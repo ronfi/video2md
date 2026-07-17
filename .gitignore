@@ -1,0 +1,25 @@
+# video2md 中间产物（提取出的 .md 入库，帧/音轨不入库）
+*_v2md/
+
+# md2html 输出（临时，浏览器观看用）
+/html/
+
+# 视频一律不入库
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.flv
+*.avi
+
+# Claude 本地配置
+.claude/settings.local.json
+
+# 编辑器 / 系统 / 缓存
+*.swp
+*.swo
+*~
+.*.swp
+*.log
+.DS_Store
+__pycache__/
