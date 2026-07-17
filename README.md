@@ -1,14 +1,15 @@
-# video — 视频转写研报库
+# video2md — 视频转写 AI 工具
 
-把 B 站视频一键变成**可检索、可阅读的结构化文档**：
-语音转写（Whisper）+ 画面文字（关键帧 OCR）→ LLM 去重纠错、分章节整理 → 本地 HTML 阅读。
+把**任意视频**（本地文件、录屏、B 站链接…）一键变成**可检索、可阅读的结构化文档**：
+语音转写（Whisper）+ 画面文字（关键帧 OCR）→ LLM 去重纠错、分章节整理 → HTML 阅读。
 
-**📖 在线阅读：https://ronfi.github.io/video2md/**
+**📖 在线阅读（示例文档库）：https://ronfi.github.io/video2md/**
 
 ```
-下载              转写提取                整理                 阅读
-bili_dl.py  ──►  video2md.py  ──►  DeepSeek 结构化  ──►  md2html.py
-(B站API通道)     (ASR+OCR+同音字修正)   (正文+折叠附录)      (html/index.html)
+下载(可选)            转写提取                整理                 阅读
+bili_dl.py   ──►   video2md.py   ──►  DeepSeek 结构化  ──►  md2html.py
+(B站API通道)      (任意视频：ASR+OCR      (正文+折叠附录)      (html/index.html)
+                   +同音字修正)
 ```
 
 ## 快速开始
@@ -17,10 +18,13 @@ bili_dl.py  ──►  video2md.py  ──►  DeepSeek 结构化  ──►  md
 pip install -r requirements.txt
 export DEEPSEEK_API_KEY=sk-xxx        # LLM 整理用；不设则降级为纯转写
 
-# 三步出文档
-python3 tools/bili_dl.py BV1fj5f6iEH5                          # 1. 下载到 ref/
-python3 tools/video2md.py ref/BV1fj5f6iEH5.mp4 --auto-crop     # 2. 转写 -> ref/<BV>-<标题>.md
-python3 tools/md2html.py                                       # 3. 出 HTML，打开 html/index.html
+# 任意本地视频（手机录屏、下载的课程、会议录像…）两步出文档
+python3 tools/video2md.py 你的视频.mp4 --auto-crop      # 转写 -> 同目录 <名>-<标题>.md
+python3 tools/md2html.py                                # 出 HTML，打开 html/index.html
+
+# B 站视频多一步下载
+python3 tools/bili_dl.py BV1fj5f6iEH5                   # 下载到 ref/（自动记录标题）
+python3 tools/video2md.py ref/BV1fj5f6iEH5.mp4 --auto-crop
 ```
 
 > 长视频（>15 分钟）建议加 `--interval 10` 降低关键帧密度。
