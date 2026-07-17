@@ -174,8 +174,11 @@ def find_mds(root):
                 out.append(os.path.join(dp, f))
     return sorted(out)
 
-def fix_images(md_text, md_dir, root, out_dir):
-    """相对图片路径 -> 从 out_dir 指向真实文件的相对路径。"""
+def fix_images(md_text, md_dir, root, out_dir, bundle=False):
+    """相对图片路径处理：
+    默认 -> 改写为从 out_dir 指向真实文件的相对路径（本地浏览）。
+    bundle=True -> 把图片复制进 out_dir/assets/<原目录名>/，用站内相对路径（用于发布，如 GitHub Pages）。
+    """
     def repl(m):
         alt, path = m.group(1), m.group(2)
         if re.match(r"^(https?:)?//", path) or path.startswith("data:"):
@@ -183,6 +186,16 @@ def fix_images(md_text, md_dir, root, out_dir):
         for base in (md_dir, root):
             cand = os.path.normpath(os.path.join(base, path))
             if os.path.exists(cand):
+                if bundle:
+                    import shutil
+                    sub = os.path.basename(os.path.dirname(cand)) or "img"
+                    parent = os.path.basename(os.path.dirname(os.path.dirname(cand)))
+                    adir = os.path.join(out_dir, "assets", parent, sub)
+                    os.makedirs(adir, exist_ok=True)
+                    dst = os.path.join(adir, os.path.basename(cand))
+                    if not os.path.exists(dst):
+                        shutil.copy2(cand, dst)
+                    return f"![{alt}]({os.path.relpath(dst, out_dir)})"
                 return f"![{alt}]({os.path.relpath(cand, out_dir)})"
         return m.group(0)
     return re.sub(r"!\[([^\]]*)\]\(([^)\s]+)\)", repl, md_text)
@@ -195,6 +208,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("files", nargs="*", help="指定 md 文件（缺省=全仓库扫描）")
     ap.add_argument("-o", "--out", default="html", help="输出目录（默认 html/）")
+    ap.add_argument("--bundle-assets", action="store_true",
+                    help="把引用图片复制进输出目录 assets/（用于发布到 GitHub Pages 等）")
     args = ap.parse_args()
 
     import markdown
@@ -215,7 +230,7 @@ def main():
         rel = os.path.relpath(md_path, root)
         text = open(md_path, encoding="utf-8").read()
         title = first_title(text, os.path.basename(md_path))
-        text = fix_images(text, os.path.dirname(md_path), root, out_dir)
+        text = fix_images(text, os.path.dirname(md_path), root, out_dir, bundle=args.bundle_assets)
         text = re.sub(r"<(details|div)(\s*)>", r'<\1 markdown="1">', text)
         body = markdown.markdown(
             text, extensions=["tables", "fenced_code", "toc", "sane_lists", "md_in_html"])

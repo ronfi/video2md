@@ -41,6 +41,9 @@ python3 tools/md2html.py                              # 全量重建 html/（会
 - 远程：`origin = https://github.com/ronfi/video2md`（**public 仓库**，勿提交任何密钥/隐私/视频文件）。
 - 不入库：`ref/BV*.mp4`（版权大文件）、`*_v2md/`、`html/`、`*.swp`、`__pycache__/`。
 - 新增/改动转写文档后：跑 `md2html.py` 重建索引再提交。
+- **站点发布**（https://ronfi.github.io/video2md/ ，gh-pages 分支）：文档有更新时同步发布：
+  `python3 tools/md2html.py -o <临时目录> --bundle-assets && touch <临时目录>/.nojekyll`，
+  然后在临时目录 `git init -b gh-pages` + `push -f origin gh-pages`（孤儿分支，覆盖式）。
 
 ## 设计语言（md2html 样式）
 「QUANT WORKFLOW 信息卡」体系：终端绿 #39E6A8 结构件 + 金黄 #FFC83D 强调 +
