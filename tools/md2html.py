@@ -21,10 +21,9 @@ import argparse, os, re, html as H, datetime
 SKIP_DIRS = {".git", "node_modules", "out", ".remotion", "html"}
 
 EYEBROWS = {
-    "ref": "REF · 视频文档",
+    "ref": "REF · 视频文档 VIDEO DOCS",
     "tools": "TOOLS · 工具说明",
-    "remotion-ptrade": "REMOTION · 渲染工程",
-    ".": "DOCS · 知识库",
+    ".": "DOCS · 项目文档 PROJECT",
 }
 
 CSS = """
@@ -128,6 +127,8 @@ details[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}
 
 /* —— 索引页 —— */
 .idx-head{margin-bottom:8px}
+.en-sub{font-size:.48em;font-weight:600;color:var(--dim);letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;vertical-align:middle;margin-left:10px}
 .idx-meta{color:var(--dim);font-size:13px;margin:0 0 34px}
 .group{margin:34px 0 10px;display:flex;align-items:baseline;gap:12px}
 .group .g-name{font-weight:800;font-size:15px;letter-spacing:2px;
@@ -155,9 +156,9 @@ footer{margin-top:64px;color:var(--dim);font-size:12px;letter-spacing:1px;
 footer::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
 """
 
-def page(title, body, eyebrow, back=None):
-    back_html = f'<a class="back" href="{back}">← 返回索引</a>' if back else ""
-    return (f'<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8">'
+def page(title, body, eyebrow, back=None, lang="zh"):
+    back_html = f'<a class="back" href="{back}">← 返回索引 · Index</a>' if back else ""
+    return (f'<!DOCTYPE html><html lang="{lang}"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width,initial-scale=1">'
             f'<title>{H.escape(title)}</title><style>{CSS}</style></head><body><main>'
             f'<div class="topbar"><span class="eyebrow">{H.escape(eyebrow)}</span>{back_html}</div>'
@@ -200,6 +201,12 @@ def fix_images(md_text, md_dir, root, out_dir, bundle=False):
         return m.group(0)
     return re.sub(r"!\[([^\]]*)\]\(([^)\s]+)\)", repl, md_text)
 
+def detect_lang(text):
+    """按 CJK 字符占比判断文档语言（供 <html lang> 与屏幕阅读器使用）。"""
+    cjk = len(re.findall(r"[一-龥]", text))
+    letters = len(re.findall(r"[A-Za-z]", text))
+    return "zh" if cjk * 3 >= letters else "en"
+
 def first_title(md_text, fallback):
     m = re.search(r"^#\s+(.+)$", md_text, re.M)
     return m.group(1).strip() if m else fallback
@@ -239,7 +246,7 @@ def main():
         eyebrow = EYEBROWS.get(group, group.upper())
         out_name = rel.replace(os.sep, "__").rsplit(".md", 1)[0] + ".html"
         open(os.path.join(out_dir, out_name), "w", encoding="utf-8").write(
-            page(title, body, eyebrow, back="index.html"))
+            page(title, body, eyebrow, back="index.html", lang=detect_lang(text)))
         st = os.stat(md_path)
         entries.append((rel, out_name, title,
                         datetime.datetime.fromtimestamp(st.st_mtime).strftime("%Y-%m-%d %H:%M"),
@@ -251,8 +258,8 @@ def main():
     for e in entries:
         groups.setdefault(os.path.dirname(e[0]) or ".", []).append(e)
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    body = ['<div class="idx-head"><h1>文档索引</h1></div>',
-            f'<p class="idx-meta mono">{len(entries)} 篇 · 生成于 {now}</p>']
+    body = ['<div class="idx-head"><h1>文档索引 <span class="en-sub">Document Index</span></h1></div>',
+            f'<p class="idx-meta mono">{len(entries)} docs · generated {now}</p>']
     for g in sorted(groups):
         body.append(f'<div class="group"><span class="g-name">{H.escape(g.upper() if g != "." else "ROOT")}/</span></div>')
         body.append('<div class="cards">')
@@ -263,7 +270,7 @@ def main():
                 f'<p class="meta">{H.escape(rel)} · {mtime} · {size}</p></a>')
         body.append('</div>')
     open(os.path.join(out_dir, "index.html"), "w", encoding="utf-8").write(
-        page("文档索引", "\n".join(body), "VIDEO REPO · DOCS"))
+        page("文档索引 · Document Index", "\n".join(body), "VIDEO2MD · 文档索引 INDEX"))
     print(f"\n✅ {len(entries)} 篇已转换 -> {out_dir}/index.html")
 
 if __name__ == "__main__":

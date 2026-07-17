@@ -1,5 +1,7 @@
 # video2md — 视频转写 AI 工具
 
+**中文 | [English](README.en.md)**
+
 把**任意视频**（本地文件、录屏、B 站链接…）一键变成**可检索、可阅读的结构化文档**：
 语音转写（Whisper）+ 画面文字（关键帧 OCR）→ LLM 去重纠错、分章节整理 → HTML 阅读。
 
@@ -22,6 +24,9 @@ export DEEPSEEK_API_KEY=sk-xxx        # LLM 整理用；不设则降级为纯转
 python3 tools/video2md.py 你的视频.mp4 --auto-crop      # 转写 -> 同目录 <名>-<标题>.md
 python3 tools/md2html.py                                # 出 HTML，打开 html/index.html
 
+# 英文视频：转写并用英文成文
+python3 tools/video2md.py talk.mp4 --lang en
+
 # B 站视频多一步下载
 python3 tools/bili_dl.py BV1fj5f6iEH5                   # 下载到 ref/（自动记录标题）
 python3 tools/video2md.py ref/BV1fj5f6iEH5.mp4 --auto-crop
@@ -36,6 +41,7 @@ python3 tools/video2md.py ref/BV1fj5f6iEH5.mp4 --auto-crop
   `BV1fj5f6iEH5-长鑫存储10大核心供应商.md`，并自动附原视频链接。
 - **同音字修正**：LLM 借助时间对齐的画面 OCR 修正 ASR 同音错字
   （如"中级虚创→中际旭创"、"科丧50→科创50"），只做最小替换、可审计。
+- **中英双语**：`--lang en` 转写英文视频并以英文成文（`--doc-lang` 可覆盖）。
 - **繁简统一**：简体引导 + OpenCC 兜底，杜绝 Whisper 偶发繁体输出。
 - **正文 + 附录**：LLM 整理出分章节规范正文（概述/要点/术语表）；
   原始带时间戳转写与关键帧截图折叠在附录，随时溯源。

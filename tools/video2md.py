@@ -148,7 +148,7 @@ def _llm_chat(prompt, model, max_tokens=4000, timeout=240):
     r.raise_for_status()
     return r.json()["choices"][0]["message"]["content"].strip()
 
-def llm_fix_transcript(segments, kf_ocr, model="deepseek-chat", batch=120):
+def llm_fix_transcript(segments, kf_ocr, model="deepseek-chat", batch=120, doc_lang="zh"):
     """用时间对齐的画面 OCR 词修正 ASR 同音字。返回(新segments, 修正数)。
     只让 LLM 输出修正对 {i, from, to}，程序端最小替换——不重写、可审计。"""
     if not os.environ.get("DEEPSEEK_API_KEY") or not segments:
@@ -173,7 +173,21 @@ def llm_fix_transcript(segments, kf_ocr, model="deepseek-chat", batch=120):
                         ocr_win.append(ln)
         seg_lines = "\n".join(f"[{i}] [{hhmmss(s)}] {txt}"
                               for i, (s, _e, txt) in enumerate(chunk, start=b0))
-        prompt = (
+        if doc_lang == "en":
+            prompt = (
+                "Below are ASR transcript segments from a video (often containing mis-recognized "
+                "words) and the on-screen OCR text from the same time window plus a full-video "
+                "term list. Find words the ASR likely mis-recognized (homophones/near-homophones, "
+                "proper nouns, technical terms) and correct them based on the on-screen text.\n"
+                "Rules: fix wrong words only; no rewriting or polishing; skip if unsure.\n"
+                'Output ONLY a JSON array (no other text/code fence): '
+                '[{"i":segment_index,"from":"wrong","to":"correct"}]; output [] if nothing to fix.\n\n'
+                f"[ASR segments]\n{seg_lines}\n\n"
+                "[On-screen OCR in this window]\n" + "\n".join(ocr_win[:80]) +
+                "\n\n[Full-video term list]\n" + " / ".join(vocab[:150])
+            )
+        else:
+            prompt = (
             "下面是视频的【语音转写片段】(ASR，常见同音字错误) 和同一时间段的【画面文字OCR】"
             "以及【全片画面术语表】。请找出转写里的**同音/近音错别字**（尤其专有名词、术语），"
             "以画面文字为准给出修正。\n"
@@ -203,13 +217,32 @@ def llm_fix_transcript(segments, kf_ocr, model="deepseek-chat", batch=120):
     return segs, total_fix
 
 # ---------- C: DeepSeek 整理成规范文档 ----------
-def llm_document(seg_lines, ocr_lines, model="deepseek-chat"):
+def llm_document(seg_lines, ocr_lines, model="deepseek-chat", doc_lang="zh"):
     """把 raw 转写+OCR 交给 DeepSeek，产出去重、纠错、分章节的完整文档正文。"""
     key = os.environ.get("DEEPSEEK_API_KEY")
     if not key:
         return None, "未设置 DEEPSEEK_API_KEY，跳过 LLM 整理"
     import requests
-    prompt = (
+    if doc_lang == "en":
+        prompt = (
+            "You are a professional documentation editor. Below are the auto-extracted "
+            "[speech transcript] (spoken, possibly repetitive) and [on-screen OCR text] "
+            "(repeated across frames, may contain typos) of a video. Organize them into a "
+            "well-structured, readable, deduplicated English Markdown document.\n\n"
+            "Requirements:\n"
+            "1. Deduplicate; present each piece of information once.\n"
+            "2. Fix obvious OCR/ASR errors from context; never invent facts.\n"
+            "3. Use ## / ### headings; start with '## Overview'.\n"
+            "4. Use lists, **bold** keywords, and tables where appropriate.\n"
+            "5. Keep all steps, data, tool names, terminology; end with '## Key Terms' or "
+            "'## Quick Takeaways'.\n"
+            "6. First line: `TITLE: <a title within 15 words>`, then a blank line, then the body "
+            "starting at '## Overview' (no H1, no code fences around the doc).\n\n"
+            "[Speech transcript (timed)]\n" + "\n".join(seg_lines) +
+            "\n\n[On-screen OCR (deduped)]\n" + "\n".join(ocr_lines)
+        )
+    else:
+        prompt = (
         "你是专业的文档整理编辑。下面是某视频自动提取的【语音转写】(口语、可能啰嗦重复)"
         "和【画面文字OCR】(跨帧重复、可能有错字)。请整理成一篇**规范、易读、去重**的中文 Markdown 文档。\n\n"
         "硬性要求：\n"
@@ -298,7 +331,9 @@ def main():
     ap.add_argument("video")
     ap.add_argument("-o", "--out", default=None)
     ap.add_argument("--model", default="small", help="whisper: tiny/base/small/medium")
-    ap.add_argument("--lang", default="zh")
+    ap.add_argument("--lang", default="zh", help="语音语言（whisper），如 zh/en")
+    ap.add_argument("--doc-lang", default="auto", choices=["auto", "zh", "en"],
+                    help="输出文档语言：auto=跟随 --lang（zh->中文，其它->英文）")
     ap.add_argument("--interval", type=float, default=3.0, help="关键帧间隔(秒)")
     ap.add_argument("--crop", default=None, help="画面裁剪 W:H:X:Y(去手机UI)")
     ap.add_argument("--auto-crop", action="store_true", help="自动检测内容区(去黑边)")
@@ -338,9 +373,10 @@ def main():
 
     if not args.no_llm and not args.no_fix_asr and not args.no_ocr:
         print(f"[4.5/5] OCR 辅助修正 ASR 同音字 ({args.llm_model})…")
-        segments, nfix = llm_fix_transcript(segments, kf_ocr, args.llm_model)
+        segments, nfix = llm_fix_transcript(segments, kf_ocr, args.llm_model, doc_lang=doc_lang)
         print(f"      修正 {nfix} 处")
 
+    doc_lang = args.doc_lang if args.doc_lang != "auto" else ("zh" if args.lang == "zh" else "en")
     title = resolve_title(args.video, args.title)
 
     doc_body, note = (None, "已用 --no-llm 关闭")
@@ -349,7 +385,7 @@ def main():
         seg_lines = [f"[{hhmmss(s)}] {t}" for s, _e, t in segments]
         uniq = []
         [uniq.append(l) for _p, _t, ls in kf_ocr for l in ls if l not in uniq]
-        doc_body, note = llm_document(seg_lines, uniq, args.llm_model)
+        doc_body, note = llm_document(seg_lines, uniq, args.llm_model, doc_lang=doc_lang)
         print("      " + ("✅ 完成" if doc_body else "⚠ " + note))
         # 解析 LLM 首行 TITLE:（作为标题兜底）
         if doc_body:

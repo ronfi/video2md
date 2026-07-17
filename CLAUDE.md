@@ -11,7 +11,7 @@ tools/            # 三件套：bili_dl.py / video2md.py / md2html.py（用法�
 ref/              # 视频与转写文档；BV*.mp4 大文件不入库，<BV>.title.txt sidecar 入库
 html/             # md2html 输出（临时，不入库，可随时重建）
 requirements.txt  # 依赖统一安装
-README.md         # 项目说明（对外）
+README.md / README.en.md   # 项目说明（中/英双语，改动需同步两份）
 ```
 
 ## 标准工作流

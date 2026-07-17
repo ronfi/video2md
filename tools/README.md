@@ -78,7 +78,8 @@ python tools/video2md.py video.mp4 --no-ocr
 | `video` | — | 输入视频路径（必填） |
 | `-o, --out` | `<同名>.md` | 输出 Markdown 路径 |
 | `--model` | `small` | Whisper 模型：tiny/base/small/medium |
-| `--lang` | `zh` | 语音语言 |
+| `--lang` | `zh` | 语音语言（whisper），如 zh/en |
+| `--doc-lang` | `auto` | 输出文档语言：auto=跟随 --lang |
 | `--interval` | `3.0` | 关键帧采样间隔（秒） |
 | `--auto-crop` | 关 | 方差法自动检测并裁掉手机 UI 边 |
 | `--crop W:H:X:Y` | — | 手动裁剪区（优先于 --auto-crop） |
