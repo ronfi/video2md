@@ -38,7 +38,7 @@ python3 tools/md2html.py                              # 全量重建 html/（会
 ## Git 约定（重要）
 - **用户已授权：改动完成后自动 `git commit` + `git push origin main`，无需询问**。
 - 提交信息用中文，结尾加 `Co-Authored-By: Claude Fable 5 <noreply@anthropic.com>`。
-- 远程：`origin = https://github.com/suemto/video`（**public 仓库**，勿提交任何密钥/隐私/视频文件）。
+- 远程：`origin = https://github.com/ronfi/video2md`（**public 仓库**，勿提交任何密钥/隐私/视频文件）。
 - 不入库：`ref/BV*.mp4`（版权大文件）、`*_v2md/`、`html/`、`*.swp`、`__pycache__/`。
 - 新增/改动转写文档后：跑 `md2html.py` 重建索引再提交。
 
