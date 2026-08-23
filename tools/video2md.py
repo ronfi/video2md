@@ -346,6 +346,7 @@ def main():
     ap.add_argument("--title", default=None, help="视频标题（缺省：读 <视频名>.title.txt，再缺省由 LLM 生成）；用作文档 H1 与输出文件名后缀")
     ap.add_argument("--llm-model", default="deepseek-chat")
     args = ap.parse_args()
+    doc_lang = args.doc_lang if args.doc_lang != "auto" else ("zh" if args.lang == "zh" else "en")
 
     base = os.path.splitext(args.video)[0]
     out_md = args.out or base + ".md"
@@ -376,7 +377,6 @@ def main():
         segments, nfix = llm_fix_transcript(segments, kf_ocr, args.llm_model, doc_lang=doc_lang)
         print(f"      修正 {nfix} 处")
 
-    doc_lang = args.doc_lang if args.doc_lang != "auto" else ("zh" if args.lang == "zh" else "en")
     title = resolve_title(args.video, args.title)
 
     doc_body, note = (None, "已用 --no-llm 关闭")
