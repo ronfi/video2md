@@ -1,0 +1,797 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>高盛：对泡泡玛特单日暴跌23%的看法</title><style>
+:root{
+  --bg:#F6F9F7; --surface:#FFFFFF; --ink:#1C2622; --dim:#5F6F67;
+  --accent:#0E9A68; --accent-soft:rgba(14,154,104,.14); --gold:#8A6400;
+  --gold-soft:rgba(255,200,61,.22); --line:#DCE5E0; --code-bg:#EEF3F0;
+  --card-shadow:0 1px 2px rgba(28,38,34,.05),0 8px 24px rgba(28,38,34,.06);
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C120F; --surface:#121A16; --ink:#E6EFEA; --dim:#8FA39A;
+  --accent:#39E6A8; --accent-soft:rgba(57,230,168,.13); --gold:#FFC83D;
+  --gold-soft:rgba(255,200,61,.14); --line:#233029; --code-bg:#18221D;
+  --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:18px/1.9 "Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+  -webkit-font-smoothing:antialiased}
+main{max-width:1140px;margin:0 auto;padding:44px 40px 96px}
+@media(max-width:720px){main{padding:24px 18px 64px}body{font-size:16.5px}}
+
+/* —— 字体分工：标题黑体 / 元信息等宽 —— */
+h1,h2,h3,h4,.sans{font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",
+  -apple-system,"Segoe UI",sans-serif}
+.mono,code,pre,.meta,.eyebrow,.pill{font-family:"JetBrains Mono",Menlo,Consolas,
+  "Noto Sans Mono CJK SC",monospace}
+
+/* —— 眉标 + 返回 —— */
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--dim);
+  font-size:12.5px;letter-spacing:2.5px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:8px;
+  background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+  transition:border-color .15s,background .15s}
+.back:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* —— 标题：签名进度线 —— */
+h1{font-size:clamp(27px,3.1vw,38px);font-weight:800;line-height:1.32;
+  letter-spacing:.5px;margin:.2em 0 .55em;position:relative;padding-bottom:20px}
+h1::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;
+  border-radius:3px;background:linear-gradient(90deg,var(--accent) 0%,
+  var(--accent) 34%,var(--gold) 35%,var(--gold) 37%,var(--line) 38%)}
+h2{font-size:23px;font-weight:800;margin:2.2em 0 .8em;padding-left:16px;
+  position:relative;letter-spacing:.5px}
+h2::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:5px;
+  border-radius:5px;background:linear-gradient(var(--accent),var(--accent-soft))}
+h3{font-size:18.5px;font-weight:700;margin:1.7em 0 .5em;color:var(--ink)}
+h4{font-size:16.5px;margin:1.4em 0 .4em}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;
+  transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,.back:focus-visible,summary:focus-visible{outline:2px solid var(--accent);
+  outline-offset:3px;border-radius:4px}
+strong{color:var(--ink);background:linear-gradient(transparent 62%,var(--gold-soft) 62%);
+  padding:0 1px}
+p{margin:.9em 0}
+ul,ol{padding-left:1.6em}li{margin:.32em 0}
+hr{border:none;border-top:1px solid var(--line);margin:2.4em 0}
+
+/* —— 文档头部 meta（首个引用块）—— */
+blockquote{margin:1.1em 0;padding:.35em 1.1em;border-left:4px solid var(--line);
+  color:var(--dim);background:var(--surface);border-radius:0 10px 10px 0}
+h1+blockquote{border-left-color:var(--accent);font-size:14px;
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:.3px}
+
+/* —— 代码 / 时间戳 —— */
+code{background:var(--code-bg);color:var(--accent);padding:.14em .45em;
+  border-radius:6px;font-size:.82em}
+pre{background:var(--code-bg);border:1px solid var(--line);padding:16px 18px;
+  border-radius:12px;overflow-x:auto;line-height:1.65}
+pre code{padding:0;background:none;color:var(--ink);font-size:.85em}
+
+/* —— 表格 —— */
+table{border-collapse:collapse;display:block;overflow-x:auto;margin:1.2em 0;
+  font-size:.92em;font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th,td{border:1px solid var(--line);padding:8px 14px;text-align:left}
+th{background:var(--accent-soft);font-weight:700;letter-spacing:.5px;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--surface)}
+
+/* —— 关键帧图 —— */
+img{max-width:100%;border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--card-shadow);margin:.4em 0}
+
+/* —— 附录折叠面板（终端面板风）—— */
+details{border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:0;margin:1.2em 0;overflow:hidden}
+details>*:not(summary){margin-left:20px;margin-right:20px}
+details>p:last-child,details>img:last-child{margin-bottom:18px}
+summary{cursor:pointer;font-weight:700;padding:14px 20px;letter-spacing:1px;
+  font-family:"Noto Sans SC",sans-serif;font-size:15px;color:var(--dim);
+  display:flex;align-items:center;gap:10px;user-select:none;
+  transition:color .15s,background .15s}
+summary::before{content:"";width:7px;height:7px;border-radius:7px;
+  background:var(--accent);flex:none}
+summary:hover{color:var(--ink);background:var(--accent-soft)}
+details[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}
+
+/* —— 索引页 —— */
+.idx-head{margin-bottom:8px}
+.en-sub{font-size:.48em;font-weight:600;color:var(--dim);letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;vertical-align:middle;margin-left:10px}
+.idx-meta{color:var(--dim);font-size:13px;margin:0 0 34px}
+.group{margin:34px 0 10px;display:flex;align-items:baseline;gap:12px}
+.group .g-name{font-weight:800;font-size:15px;letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;color:var(--dim)}
+.group::after{content:"";flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{position:relative;display:block;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;
+  text-decoration:none;color:var(--ink);box-shadow:var(--card-shadow);
+  transition:transform .16s,border-color .16s;border-bottom:none}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card .no{position:absolute;top:16px;right:18px;font-size:11.5px;color:var(--accent);
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:1px;opacity:.85}
+.card h3{margin:0 42px .5em 0;font-size:16.5px;line-height:1.5;font-weight:700}
+.card .meta{color:var(--dim);font-size:12px;letter-spacing:.3px;margin:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(prefers-reduced-motion:no-preference){
+  .card{animation:rise .4s cubic-bezier(.2,.7,.3,1) backwards}
+  .cards .card:nth-child(2){animation-delay:.04s}.cards .card:nth-child(3){animation-delay:.08s}
+  .cards .card:nth-child(4){animation-delay:.12s}.cards .card:nth-child(5){animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}}
+}
+footer{margin-top:64px;color:var(--dim);font-size:12px;letter-spacing:1px;
+  font-family:"JetBrains Mono",Menlo,monospace;display:flex;gap:10px;align-items:center}
+footer::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+</style></head><body><main><div class="topbar"><span class="eyebrow">REF · 视频文档 VIDEO DOCS</span><a class="back" href="index.html">← 返回索引 · Index</a></div><h1 id="23">高盛：对泡泡玛特单日暴跌23%的看法</h1>
+<blockquote>
+<p>时长 07:57 · 分辨率 852x480 · 生成于 2026-07-07　|　来源 <code>ref/BV1kMXsBBEo9.mp4</code> · <a href="https://www.bilibili.com/video/BV1kMXsBBEo9">视频链接</a></p>
+</blockquote>
+<h2 id="_1">概述</h2>
+<p>本视频深度解读了高盛于3月26日发布的关于泡泡玛特（9992.HK）的研报。报告指出，尽管泡泡玛特2025年下半年交出了营收同比增长174%、净利润同比增长272%的亮眼财报，但高盛却将其评级下调至“中性”，目标价从300港元大幅下调39%至184港元。视频分析了高盛下调评级背后的三大原因（美洲及欧洲市场增长放缓、汇兑损失），同时也肯定了其在中国大陆市场的强劲表现、核心IP（如The Monsters/Labubu）的爆发力以及品类结构的成功调整。最后，视频总结了泡泡玛特面临的机遇与风险，并对其2026年的战略规划进行了展望。</p>
+<h2 id="_2">研报核心信息</h2>
+<p>高盛对泡泡玛特（9992.HK）的最新评级与目标价如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">项目</th>
+<th style="text-align: left;">数据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>当前股价</strong></td>
+<td style="text-align: left;">168.30 港元</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>高盛评级</strong></td>
+<td style="text-align: left;"><strong>中性</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>12个月目标价</strong></td>
+<td style="text-align: left;"><strong>184.00 港元</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>潜在上涨空间</strong></td>
+<td style="text-align: left;">9.3%</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>目标价下调幅度</strong></td>
+<td style="text-align: left;">较此前300港元目标价下调 <strong>39%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>盈利预测调整</strong></td>
+<td style="text-align: left;">2026-2027年盈利预测下调 <strong>18%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>估值倍数调整</strong></td>
+<td style="text-align: left;">从20倍PE降至 <strong>15倍PE</strong>（对标迪士尼一个标准差以下水平）</td>
+</tr>
+</tbody>
+</table>
+<p>高盛认为，此次下调主要反映了公司存在<strong>增长放缓</strong>和<strong>IP动能下降</strong>的风险。</p>
+<h2 id="2025">2025年下半年业绩回顾</h2>
+<h3 id="_3">整体业绩</h3>
+<ul>
+<li><strong>收入</strong>：234.4亿人民币，同比增长 <strong>174%</strong></li>
+<li><strong>净利润</strong>：82亿人民币，同比增长 <strong>272%</strong></li>
+</ul>
+<p>尽管数据亮眼，但该业绩仍低于高盛预期的8%-10%。</p>
+<h3 id="_4">业绩低于预期的三大原因</h3>
+<ol>
+<li><strong>美洲市场增长放缓</strong>：2025年下半年同比增长633%，而第三季度增速高达1265%-1270%。</li>
+<li><strong>欧洲及其他地区增长放缓</strong>：2025年下半年同比增长436%，而第三季度增速为735%-740%。</li>
+<li><strong>汇兑损失</strong>：对盈利表现造成了一定影响。</li>
+</ol>
+<h3 id="_5">业绩亮点</h3>
+<ul>
+<li><strong>中国大陆市场</strong>：表现强于预期，同比增长 <strong>134%</strong>，比高盛预期高出5%，依然是公司的基本盘。</li>
+<li><strong>核心IP生态</strong>：<ul>
+<li><strong>The Monsters (Labubu)</strong>：销售增长 <strong>287%</strong>，达93.5亿元，占总销售额的40%，成为最核心的收入来源。</li>
+<li><strong>Skullpanda</strong>：增长216%</li>
+<li><strong>Crybaby</strong>：增长110%</li>
+<li><strong>Dimoo</strong>：增长214%</li>
+<li><strong>Molly</strong>：增长相对平缓，为17%</li>
+</ul>
+</li>
+<li><strong>IP内容开发</strong>：<ul>
+<li>Labubu已与<strong>索尼影业</strong>合作开发电影，目前处于剧本阶段。</li>
+<li>Labubu将参与<strong>2026年FIFA世界杯</strong>的营销活动。</li>
+</ul>
+</li>
+</ul>
+<h2 id="_6">品类结构与市场战略</h2>
+<h3 id="_7">品类结构变化</h3>
+<p>消费者的偏好正在发生变化，毛绒玩具已取代手办成为最大收入来源。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">品类</th>
+<th style="text-align: left;">2025年下半年表现</th>
+<th style="text-align: left;">销售额</th>
+<th style="text-align: left;">占总销售额比例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>毛绒玩具</strong></td>
+<td style="text-align: left;">爆发式增长，同比增长 <strong>427%</strong></td>
+<td style="text-align: left;">125.7亿元</td>
+<td style="text-align: left;"><strong>54%</strong></td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>手办类</strong></td>
+<td style="text-align: left;">同比增长60%</td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">29% (占比下降)</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>MEGA产品</strong></td>
+<td style="text-align: left;">同比下滑 <strong>17%</strong></td>
+<td style="text-align: left;">-</td>
+<td style="text-align: left;">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_8">海外市场战略</h3>
+<ul>
+<li><strong>门店布局</strong>：中国大陆445家门店，海外185家门店。</li>
+<li><strong>线上与线下</strong>：2025年海外线上销售额已超过零售店，但高盛认为长期来看零售店比例将提升。</li>
+<li><strong>美国市场扩张</strong>：计划在2026年于美国市场突破<strong>100家门店</strong>，包括在时代广场和第五大道开设旗舰店。</li>
+<li><strong>供应链优化</strong>：通过规模经济、数字供应链投资和更严格的产品发布计划来提升运营效率。</li>
+</ul>
+<h2 id="_9">新业务拓展与未来展望</h2>
+<h3 id="_10">新业务拓展</h3>
+<ul>
+<li><strong>主题乐园</strong>：1.5阶段预计在2026年夏季完成，2.0阶段已进入设计阶段。</li>
+<li><strong>新品类</strong>：珠宝甜品表现超出预期，计划在2026年4月将新品类扩展至<strong>小家电</strong>。</li>
+<li><strong>本地化</strong>：招募<strong>局部艺术家</strong>进行产品开发，以增强与本地消费者的共鸣。</li>
+</ul>
+<h3 id="2026">2026年战略定位</h3>
+<p>泡泡玛特管理层将2026年定位为<strong>“运营与组织提升之年”</strong>，目标是实现<strong>超过20%的同比增长</strong>，同时不牺牲盈利能力。公司将重点关注优化组织效率和跨境管理，并计划从2026年5月起提供<strong>季度交易更新</strong>，以提高运营透明度。</p>
+<h2 id="_11">风险与机遇分析</h2>
+<h3 id="_12">下行风险</h3>
+<ul>
+<li><strong>单一IP风险</strong>：过度依赖单一IP（如Labubu），若其热度下降将严重影响业绩。</li>
+<li><strong>IP组合扩展失败</strong>：新IP未能获得市场认可。</li>
+<li><strong>竞争加剧</strong>：盲盒和潮玩市场竞争激烈，新竞争对手可能分流市场份额。</li>
+<li><strong>成本与费用控制不当</strong>：影响公司盈利能力。</li>
+</ul>
+<h3 id="_13">上行机遇</h3>
+<ul>
+<li><strong>更多IP推出与热度提升</strong>：持续推出热门IP并提升现有IP影响力。</li>
+<li><strong>品类扩展</strong>：拓展至小家电等新品类，带来强劲销售。</li>
+<li><strong>竞争超越</strong>：通过强大的IP实力和发布频率在竞争中胜出。</li>
+<li><strong>供应链与成本管理</strong>：更好的供应链管理和更严格的成本控制。</li>
+<li><strong>超预期的海外发展</strong>：海外市场增长超出预期，提升全球市场份额和品牌影响力。</li>
+</ul>
+<h2 id="_14">要点速览</h2>
+<ul>
+<li><strong>评级下调</strong>：高盛因增长放缓和IP动能下降，将泡泡玛特评级下调至“中性”，目标价下调39%至184港元。</li>
+<li><strong>业绩分化</strong>：2025年下半年营收利润翻倍增长，但低于高盛预期，主要受海外市场增速放缓及汇兑损失影响。</li>
+<li><strong>核心优势</strong>：中国大陆市场基本盘稳固，核心IP Labubu销售强劲，毛绒玩具品类成功取代手办成为第一大收入来源。</li>
+<li><strong>未来看点</strong>：美国市场门店扩张、主题乐园建设、新品类（小家电）拓展以及2026年“运营与组织提升之年”的战略落地。</li>
+<li><strong>风险提示</strong>：需警惕单一IP依赖、市场竞争加剧以及海外扩张不及预期的风险。</li>
+</ul>
+<hr />
+<h2 id="_15">附录：原始提取素材</h2>
+<details>
+<summary>语音全文转写（带时间戳）</summary>
+<ul>
+<li><code>[00:00–00:05]</code> 你有没有想过当一家曾经被市场捧为盲盒赛道龙头的公司</li>
+<li><code>[00:05–00:08]</code> 在发布亮眼财报的同时</li>
+<li><code>[00:08–00:11]</code> 却被头部投行下调了评级和目标价</li>
+<li><code>[00:11–00:14]</code> 这背后究竟是增长见顶的信号</li>
+<li><code>[00:14–00:16]</code> 还是市场短期误判的机遇</li>
+<li><code>[00:16–00:18]</code> 今天咱们就来聊聊</li>
+<li><code>[00:18–00:22]</code> 高盛在3月26日发布的这份关于泡泡玛特的深度研报</li>
+<li><code>[00:22–00:26]</code> 看看这份报告里藏着哪些关键信息和投资启示</li>
+<li><code>[00:27–00:30]</code> 首先 咱们先来看这份研报的基本信息</li>
+<li><code>[00:30–00:35]</code> 高盛对泡泡玛特给出的评级是中性目标价为184港元</li>
+<li><code>[00:35–00:39]</code> 而当前泡泡玛特的股价是168.30港元</li>
+<li><code>[00:39–00:44]</code> 也就是说高盛认为公司股价还有9.3%的上涨空间</li>
+<li><code>[00:44–00:45]</code> 不过有意思的是</li>
+<li><code>[00:45–00:48]</code> 这个目标价比之前高盛给出的300港元</li>
+<li><code>[00:48–00:51]</code> 下调了足足39%</li>
+<li><code>[00:51–00:56]</code> 同时 高盛还把2026-2027年的盈利预测下调了18%</li>
+<li><code>[00:56–00:59]</code> 估值倍数也从20倍PE降到了15倍PE</li>
+<li><code>[00:59–01:02]</code> 对标迪士尼一个标准差以下的水平</li>
+<li><code>[01:02–01:07]</code> 反映出高盛认为泡泡玛特存在增长放缓和IP动能下降的问题</li>
+<li><code>[01:08–01:12]</code> 接下来咱们看看泡泡玛特2025年下半年的业绩表现</li>
+<li><code>[01:12–01:13]</code> 整体来看</li>
+<li><code>[01:13–01:18]</code> 泡泡玛特2025年下半年的收入达到234.4亿人民币</li>
+<li><code>[01:18–01:20]</code> 同比增长174%</li>
+<li><code>[01:20–01:22]</code> 净利润82亿人民币</li>
+<li><code>[01:22–01:24]</code> 同比增长272%</li>
+<li><code>[01:24–01:28]</code> 单从数据上看 这绝对是一份亮眼的成绩单</li>
+<li><code>[01:28–01:33]</code> 但高盛却指出这份业绩低于他们预期的8%-10%</li>
+<li><code>[01:33–01:35]</code> 为什么会出现这种情况呢</li>
+<li><code>[01:35–01:37]</code> 高盛分析主要有三个原因</li>
+<li><code>[01:37–01:40]</code> 首先是美洲市场的增长放缓</li>
+<li><code>[01:40–01:44]</code> 2025年下半年美洲市场同比增长633%</li>
+<li><code>[01:44–01:45]</code> 而在2025年第三季度</li>
+<li><code>[01:45–01:50]</code> 这个增速还在1265%-1270%之间</li>
+<li><code>[01:50–01:52]</code> 下滑幅度非常明显</li>
+<li><code>[01:52–01:54]</code> 其次是欧洲及其他地区的增长</li>
+<li><code>[01:54–01:55]</code> 也出现了放缓</li>
+<li><code>[01:55–01:59]</code> 2025年下半年同比增长436%</li>
+<li><code>[01:59–02:03]</code> 而第三季度的增速在735%-740%</li>
+<li><code>[02:03–02:05]</code> 最后就是汇对损失</li>
+<li><code>[02:05–02:08]</code> 这也对公司的盈利表现造成了一定的影响</li>
+<li><code>[02:09–02:10]</code> 不过咱们也不能只看不好的一面</li>
+<li><code>[02:10–02:13]</code> 高盛也肯定了泡泡玛特在一些方面的表现</li>
+<li><code>[02:13–02:15]</code> 首先是中国大陆市场</li>
+<li><code>[02:15–02:17]</code> 表现强于高盛的预期</li>
+<li><code>[02:17–02:21]</code> 同比增长134%比高盛的预期高出了5%</li>
+<li><code>[02:21–02:24]</code> 这说明国内市场依然是泡泡玛特的基本盘</li>
+<li><code>[02:24–02:27]</code> 消费者对公司的IP和产品还是非常认可的</li>
+<li><code>[02:27–02:29]</code> 其次是IP生态方面</li>
+<li><code>[02:29–02:32]</code> 泡泡玛特的核心IP The Monsters</li>
+<li><code>[02:32–02:35]</code> 也就是Labubu的销售增长了287%</li>
+<li><code>[02:35–02:37]</code> 达到93.5亿元</li>
+<li><code>[02:37–02:39]</code> 占总销售额的40%</li>
+<li><code>[02:39–02:42]</code> 成为了公司最核心的收入来源</li>
+<li><code>[02:42–02:43]</code> 除此之外</li>
+<li><code>[02:43–02:45]</code> Skullpanda增长216%</li>
+<li><code>[02:45–02:48]</code> Crybaby增长110%</li>
+<li><code>[02:48–02:50]</code> 丁木增长214%</li>
+<li><code>[02:50–02:53]</code> 这些热门IP的表现也都非常不错</li>
+<li><code>[02:53–02:55]</code> 只有猫类的增长相对平缓</li>
+<li><code>[02:55–02:57]</code> 同比增长17%</li>
+<li><code>[02:57–02:58]</code> 在IP内容开发方面</li>
+<li><code>[02:58–03:01]</code> Labubu已经和索尼营业合作开发电影</li>
+<li><code>[03:01–03:03]</code> 目前处于剧本阶段</li>
+<li><code>[03:03–03:05]</code> 同时Labubu还将参与2026年</li>
+<li><code>[03:05–03:07]</code> Five世界杯的营销活动</li>
+<li><code>[03:07–03:10]</code> 这无疑会进一步提升IP的全球影响力</li>
+<li><code>[03:11–03:13]</code> 在品类结构方面</li>
+<li><code>[03:13–03:15]</code> 泡泡玛特也发生了一些变化</li>
+<li><code>[03:15–03:17]</code> 毛绒玩具持续爆发式增长</li>
+<li><code>[03:17–03:19]</code> 同比增长427%</li>
+<li><code>[03:19–03:21]</code> 达到125.7亿元</li>
+<li><code>[03:21–03:24]</code> 贡献了54%的销售额</li>
+<li><code>[03:24–03:25]</code> 已经超过了首半类产品</li>
+<li><code>[03:25–03:28]</code> 成为公司最大的收入来源</li>
+<li><code>[03:28–03:31]</code> 首半类产品虽然也增长了60%</li>
+<li><code>[03:31–03:33]</code> 但占比已经降至29%</li>
+<li><code>[03:33–03:36]</code> 而MEGA产品则出现了17%的下滑</li>
+<li><code>[03:36–03:39]</code> 这说明消费者的偏好正在发生变化</li>
+<li><code>[03:39–03:42]</code> 泡泡玛特也在及时调整自己的产品结构</li>
+<li><code>[03:42–03:43]</code> 来适应市场的需求</li>
+<li><code>[03:44–03:47]</code> 海外市场一直是泡泡玛特重点布局的方向</li>
+<li><code>[03:47–03:49]</code> 高盛也对泡泡玛特的海外市场战略</li>
+<li><code>[03:49–03:51]</code> 进行了分析</li>
+<li><code>[03:51–03:54]</code> 目前泡泡玛特在中国大陆有445家门店</li>
+<li><code>[03:54–03:56]</code> 海外有185家门店</li>
+<li><code>[03:56–04:00]</code> 在2025年海外线上销售额已经超过了零售店</li>
+<li><code>[04:00–04:02]</code> 但高盛认为从长期来看</li>
+<li><code>[04:02–04:04]</code> 零售店的比例将会提升</li>
+<li><code>[04:04–04:06]</code> 泡泡玛特计划在2026年</li>
+<li><code>[04:06–04:08]</code> 在美国市场突破100家门店</li>
+<li><code>[04:08–04:11]</code> 包括时代广场和第五大道的旗舰店</li>
+<li><code>[04:11–04:13]</code> 这无疑会进一步提升公司</li>
+<li><code>[04:13–04:15]</code> 在美国市场的品牌知名度和市场份额</li>
+<li><code>[04:15–04:18]</code> 同时泡泡玛特还在通过规模经济</li>
+<li><code>[04:18–04:20]</code> 数字供应链投资</li>
+<li><code>[04:20–04:22]</code> 更严格的产品发布计划等方式</li>
+<li><code>[04:22–04:23]</code> 来优化供应链</li>
+<li><code>[04:23–04:24]</code> 提升运营效率</li>
+<li><code>[04:25–04:26]</code> 除了现有的业务</li>
+<li><code>[04:26–04:29]</code> 泡泡玛特也在积极拓展新业务</li>
+<li><code>[04:29–04:31]</code> 泡泡玛特主题乐园的1.5阶段</li>
+<li><code>[04:31–04:33]</code> 预计在2026年下季完成</li>
+<li><code>[04:33–04:35]</code> 2.0阶段已经进入设计阶段</li>
+<li><code>[04:35–04:37]</code> 主题乐园的建设</li>
+<li><code>[04:37–04:39]</code> 将会为公司带来新的收入增长点</li>
+<li><code>[04:39–04:42]</code> 同时也能进一步强化IP的影响力</li>
+<li><code>[04:42–04:44]</code> 在新品类扩展方面</li>
+<li><code>[04:44–04:46]</code> 珠宝甜品的表现超出预期</li>
+<li><code>[04:46–04:49]</code> 泡泡玛特计划在2026年4月</li>
+<li><code>[04:49–04:51]</code> 将新品类扩展至小家店</li>
+<li><code>[04:51–04:53]</code> 这说明公司正在不断探索</li>
+<li><code>[04:53–04:54]</code> 新的业务边界</li>
+<li><code>[04:54–04:56]</code> 寻找新的增长机会</li>
+<li><code>[04:56–04:56]</code> 此外</li>
+<li><code>[04:56–04:58]</code> 泡泡玛特还在招募局部艺术家</li>
+<li><code>[04:58–05:00]</code> 进行产品开发</li>
+<li><code>[05:00–05:02]</code> 以增强和本地消费者的共鸣</li>
+<li><code>[05:02–05:03]</code> 这有助于公司更好的</li>
+<li><code>[05:03–05:06]</code> 适应不同市场的文化和消费习惯</li>
+<li><code>[05:07–05:08]</code> 对于2026年</li>
+<li><code>[05:08–05:10]</code> 帕帕马特管理层将其定位为</li>
+<li><code>[05:10–05:13]</code> 运营与组织提升之年</li>
+<li><code>[05:13–05:16]</code> 目标是实现超过20%的同比增长</li>
+<li><code>[05:16–05:18]</code> 同时不牺牲盈利能力</li>
+<li><code>[05:18–05:21]</code> 重点关注优化组织效率和跨境管理</li>
+<li><code>[05:21–05:23]</code> 为了提高运营透明度</li>
+<li><code>[05:23–05:26]</code> 帕帕马特计划从2026年5月起</li>
+<li><code>[05:26–05:28]</code> 提供继度交易更新</li>
+<li><code>[05:28–05:30]</code> 这无疑会让投资者更及时的了解</li>
+<li><code>[05:30–05:31]</code> 公司的运营情况</li>
+<li><code>[05:32–05:34]</code> 高盛里对帕帕马特的风险</li>
+<li><code>[05:34–05:36]</code> 与机遇进行了分析</li>
+<li><code>[05:36–05:37]</code> 下行风险主要包括</li>
+<li><code>[05:37–05:41]</code> 单一IP风险或IP组合扩展失败</li>
+<li><code>[05:41–05:43]</code> 竞争加剧以及成本和费用控制不当</li>
+<li><code>[05:43–05:45]</code> 如果帕帕马特过度依赖</li>
+<li><code>[05:45–05:46]</code> 某一个IP</li>
+<li><code>[05:46–05:48]</code> 一旦这个IP的热度下降</li>
+<li><code>[05:48–05:51]</code> 将会对公司的业绩造成很大的影响</li>
+<li><code>[05:51–05:53]</code> 同时盲和和潮玩市场的竞争</li>
+<li><code>[05:53–05:54]</code> 也在不断加剧</li>
+<li><code>[05:54–05:58]</code> 新的竞争对手可能会分流公司的市场份额</li>
+<li><code>[05:58–05:58]</code> 此外</li>
+<li><code>[05:58–06:01]</code> 如果公司不能很好的控制成本和费用</li>
+<li><code>[06:01–06:03]</code> 将会影响公司的市场份额</li>
+<li><code>[06:04–06:07]</code> 上行机遇则包括更多IP推出</li>
+<li><code>[06:07–06:10]</code> IP热度提升和品类扩展带来强劲销售</li>
+<li><code>[06:10–06:13]</code> 通过IP实力和发布频率</li>
+<li><code>[06:13–06:15]</code> 销售营销实现竞争超越</li>
+<li><code>[06:15–06:17]</code> 更好的供应链管理</li>
+<li><code>[06:17–06:21]</code> 更严格的成本控制以及超预期的海外发展</li>
+<li><code>[06:21–06:24]</code> 如果帕帕马特能够不断推出新的热门IP</li>
+<li><code>[06:24–06:26]</code> 提升现有IP的热度</li>
+<li><code>[06:26–06:28]</code> 同时拓展更多的品类</li>
+<li><code>[06:28–06:31]</code> 将会为公司带来强劲的销售增长</li>
+<li><code>[06:31–06:34]</code> 通过优化供应链和控制成本</li>
+<li><code>[06:34–06:36]</code> 能够提升公司的行养能力</li>
+<li><code>[06:36–06:39]</code> 如果海外市场能够取得超出预期的发展</li>
+<li><code>[06:39–06:43]</code> 将会进一步提升公司的全球市场份额和品牌影响力</li>
+<li><code>[06:44–06:45]</code> 最后咱们来总结一下</li>
+<li><code>[06:45–06:47]</code> 高盛这份研报主要观念</li>
+<li><code>[06:47–06:51]</code> 高盛认为帕帕马特在中国大陆市场表现强劲</li>
+<li><code>[06:51–06:53]</code> IP生态持续发力</li>
+<li><code>[06:53–06:55]</code> 品类结构不断优化</li>
+<li><code>[06:55–06:57]</code> 新业务拓展也取得了一定的进展</li>
+<li><code>[06:57–07:00]</code> 但海外市场的增长放缓以及汇兑损失</li>
+<li><code>[07:00–07:03]</code> 对公司的业绩造成了一定的影响</li>
+<li><code>[07:03–07:05]</code> 高盛下调了公司的评级和目标价</li>
+<li><code>[07:05–07:08]</code> 主要是因为认为公司的增长放缓</li>
+<li><code>[07:08–07:09]</code> 和IP动能下降</li>
+<li><code>[07:09–07:10]</code> 但同时也认为公司</li>
+<li><code>[07:10–07:12]</code> 依然存在一定的上涨空间</li>
+<li><code>[07:13–07:15]</code> 从市场趋势来看</li>
+<li><code>[07:15–07:18]</code> 潮玩市场依然具有很大的发展潜力</li>
+<li><code>[07:18–07:21]</code> 随着消费者对文化娱乐产品的需求不断提升</li>
+<li><code>[07:21–07:24]</code> 潮玩市场的规模也在不断扩大</li>
+<li><code>[07:24–07:26]</code> 帕帕马特作为行业的龙头企业</li>
+<li><code>[07:26–07:29]</code> 拥有强大的IP运营能力和品牌影响力</li>
+<li><code>[07:29–07:31]</code> 如果能够顺利实现运营</li>
+<li><code>[07:31–07:33]</code> 与组织提升之年的目标</li>
+<li><code>[07:33–07:35]</code> 优化海外市场的运营效率</li>
+<li><code>[07:35–07:36]</code> 拓展新的业务增长点</li>
+<li><code>[07:36–07:38]</code> 依然有望实现持续的增长</li>
+<li><code>[07:39–07:41]</code> 不过需要提醒大家的是</li>
+<li><code>[07:41–07:43]</code> 高盛的延报观点仅仅是作为参考</li>
+<li><code>[07:43–07:46]</code> 投资决策还需要结合自己的风险承受能力</li>
+<li><code>[07:46–07:49]</code> 投资目标以及对市场的判断来做出</li>
+<li><code>[07:49–07:51]</code> 市场是不断变化的</li>
+<li><code>[07:51–07:54]</code> 帕帕马特未来的发展也存在很多不确定性</li>
+<li><code>[07:54–07:56]</code> 大家在投资的时候一定要谨慎对待</li>
+<li><code>[07:56–07:57]</code> 做好风险控制</li>
+</ul>
+</details>
+<details>
+<summary>关键帧 + OCR</summary>
+<p><strong><code>[00:00]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　当一家曾经被市场捧为盲盒　/　negatively（-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="00:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0001.jpg" /></p>
+<p><strong><code>[00:03]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.Thehare　/　赛道龙头的公司　/　arurCnen　/　2-2978-7999carol.chen@gs.com　/　negatively(-23%onthedayvs.HSI+1%)　/　fman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0002.jpg" /></p>
+<p><strong><code>[00:06]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　Vs.735%-740%in3Q25),andFXlo　/　在发布亮眼财报的同时　/　sharepricereac　/　99 |carol.chen(@gs.com　/　negatively(-23%onthedayvs.Hs　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="00:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0003.jpg" /></p>
+<p><strong><code>[00:09]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25　/　却被头部投行下调了评级和目标价　/　Lcom　/　negatively（-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0004.jpg" /></p>
+<p><strong><code>[00:12]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),aRdE　/　这背后究竟是增长见顶的信号　/　chen@gs.com　/　negatively（-23%ontheda　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0005.jpg" /></p>
+<p><strong><code>[00:15]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　还是市场短期误判的机遇　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　a) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0006.jpg" /></p>
+<p><strong><code>[00:18]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXlq　/　高盛在3月26日发布的　/　Iheshase　/　999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HS　/　(Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0007.jpg" /></p>
+<p><strong><code>[00:21]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),　/　这份关于泡泡玛特的深度研报　/　aruicen　/　hien@ogs.com　/　negatively（-23%ontheda　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0008.jpg" /></p>
+<p><strong><code>[00:24]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),　/　apd-ExdlossIheshar　/　藏着哪些关键信息和投资启示　/　chen@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="00:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0009.jpg" /></p>
+<p><strong><code>[00:27]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　咱们先来看这份研报的基本信息　/　cogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="00:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0010.jpg" /></p>
+<p><strong><code>[00:30]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q2　/　高盛对泡泡玛特给出的评级是中性　/　.COm　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0011.jpg" /></p>
+<p><strong><code>[00:33]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vS.735%-740%in3Q25).andFX1oss.Tbe　/　自标价为184港元　/　carorCnen　/　2978-79991carol.chen@gs.com　/　negatively(-23%onthedayvs.HSI+1%　/　an Sachs (Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0012.jpg" /></p>
+<p><strong><code>[00:36]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in　/　而当前泡泡玛特的股价是168.30港元　/　heshare　/　aruiCnen　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0013.jpg" /></p>
+<p><strong><code>[00:39]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　VS.735%-740%　/　高盛认为公司股价还有9.3%的上涨空间　/　negatively(-23%　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0014.jpg" /></p>
+<p><strong><code>[00:42]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　VS.735%-740%　/　高盛认为公司股价还有9.3%的上涨空间　/　negatively(-23%　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0015.jpg" /></p>
+<p><strong><code>[00:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in　/　这个自标价比之前高盛给出的300港元　/　negatively(-23%　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0016.jpg" /></p>
+<p><strong><code>[00:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Theshakenric　/　下调了足足39%　/　arurCnen　/　2-2978-7999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl+1%),　/　Iman Sachis (Asia) LLC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0017.jpg" /></p>
+<p><strong><code>[00:51]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-7　/　高盛还把2026-2027年的盈利预测下调了18%　/　negatively　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="00:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0018.jpg" /></p>
+<p><strong><code>[00:54]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-7　/　高盛还把2026-2027年的盈利预测下调了18%　/　adEXloss.Ihesharepr　/　negatively　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0019.jpg" /></p>
+<p><strong><code>[00:57]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in30　/　估值倍数也从20倍PE降到了15倍PE　/　aocnen　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="00:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0020.jpg" /></p>
+<p><strong><code>[01:00]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q2　/　对标迪士尼一个标准差以下的水平　/　pric　/　,COIT　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0021.jpg" /></p>
+<p><strong><code>[01:03]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXl2S5　/　泡泡玛特存在增长放缓　/　Theshare　/　99 1carol.chen@ogs.com　/　negatively(-23%onthedayvs.HS　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0022.jpg" /></p>
+<p><strong><code>[01:06]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXlossheshar　/　和IP动能下降的问题　/　arolcnen　/　7999 |carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0023.jpg" /></p>
+<p><strong><code>[01:09]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q　/　泡泡玛特2025年下半年的业绩表现　/　.com　/　negatively(-23%ont　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0024.jpg" /></p>
+<p><strong><code>[01:12]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),　/　泡泡玛特2025年下半年的收入　/　aare　/　chen(@gs.com　/　negatively（-23%onthed　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0025.jpg" /></p>
+<p><strong><code>[01:15]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss　/　达到234.4亿人民币　/　eshare_pricereac　/　aroicnen　/　8-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+　/　Sachs (Asia) L.LC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0026.jpg" /></p>
+<p><strong><code>[01:18]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.The　/　同比增长174%　/　carorCnen　/　352-2978-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HSI+1%)　/　dman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0027.jpg" /></p>
+<p><strong><code>[01:21]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　净利润82亿人民币　/　aroilnen　/　978-7999carol.chen@gs.com　/　negatively(-23%onthedayvs.HSI+19　/　Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0028.jpg" /></p>
+<p><strong><code>[01:24]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesh　/　单从数据上看　/　852-2978-7999carol.chen@0gs.com　/　caruiCnen　/　negatively(-23%onthedayvs.HSI+1%),　/　Goldman Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0029.jpg" /></p>
+<p><strong><code>[01:27]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.Thes　/　share　/　但高盛却指出　/　852-2978-79991carol.chen@0gs.com　/　caruiCnen　/　negatively(-23%onthedayvs.HS1+1%),　/　Goldmian Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0030.jpg" /></p>
+<p><strong><code>[01:30]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3Q　/　这份业绩低于他们预期的8%到10%　/　cofm　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0031.jpg" /></p>
+<p><strong><code>[01:33]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),and　/　那为什么会出现这种情况呢　/　ol.chen@gs.com　/　negatively(-23%ontheday　/　L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0032.jpg" /></p>
+<p><strong><code>[01:36]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andE　/　首先是美洲市场的增长放缓　/　olchen@ogs.com　/　negatively（-23%ontheday　/　.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0033.jpg" /></p>
+<p><strong><code>[01:39]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.The　/　2025年下半年　/　share　/　CarurCnen　/　852-2978-7999carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSI+1%),　/　Mdman Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0034.jpg" /></p>
+<p><strong><code>[01:42]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXk　/　美洲市场同比增长633%　/　aroiCnei　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　sia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0035.jpg" /></p>
+<p><strong><code>[01:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3　/　这个增速还在1.265%到1,270%之间　/　negatively（-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0036.jpg" /></p>
+<p><strong><code>[01:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3　/　这个增速还在1.265%到1,270%之间　/　negatively（-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0037.jpg" /></p>
+<p><strong><code>[01:51]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy，　/　vs.735%-740%in3Q25).andFXloss.ThesharA　/　其次是欧洲　/　+852-2978-79991carol.cheni@gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSl+1%),whi　/　Goldman Sachs [Asia} L.LC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="01:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0038.jpg" /></p>
+<p><strong><code>[01:54]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　及其他地区的增长也出现了放缓　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0039.jpg" /></p>
+<p><strong><code>[01:57]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andEXlo　/　2025年下半年同比增长436%　/　aroiCnen　/　chieneogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="01:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0040.jpg" /></p>
+<p><strong><code>[02:00]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q　/　而第三季度的增速在735%到740%　/　.com　/　negatively（-23%ont　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0041.jpg" /></p>
+<p><strong><code>[02:03]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.　/　最后就是汇兑损失　/　ioicnen　/　978-7999/carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+1　/　Sachs (Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0042.jpg" /></p>
+<p><strong><code>[02:06]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.　/　造成了一定的影响　/　nricereac　/　aruiCnen　/　978-7999carol.chen@gs.com　/　negatively（-23%onthedayvs.HSl+19　/　Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0043.jpg" /></p>
+<p><strong><code>[02:09]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　不过咱们也不能只看不好的一面　/　ogs.com　/　negatively（-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0044.jpg" /></p>
+<p><strong><code>[02:12]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),and　/　泡泡玛特在一些方面的表现　/　oricerea　/　rol.chen@ogs.com　/　negatively(-23%ontheday　/　L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0045.jpg" /></p>
+<p><strong><code>[02:15]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss　/　表现强于高盛的预期　/　Thesharepri　/　aruiCnen　/　7999 |carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0046.jpg" /></p>
+<p><strong><code>[02:18]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFX　/　比高盛的预期高出了5%　/　reacted　/　aruiCneu　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　sia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0047.jpg" /></p>
+<p><strong><code>[02:21]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q2　/　国内市场依然是泡泡玛特的基本盘　/　.corm　/　negatively（-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0048.jpg" /></p>
+<p><strong><code>[02:24]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFx　/　消费者对公司的IP和产品　/　CC.　/　cnen　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　ia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0049.jpg" /></p>
+<p><strong><code>[02:27]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　其次是IP生态方面　/　arorcnen　/　978-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+19　/　in Sachs (Asia) L.L,C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0050.jpg" /></p>
+<p><strong><code>[02:30]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25　/　泡泡玛特的核心iIPtheMonsters　/　pricereacted　/　caruiCnen　/　oigs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0051.jpg" /></p>
+<p><strong><code>[02:33]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),　/　也就是level的销售增长了287%　/　eshare　/　aruiCnen　/　n@ogs.com　/　negatively（-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0052.jpg" /></p>
+<p><strong><code>[02:36]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　+852-2978-7999 1carol.chen@gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSl+1%),whichbasedonour　/　Goldman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0053.jpg" /></p>
+<p><strong><code>[02:39]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),ar　/　成为了公司最核心的收入来源　/　enogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0054.jpg" /></p>
+<p><strong><code>[02:42]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　•852-2978-7999)carol.chen@gs.com　/　CaruiCnen　/　negatively(-23%onthedayvs.HSl+1%),whichbasedonour　/　Goidiman Sachis (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0055.jpg" /></p>
+<p><strong><code>[02:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Theshareprere　/　Crybaby增长110%　/　arurCnen　/　78-7999carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+　/　Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0056.jpg" /></p>
+<p><strong><code>[02:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Theshareprice　/　Dimo0增长214%　/　caruiCnen　/　2978-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HS1+1%　/　an Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0057.jpg" /></p>
+<p><strong><code>[02:51]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　Vs.735%-740%in3Q25）　/　这些热门IP的表现也都非常不错　/　Theshare　/　ogs.com　/　negatively（-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="02:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0058.jpg" /></p>
+<p><strong><code>[02:54]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFX1oss.The　/　同比增长17%　/　CarorCnei　/　852-2978-79991carol.chen@0gs.com　/　negatively(-23%onthedayvs.HSI+1%),　/　oldman Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0059.jpg" /></p>
+<p><strong><code>[02:57]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFX1oss.　/　在IP内容开发方面　/　Thesharepric　/　arurCnen　/　978-7999carol.chen@ogs.com　/　negatively（-23%onthedayvs.HSl+19　/　in Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="02:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0060.jpg" /></p>
+<p><strong><code>[03:00]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3Q　/　ab布已经和索尼影业合作开发电影　/　nesbare　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0061.jpg" /></p>
+<p><strong><code>[03:03]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25　/　同时lab布还将参与2026年fives　/　s@gs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0062.jpg" /></p>
+<p><strong><code>[03:06]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in30　/　这无疑会进一步提升IP的全球影响力　/　he-share　/　negatively（-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0063.jpg" /></p>
+<p><strong><code>[03:09]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　852-2978-79991carol.chen@gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSl+1%),whichbasedonour　/　Goldman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0064.jpg" /></p>
+<p><strong><code>[03:12]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),and　/　泡泡玛特也发生了一些变化　/　ol.chen@pgs.com　/　negatively(-23%ontheday　/　.LC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0065.jpg" /></p>
+<p><strong><code>[03:15]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　Vs.735%-740%in3Q25),andFX　/　毛绒玩具持续爆发式增长　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　a) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0066.jpg" /></p>
+<p><strong><code>[03:18]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.The　/　同比增长427%　/　LarurCnen　/　352-2978-79991carol.chen@0gs.com　/　negatively(-23%onthedayvs.HSI+1%)　/　dman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0067.jpg" /></p>
+<p><strong><code>[03:21]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXlos　/　贡献了54%的销售额　/　uruicnen　/　7999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0068.jpg" /></p>
+<p><strong><code>[03:24]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXl　/　已经超过了手办类产品　/　arorCnen　/　999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HS　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0069.jpg" /></p>
+<p><strong><code>[03:27]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),　/　手办类产品星然也增长了60%　/　aoilnel　/　chen@ogs.com　/　negatively（-23%ontheda　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0070.jpg" /></p>
+<p><strong><code>[03:30]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXlos　/　但占比包经降至29%　/　aruiCnen　/　-79991carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0071.jpg" /></p>
+<p><strong><code>[03:33]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　vs.735%-740%in3Q2　/　而Mega产品则出现了17%的下滑　/　loss.　/　gs.com　/　negatively（-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0072.jpg" /></p>
+<p><strong><code>[03:36]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25　/　这说明消费者的偏好正在发生变化　/　.com　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0073.jpg" /></p>
+<p><strong><code>[03:39]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),anEXs　/　也在及时调整自包的产品结构　/　hen@ogs.com　/　negatively(-23%ontheda　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0074.jpg" /></p>
+<p><strong><code>[03:42]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFX1oss.　/　来适应市场的需求　/　heshare　/　aroicnen　/　978-7999|carol.chen@gs.com　/　negatively（-23%onthedayvs.HSl+1　/　Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0075.jpg" /></p>
+<p><strong><code>[03:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),and　/　一直是泡泡玛特重点布局的方向　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0076.jpg" /></p>
+<p><strong><code>[03:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q2　/　高盛也对泡泡玛特的海外市场战略　/　.com　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0077.jpg" /></p>
+<p><strong><code>[03:51]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in　/　自前泡泡玛特在中国大陆有445家门店　/　aroiCnen　/　negatively(-23%　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="03:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0078.jpg" /></p>
+<p><strong><code>[03:54]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　海外有185家门店　/　AruiCnen　/　978-7999carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSI+19　/　an Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0079.jpg" /></p>
+<p><strong><code>[03:57]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q2　/　海外线上销售额已经超过了零售店　/　pris　/　.com　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="03:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0080.jpg" /></p>
+<p><strong><code>[04:00]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy，　/　vs.735%-740%in3Q25),andFXloss.Theshar　/　从长期来看　/　852-2978-79991carol.chen@gs.com　/　CarurCnei　/　negatively(-23%onthedayvs.HSI+1%),whig　/　Goldnian Sachs (Asia] L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0081.jpg" /></p>
+<p><strong><code>[04:03]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFX　/　泡泡玛特计划在2026年　/　Theshare　/　arurCnei　/　99|carol.chen(@gs.com　/　negatively(-23%onthedayvs.H　/　Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKs223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0082.jpg" /></p>
+<p><strong><code>[04:06]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andEXloshsha　/　在美国市场突破100家门店　/　arol.chen@ogs.com　/　negatively（-23%onthedayvs　/　L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="04:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0083.jpg" /></p>
+<p><strong><code>[04:09]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25　/　包括时代广场和第五大道的旗舰店　/　negatively（-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0084.jpg" /></p>
+<p><strong><code>[04:12]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),ar　/　公司在美国市场的品牌知名度　/　enogs.com　/　negatively(-23%ontheda　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0085.jpg" /></p>
+<p><strong><code>[04:15]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25）　/　同时泡泡玛特还在通过规模经济　/　heshare　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0086.jpg" /></p>
+<p><strong><code>[04:18]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.Thehare　/　数字供应链投资　/　arurCnen　/　-2978-7999carol.chen@0gs.com　/　negatively(-23%onthedayvs.HSI+1%）　/　man Sachs (Asia} LLC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0087.jpg" /></p>
+<p><strong><code>[04:21]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.Thes　/　来优化供应链　/　caruiCnen　/　852-2978-7999carol.chen@gs.com　/　negatively(-23%onthedayvs.HSI+1%),　/　oldmian Sachs (Asia] LLC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0088.jpg" /></p>
+<p><strong><code>[04:24]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　+852-2978-79991carol.chen@0gs.com　/　CaruiCnen　/　negatively(-23%onthedayvs.HSI+1%),whichbasedonour　/　Goldman Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0089.jpg" /></p>
+<p><strong><code>[04:27]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),　/　泡泡玛特也在积极拓展新业务　/　hen@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0090.jpg" /></p>
+<p><strong><code>[04:30]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFX　/　预计在2026年夏季完成　/　sharepricereac　/　91carol.chen@ogs.com　/　negatively(-23%onthedayvs.H　/　Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0091.jpg" /></p>
+<p><strong><code>[04:33]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXlos　/　2.0阶段已经进入设计阶段　/　arol.chen@ogs.com　/　negatively(-23%onthedayvs　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0092.jpg" /></p>
+<p><strong><code>[04:36]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25　/　将会为公司带来新的收入增长点　/　pri6ereactec　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="04:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0093.jpg" /></p>
+<p><strong><code>[04:39]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25）　/　同时也能进一步强化IP的影响力　/　price.　/　@gs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0094.jpg" /></p>
+<p><strong><code>[04:42]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　在新品类扩展方面　/　Lhesha　/　aroilnen　/　978-7999|carol.chen@gs.com　/　negatively（-23%onthedayvs.HSl+1　/　n Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="04:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0095.jpg" /></p>
+<p><strong><code>[04:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　珠宝甜品的表现超出预期　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　a) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0096.jpg" /></p>
+<p><strong><code>[04:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　Vs.735%-740%in3Q25),andFXl　/　将新品类扩展至小家电　/　aruiCen　/　991carol.chen@gs.com　/　negatively(-23%onthedayvs.HS　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0097.jpg" /></p>
+<p><strong><code>[04:51]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25)　/　公司正在不断探索新的业务边界　/　Thesharepr　/　@gs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="04:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0098.jpg" /></p>
+<p><strong><code>[04:54]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　寻找新的增长机会　/　aruiCnen　/　978-7999carol.chen@ogs.com　/　negatively（-23%onthedayvs.HSl+19　/　Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0099.jpg" /></p>
+<p><strong><code>[04:57]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q2　/　此外泡泡玛特还在招募局部艺术家　/　heshar2　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="04:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0100.jpg" /></p>
+<p><strong><code>[05:00]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),and　/　以增强和本地消费者的共鸣　/　The-share　/　D：　/　rol.chen@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0101.jpg" /></p>
+<p><strong><code>[05:03]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),and　/　更好的适应不同市场的文化　/　Cnei　/　rol.chen@ogs.com　/　negatively(-23%ontheday　/　.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0102.jpg" /></p>
+<p><strong><code>[05:06]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy，　/　vs.735%-740%in3Q25).andFXloss.Theshar　/　对于2026年　/　852-2978-79991carol.chen@gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSl+1%),whi　/　Goldmian Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0103.jpg" /></p>
+<p><strong><code>[05:09]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.　/　管理层将其定位为　/　hashare　/　ioicnen　/　978-7999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl+19　/　n Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0104.jpg" /></p>
+<p><strong><code>[05:12]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy　/　Vs.735%-740%in3Q25）　/　自标是实现超过20%的同比增长　/　shareBr　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0105.jpg" /></p>
+<p><strong><code>[05:15]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXlos　/　同时不牺牲盈利能力　/　uicien　/　-7999/carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="05:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0106.jpg" /></p>
+<p><strong><code>[05:18]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss.　/　董点关注优化组织　/　arorcnen　/　978-7999|carol.chen@gs.com　/　negatively（-23%onthedayvs.HSl+19　/　n Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="05:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0107.jpg" /></p>
+<p><strong><code>[05:21]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss　/　为了提高运营透明度　/　reactec　/　AruiCnen　/　chs (Asia) L.L.C　/　7999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="05:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0108.jpg" /></p>
+<p><strong><code>[05:24]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),a　/　泡泡玛特计划从2026年5月起　/　chen@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0109.jpg" /></p>
+<p><strong><code>[05:27]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.　/　这无疑会让投资者　/　dAshare　/　aoicnen　/　978-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+1　/　Sachs (Asia) L.LC.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0110.jpg" /></p>
+<p><strong><code>[05:30]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),　/　更及时的了解公司的运营情况　/　hen@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0111.jpg" /></p>
+<p><strong><code>[05:33]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　高盛也对泡泡玛特的风险与机遇　/　@ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0112.jpg" /></p>
+<p><strong><code>[05:36]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),　/　下行风险主要包括单一IP风险　/　caruiCnei　/　en@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0113.jpg" /></p>
+<p><strong><code>[05:39]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.　/　或IP组合扩展失败　/　heshare　/　aroicnen　/　978-7999carol.chen@ogs.com　/　negatively（-23%onthedayvs.HSl+19　/　Sachs (Asia) L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0114.jpg" /></p>
+<p><strong><code>[05:42]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　以及成本和费用控制不当　/　ia) L.L.C　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0115.jpg" /></p>
+<p><strong><code>[05:45]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25　/　如巢泡泡玛特过度依赖某一个IP　/　a8.share　/　iioicnen　/　@gs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0116.jpg" /></p>
+<p><strong><code>[05:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q2　/　将会对公司的业绩造成很大的影响　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0117.jpg" /></p>
+<p><strong><code>[05:51]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3　/　盲盒和潮玩市场的竞争也在不断加剧　/　negatively(-23%on　/　conversationswithinvestorswasmainiyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="05:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0118.jpg" /></p>
+<p><strong><code>[05:54]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thes　/　新的竞争对手　/　852-2978-7999carol.chen@gs.com　/　carurCnen　/　negatively(-23%onthedayvs.HSI+1%),　/　Goldman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="05:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0119.jpg" /></p>
+<p><strong><code>[05:57]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Theshareprice　/　此外　/　852-2978-79991carol.chen@gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSI+1%),whichbase　/　Goldman Sachs (Asia).L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="05:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0120.jpg" /></p>
+<p><strong><code>[06:00]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy　/　VS.735%-740%in3　/　如巢公司不能很好的控制成本和费用　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="06:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0121.jpg" /></p>
+<p><strong><code>[06:03]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),and　/　上行机遇则包括更多IP推出　/　rol.chien@ogs.com　/　negatively（-23%onthedayv　/　L.L.C.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="06:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0122.jpg" /></p>
+<p><strong><code>[06:06]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3Q25）　/　P热度提升和品类扩展带来强劲销售　/　negatively(-23%on　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0123.jpg" /></p>
+<p><strong><code>[06:09]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3Q25)　/　P热度提升和品类扩展带来强劲销售　/　negatively(-23%on　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0124.jpg" /></p>
+<p><strong><code>[06:12]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy，　/　vs.735%-740%in3Q25),andFXloss.Theshare　/　销售营销　/　+852-2978-79991carol.chen@gs.com　/　CaroiCnen　/　negatively(-23%onthedayvs.HSI+1%),which　/　Goldmian Sachs (Asia] L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0125.jpg" /></p>
+<p><strong><code>[06:15]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in　/　更好的供应链管理更严格的成本控制　/　reactec　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0126.jpg" /></p>
+<p><strong><code>[06:18]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andFXloss　/　以及超预期的海外发展　/　renrice-reac　/　99 1carol.chen(@gs.com　/　negatively(-23%onthedayvs.Hs　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0127.jpg" /></p>
+<p><strong><code>[06:21]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q28　/　泡泡玛特能够不断推出新的热门IP　/　S.COrT　/　negatively(-23%onth)　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0128.jpg" /></p>
+<p><strong><code>[06:24]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.　/　提升现有IP的热度　/　eacfec　/　aoicnen　/　978-7999|carol.chen@ogs.com　/　negatively（-23%onthedayvs.HSl+1　/　Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0129.jpg" /></p>
+<p><strong><code>[06:27]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXlos　/　同时拓展更多的品类　/　urcien　/　7999 1 carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0130.jpg" /></p>
+<p><strong><code>[06:30]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　852-2978-79991carol.chen@ogs.com　/　CarorCneni　/　negatively(-23%onthedayvs.HSl+1%),whichbasedonour　/　Goldman Sactrs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0131.jpg" /></p>
+<p><strong><code>[06:33]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　能够提升公司的盈利能力　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　a) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0132.jpg" /></p>
+<p><strong><code>[06:36]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　能够取得超出预期的发展　/　The-shar　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　a) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="06:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0133.jpg" /></p>
+<p><strong><code>[06:39]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3　/　将会进一步提升公司的全球市场份额　/　osS.　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0134.jpg" /></p>
+<p><strong><code>[06:42]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFX1oss.Thes　/　和品牌影响力　/　CarorCnen　/　852-2978-79991carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+1%),　/　oldman Sachs (Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0135.jpg" /></p>
+<p><strong><code>[06:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFX1　/　高盛这份研报主要观点　/　AruiCner　/　99carol.chen@gs.com　/　negatively(-23%onthedayvs.Hs　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="06:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0136.jpg" /></p>
+<p><strong><code>[06:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25　/　泡泡玛特在中国大陆市场表现强劲　/　.com　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="06:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0137.jpg" /></p>
+<p><strong><code>[06:51]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.ThesharDr　/　IP生态持续发力　/　aroiCnen　/　2-2978-79991carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+1%)　/　Iman Sachs (Asia] L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0138.jpg" /></p>
+<p><strong><code>[06:54]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　新业务拓展也取得了一定的进展　/　oogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0139.jpg" /></p>
+<p><strong><code>[06:57]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25).andFXloss.　/　但海外市场的增长　/　arorCnen　/　978-7999|carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+1　/　Sachs (Asia] L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="06:57" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0140.jpg" /></p>
+<p><strong><code>[07:00]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25）　/　对公司的业绩造成了一定的影响　/　ags.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainTyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:00" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0141.jpg" /></p>
+<p><strong><code>[07:03]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25　/　高盛下调了公司的评级和目标价　/　-Theshar　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:03" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0142.jpg" /></p>
+<p><strong><code>[07:06]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),ar　/　公司的增长放缓和IP动能下降　/　hen@gs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:06" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0143.jpg" /></p>
+<p><strong><code>[07:09]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thes　/　但同时也认为　/　sbarepric　/　CarurCnen　/　852-2978-7999/carol.chen@0gs.com　/　negatively(-23%onthedayvs.HSI+1%),　/　Goldman Sachs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:09" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0144.jpg" /></p>
+<p><strong><code>[07:12]</code></strong> 9992.HK　/　12mPrice Target:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXloss.Thesharepricereacted　/　•852-2978-79991carol.chen@0gs.com　/　CarurCnen　/　negatively(-23%onthedayvs.HSl+1%),whichbasedonour　/　Goldmian Sachs (Asia} L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:12" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0145.jpg" /></p>
+<p><strong><code>[07:15]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25andEX　/　潮玩市场依然具有很大的发展潜力　/　.COrm　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:15" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0146.jpg" /></p>
+<p><strong><code>[07:18]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFX1oss.　/　随着消费者对文化　/　toicnen　/　978-7999carol.chen@gs.com　/　negatively(-23%onthedayvs.HSl+19　/　n Sachis (Asia} L.LC　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:18" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0147.jpg" /></p>
+<p><strong><code>[07:21]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),　/　潮玩市场的规模也在不断扩大　/　ten@ogs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:21" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0148.jpg" /></p>
+<p><strong><code>[07:24]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),　/　泡泡玛特作为行业的龙头企业　/　nen@gs.com　/　negatively(-23%ontheday　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:24" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0149.jpg" /></p>
+<p><strong><code>[07:27]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　VS.735%-740%in3Q25）　/　拥有强大的IP运营能力和品牌影响力　/　negatively(-23%on　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Market cap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:27" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0150.jpg" /></p>
+<p><strong><code>[07:30]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25)　/　实现运营与组织提升之年的目标　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:30" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0151.jpg" /></p>
+<p><strong><code>[07:33]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy　/　Vs.735%-740%in3Q25),andF　/　优化海外市场的运营效率　/　carol.chen@ogs.com　/　negatively（-23%onthedayvs.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:33" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0152.jpg" /></p>
+<p><strong><code>[07:36]</code></strong> 9992.HK　/　12mPriceTarget:HKs184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFX　/　依然有望实现持续的增长　/　Thesharenric　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:36" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0153.jpg" /></p>
+<p><strong><code>[07:39]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25),andFX1　/　不过需要提醒大家的是　/　99|carol.chen@gs.com　/　negatively(-23%onthedayvs.HS　/　(Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:39" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0154.jpg" /></p>
+<p><strong><code>[07:42]</code></strong> 9992.HK　/　12mPriceTarget:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　Vs.735%-740%in3Q25）　/　高盛的研报观点仪仅是作为参考　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/$28.6bn</p>
+<p><img loading="lazy" alt="07:42" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0155.jpg" /></p>
+<p><strong><code>[07:45]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25　/　还需要结合自己的风险承受能力　/　ogs.com　/　negatively(-23%onthe　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:45" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0156.jpg" /></p>
+<p><strong><code>[07:48]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　Vs.735%-740%in3Q25),andF　/　以及对市场的判断来做出　/　carol.chen@ogs.com　/　negatively(-23%onthedayvs.　/　ia]LL.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:48" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0157.jpg" /></p>
+<p><strong><code>[07:51]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions（+436%yoy,　/　vs.735%-740%in3Q25),andFXlos　/　泡泡玛特未来的发展　/　oicnen　/　7999|carol.chen@ogs.com　/　negatively(-23%onthedayvs.HSl　/　chs (Asia) L.L.C　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:51" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0158.jpg" /></p>
+<p><strong><code>[07:54]</code></strong> 9992.HK　/　12mPrice Target:HKS184.00　/　Price:HKS168.30　/　Upside:9.3%　/　会员空间获取报告原文　/　PopMartreported2H25revenue/NPgrowthof174%/272%to　/　Rmb23.2bn/8.2bn,whichcamein8%/10%belowGSe,mainlyon　/　精选研报提供中文翻译　/　lower-than-expectedsalesgrowthinAmericas(+633%yoy,vs.　/　还有高盛、大摩等投行研报　/　1,265%-1,270%in3Q25)andEurope&amp;otherregions(+436%yoy,　/　vs.735%-740%in3Q25　/　大家在投资的时候一定要谨慎对待　/　LCOT　/　negatively(-23%onth　/　conversationswithinvestorswasmainlyonconcernsovergrowth　/　deceleration(especiallyintheUSwherethird-partydatasuggests　/　KeyData　/　Marketcap:HKS223.5bn/S28.6bn</p>
+<p><img loading="lazy" alt="07:54" src="assets/BV1kMXsBBEo9_v2md/frames/kf_0159.jpg" /></p>
+</details><footer>md2html · 2026-08-23</footer></main></body></html>

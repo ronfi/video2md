@@ -1,0 +1,564 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>长鑫存储10大核心供应商</title><style>
+:root{
+  --bg:#F6F9F7; --surface:#FFFFFF; --ink:#1C2622; --dim:#5F6F67;
+  --accent:#0E9A68; --accent-soft:rgba(14,154,104,.14); --gold:#8A6400;
+  --gold-soft:rgba(255,200,61,.22); --line:#DCE5E0; --code-bg:#EEF3F0;
+  --card-shadow:0 1px 2px rgba(28,38,34,.05),0 8px 24px rgba(28,38,34,.06);
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C120F; --surface:#121A16; --ink:#E6EFEA; --dim:#8FA39A;
+  --accent:#39E6A8; --accent-soft:rgba(57,230,168,.13); --gold:#FFC83D;
+  --gold-soft:rgba(255,200,61,.14); --line:#233029; --code-bg:#18221D;
+  --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:18px/1.9 "Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+  -webkit-font-smoothing:antialiased}
+main{max-width:1140px;margin:0 auto;padding:44px 40px 96px}
+@media(max-width:720px){main{padding:24px 18px 64px}body{font-size:16.5px}}
+
+/* —— 字体分工：标题黑体 / 元信息等宽 —— */
+h1,h2,h3,h4,.sans{font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",
+  -apple-system,"Segoe UI",sans-serif}
+.mono,code,pre,.meta,.eyebrow,.pill{font-family:"JetBrains Mono",Menlo,Consolas,
+  "Noto Sans Mono CJK SC",monospace}
+
+/* —— 眉标 + 返回 —— */
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--dim);
+  font-size:12.5px;letter-spacing:2.5px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:8px;
+  background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+  transition:border-color .15s,background .15s}
+.back:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* —— 标题：签名进度线 —— */
+h1{font-size:clamp(27px,3.1vw,38px);font-weight:800;line-height:1.32;
+  letter-spacing:.5px;margin:.2em 0 .55em;position:relative;padding-bottom:20px}
+h1::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;
+  border-radius:3px;background:linear-gradient(90deg,var(--accent) 0%,
+  var(--accent) 34%,var(--gold) 35%,var(--gold) 37%,var(--line) 38%)}
+h2{font-size:23px;font-weight:800;margin:2.2em 0 .8em;padding-left:16px;
+  position:relative;letter-spacing:.5px}
+h2::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:5px;
+  border-radius:5px;background:linear-gradient(var(--accent),var(--accent-soft))}
+h3{font-size:18.5px;font-weight:700;margin:1.7em 0 .5em;color:var(--ink)}
+h4{font-size:16.5px;margin:1.4em 0 .4em}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;
+  transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,.back:focus-visible,summary:focus-visible{outline:2px solid var(--accent);
+  outline-offset:3px;border-radius:4px}
+strong{color:var(--ink);background:linear-gradient(transparent 62%,var(--gold-soft) 62%);
+  padding:0 1px}
+p{margin:.9em 0}
+ul,ol{padding-left:1.6em}li{margin:.32em 0}
+hr{border:none;border-top:1px solid var(--line);margin:2.4em 0}
+
+/* —— 文档头部 meta（首个引用块）—— */
+blockquote{margin:1.1em 0;padding:.35em 1.1em;border-left:4px solid var(--line);
+  color:var(--dim);background:var(--surface);border-radius:0 10px 10px 0}
+h1+blockquote{border-left-color:var(--accent);font-size:14px;
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:.3px}
+
+/* —— 代码 / 时间戳 —— */
+code{background:var(--code-bg);color:var(--accent);padding:.14em .45em;
+  border-radius:6px;font-size:.82em}
+pre{background:var(--code-bg);border:1px solid var(--line);padding:16px 18px;
+  border-radius:12px;overflow-x:auto;line-height:1.65}
+pre code{padding:0;background:none;color:var(--ink);font-size:.85em}
+
+/* —— 表格 —— */
+table{border-collapse:collapse;display:block;overflow-x:auto;margin:1.2em 0;
+  font-size:.92em;font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th,td{border:1px solid var(--line);padding:8px 14px;text-align:left}
+th{background:var(--accent-soft);font-weight:700;letter-spacing:.5px;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--surface)}
+
+/* —— 关键帧图 —— */
+img{max-width:100%;border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--card-shadow);margin:.4em 0}
+
+/* —— 附录折叠面板（终端面板风）—— */
+details{border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:0;margin:1.2em 0;overflow:hidden}
+details>*:not(summary){margin-left:20px;margin-right:20px}
+details>p:last-child,details>img:last-child{margin-bottom:18px}
+summary{cursor:pointer;font-weight:700;padding:14px 20px;letter-spacing:1px;
+  font-family:"Noto Sans SC",sans-serif;font-size:15px;color:var(--dim);
+  display:flex;align-items:center;gap:10px;user-select:none;
+  transition:color .15s,background .15s}
+summary::before{content:"";width:7px;height:7px;border-radius:7px;
+  background:var(--accent);flex:none}
+summary:hover{color:var(--ink);background:var(--accent-soft)}
+details[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}
+
+/* —— 索引页 —— */
+.idx-head{margin-bottom:8px}
+.en-sub{font-size:.48em;font-weight:600;color:var(--dim);letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;vertical-align:middle;margin-left:10px}
+.idx-meta{color:var(--dim);font-size:13px;margin:0 0 34px}
+.group{margin:34px 0 10px;display:flex;align-items:baseline;gap:12px}
+.group .g-name{font-weight:800;font-size:15px;letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;color:var(--dim)}
+.group::after{content:"";flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{position:relative;display:block;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;
+  text-decoration:none;color:var(--ink);box-shadow:var(--card-shadow);
+  transition:transform .16s,border-color .16s;border-bottom:none}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card .no{position:absolute;top:16px;right:18px;font-size:11.5px;color:var(--accent);
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:1px;opacity:.85}
+.card h3{margin:0 42px .5em 0;font-size:16.5px;line-height:1.5;font-weight:700}
+.card .meta{color:var(--dim);font-size:12px;letter-spacing:.3px;margin:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(prefers-reduced-motion:no-preference){
+  .card{animation:rise .4s cubic-bezier(.2,.7,.3,1) backwards}
+  .cards .card:nth-child(2){animation-delay:.04s}.cards .card:nth-child(3){animation-delay:.08s}
+  .cards .card:nth-child(4){animation-delay:.12s}.cards .card:nth-child(5){animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}}
+}
+footer{margin-top:64px;color:var(--dim);font-size:12px;letter-spacing:1px;
+  font-family:"JetBrains Mono",Menlo,monospace;display:flex;gap:10px;align-items:center}
+footer::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+</style></head><body><main><div class="topbar"><span class="eyebrow">REF · 视频文档 VIDEO DOCS</span><a class="back" href="index.html">← 返回索引 · Index</a></div><h1 id="10">长鑫存储10大核心供应商</h1>
+<blockquote>
+<p>时长 03:55 · 分辨率 852x480 · 生成于 2026-07-06　|　来源 <code>ref/BV1fj5f6iEH5.mp4</code> · <a href="https://www.bilibili.com/video/BV1fj5f6iEH5">视频链接</a></p>
+</blockquote>
+<h2 id="_1">概述</h2>
+<p>本文基于长鑫科技（CXMT）招股书及相关公开信息，深度拆解这家正在重塑中国半导体格局的巨头。长鑫科技在2026年第一季度营收达508亿元，同比增长超七倍，上半年预估净利润达500至570亿元。其千亿级资本开支正带动国产半导体设备与材料产业链实现从点状突破到全链条闭环的跃升。以下按排名梳理其十大核心供应商，涵盖设备、材料、封测及销售环节。</p>
+<h2 id="_2">一、巨头崛起：长鑫科技的“狂飙”时刻</h2>
+<ul>
+<li><strong>业绩爆发</strong>：2026年Q1营收508亿元，同比增长719%；上半年预估净利润500至570亿元。</li>
+<li><strong>巨额研发</strong>：累计研发投入188.67亿元，占营收33.11%；募资295亿元用于扩产。</li>
+<li><strong>工艺突破</strong>：三年内实现从19nm到DDR5/LPDDR5的四代工艺量产。</li>
+<li><strong>采购结构</strong>：设备采购占比超过65%，材料端约20%，其余为封测与厂务。国产化率从不足30%跃升至超过70%。</li>
+</ul>
+<h2 id="_3">二、十大核心供应商排名</h2>
+<h3 id="_4">第十名：兆易创新 —— 制造与销售的深度绑定</h3>
+<ul>
+<li><strong>核心地位</strong>：国内NOR Flash与MCU双料第一；长鑫第十大股东（持股1.80%）。</li>
+<li><strong>业务增量</strong>：DRAM代销为最大收入增量，2024年销售收入超50亿元，预计2026年冲击150亿元。</li>
+<li><strong>风险提示</strong>：代销模式利润率仅1.66%，且代销协议存在到期风险。</li>
+</ul>
+<h3 id="_5">第九名：长电科技 —— 高端封测的核心枢纽</h3>
+<ul>
+<li><strong>行业地位</strong>：全球封测第三、国内第一；承接长鑫外包核心业务。</li>
+<li><strong>业绩数据</strong>：2024年总营收约296亿元，存储封测占比约18%（约53亿元）。</li>
+<li><strong>技术红利</strong>：DDR5时代先进封装（FCCSP、PoP）单颗价值量较DDR4提升超30%；合肥扩建产线预计2026年底投产，产能翻倍。</li>
+</ul>
+<h3 id="_6">第八名：雅克科技 —— 突破垄断的“材料魔法师”</h3>
+<ul>
+<li><strong>核心产品</strong>：前驱体材料，收购韩国UPChemical切入核心工艺，打破海外垄断。</li>
+<li><strong>业绩数据</strong>：半导体材料业务年营收约18亿元，毛利率高达40%；宜兴二期投产后总产能拉升至500吨/年。</li>
+<li><strong>需求增长</strong>：DDR5电容从单层演进为多层堆叠，单颗芯片前驱体消耗量暴增约50%，量价齐升。</li>
+</ul>
+<h3 id="_7">第七名：沪硅产业 —— 核心原料“大硅片”的主力</h3>
+<ul>
+<li><strong>核心地位</strong>：国内首家实现300mm（12英寸）大硅片规模量产，月产能60万片。</li>
+<li><strong>供应关系</strong>：15%至20%产能特供长鑫；长鑫晶圆年产超120万片，年耗硅片150至180万片，对应采购额30至40亿元。</li>
+<li><strong>挑战</strong>：长鑫第四座工厂将带来每月10万片以上新增需求，但硅片领域仍受海外巨头及国内价格战双重夹击。</li>
+</ul>
+<h3 id="_8">第六名：安集科技 —— 抛光液领域的“平坦化龙头”</h3>
+<ul>
+<li><strong>核心产品</strong>：CMP抛光液与清洗液，国内龙头；长鑫CMP材料国产化率超80%。</li>
+<li><strong>产能与良率</strong>：CMP浆料年产能3万吨；新一代低缺陷铜阻挡层抛光液在DDR5产线上良率反馈已超越部分进口竞品。</li>
+<li><strong>成本数据</strong>：单颗DDR5需超30道CMP工序，材料成本约0.15至0.2美元；年采购额5至8亿元。</li>
+</ul>
+<h3 id="_9">第五名：盛美上海 —— 独门秘籍把控“芯片沐浴”</h3>
+<ul>
+<li><strong>核心地位</strong>：国内清洗设备技术最强，覆盖前道FEOL至后道BEOL。</li>
+<li><strong>份额争夺</strong>：长鑫合肥第四厂区预估采购清洗设备超30亿元，盛美有望拿下40%份额；但需警惕北方华创等国内同行的贴身肉搏竞争。</li>
+</ul>
+<h3 id="_10">第四名：华海清科 —— 突破垄断的“平坦化巨匠”</h3>
+<ul>
+<li><strong>核心地位</strong>：国内唯一12英寸CMP设备量产商，覆盖DDR4与DDR5全产线。</li>
+<li><strong>装机与订单</strong>：长鑫产线装机超80台，已交付价值超20亿元；新增产能对应CMP设备采购额预估40至50亿元。</li>
+<li><strong>技术前沿</strong>：最新Universal-300X系列正进行5nm以下制程验证。</li>
+</ul>
+<h3 id="_11">第三名：拓荆科技 —— 原子级薄膜的“建筑师”</h3>
+<ul>
+<li><strong>核心地位</strong>：国内薄膜沉积设备（CVD/PVD/ALD）龙头，全技术路线覆盖。</li>
+<li><strong>行业占比</strong>：薄膜设备占晶圆厂总投资20%至25%，为最大单一品类；双基地年产能超300台。</li>
+<li><strong>采购预期</strong>：长鑫新厂区蕴含超150亿元采购预期；ALD原子层沉积已几乎完全替代进口。</li>
+</ul>
+<h3 id="_12">第二名：中微公司 —— 挑战极限深宽比的“雕刻家”</h3>
+<ul>
+<li><strong>核心地位</strong>：国内刻蚀设备技术天花板，CCP刻蚀达国际一流水平。</li>
+<li><strong>装机与份额</strong>：长鑫产线装机超200台，占该类采购份额35%以上；深宽比超60:1。</li>
+<li><strong>爆发节点</strong>：2025年下半年DDR5产能拉升，单季出货超40台；长鑫新产能对应超200亿元刻蚀采购，中微有望拿下40%；但ICP刻蚀环节仍待全面突破。</li>
+</ul>
+<h3 id="_13">第一名：北方华创 —— 无法撼动的“全能航母平台”</h3>
+<ul>
+<li><strong>核心地位</strong>：国内设备最全的平台型龙头，覆盖前道一半以上工艺（薄膜、清洗、热处理、氧化扩散、刻蚀）。</li>
+<li><strong>供应份额</strong>：独占长鑫超30%总设备采购份额，为单一最大供应商；2026年Q1营收破百亿，同期再获50至60亿元订单。</li>
+<li><strong>护城河</strong>：全能型选手的“打包解决方案”免去繁琐设备整合，单品公司无法匹敌；未来五年潜在增量空间超360亿元。</li>
+<li><strong>注</strong>：高端光刻仍需依赖ASML，此为最后拼图。</li>
+</ul>
+<h2 id="_14">三、终局视野：长鑫国产替代全景生态圈</h2>
+<table>
+<thead>
+<tr>
+<th>环节</th>
+<th>核心企业</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>设备</strong></td>
+<td>北方华创、中微公司、拓荆科技、华海清科、盛美上海</td>
+</tr>
+<tr>
+<td><strong>材料</strong></td>
+<td>安集科技、雅克科技、沪硅产业</td>
+</tr>
+<tr>
+<td><strong>封测与销售</strong></td>
+<td>长电科技、兆易创新</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>生态成型</strong>：从点状突破走向全链条闭环，设备端强势引领，材料端加速渗透。</li>
+<li><strong>板块共振</strong>：千亿级资本开支不仅造就长鑫，更托举整个A股半导体硬科技板块的未来。</li>
+<li><strong>价值底牌</strong>：在全球硅基争夺战中，供应链的深度绑定已成为国产力量的最强底牌。</li>
+</ul>
+<h2 id="_15">四、关键术语速览</h2>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DDR5/LPDDR5</td>
+<td>第五代双倍数据率同步动态随机存储器</td>
+</tr>
+<tr>
+<td>CMP</td>
+<td>化学机械抛光，用于晶圆平坦化</td>
+</tr>
+<tr>
+<td>CVD/PVD/ALD</td>
+<td>化学气相沉积/物理气相沉积/原子层沉积，薄膜制备技术</td>
+</tr>
+<tr>
+<td>CCP/ICP</td>
+<td>电容耦合等离子体/电感耦合等离子体，刻蚀技术</td>
+</tr>
+<tr>
+<td>FCCSP/PoP</td>
+<td>倒装芯片级封装/堆叠封装，先进封装技术</td>
+</tr>
+<tr>
+<td>TSV</td>
+<td>硅通孔，用于3D封装</td>
+</tr>
+<tr>
+<td>NOR Flash/MCU</td>
+<td>非易失性存储器/微控制器</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="_16">附录：原始提取素材</h2>
+<details>
+<summary>语音全文转写（带时间戳）</summary>
+<ul>
+<li><code>[00:00–00:00]</code> 大家好</li>
+<li><code>[00:00–00:04]</code> 今天我们来拆解一家正在重塑中国半导体格局的公司</li>
+<li><code>[00:04–00:05]</code> 长鑫科技</li>
+<li><code>[00:05–00:07]</code> 他刚披露招股书</li>
+<li><code>[00:07–00:09]</code> 2016年一季度营收508亿</li>
+<li><code>[00:09–00:11]</code> 同比增长超七倍</li>
+<li><code>[00:11–00:14]</code> 上半年预估净利润500-570亿</li>
+<li><code>[00:14–00:17]</code> 千亿级资本开支正在重绘国产硅基生命线</li>
+<li><code>[00:17–00:20]</code> 围绕这头巨兽的十大核心供应商</li>
+<li><code>[00:20–00:21]</code> 我们逐一梳理</li>
+<li><code>[00:21–00:23]</code> 先看长兴本身</li>
+<li><code>[00:23–00:27]</code> 三年内实现从19nm到DDR5的四代工艺量产</li>
+<li><code>[00:27–00:29]</code> 研发投入188亿</li>
+<li><code>[00:29–00:31]</code> 占营收33%</li>
+<li><code>[00:31–00:33]</code> 设备采购占6成5以上</li>
+<li><code>[00:33–00:35]</code> 材料端约两成</li>
+<li><code>[00:35–00:37]</code> 这意味着长兴花的每一分钱</li>
+<li><code>[00:37–00:39]</code> 都在喂养它背后的供应链</li>
+<li><code>[00:39–00:40]</code> 第十名</li>
+<li><code>[00:40–00:41]</code> 兆易创新</li>
+<li><code>[00:42–00:44]</code> NORFlash和MCU国内双料第一</li>
+<li><code>[00:45–00:46]</code> DRAM代销是最大增量</li>
+<li><code>[00:47–00:50]</code> 从长兴获得的销售收入2024年50亿起步</li>
+<li><code>[00:50–00:53]</code> 预计2026年冲击150亿</li>
+<li><code>[00:53–00:56]</code> 风险在于利润率仅1.66%</li>
+<li><code>[00:57–00:59]</code> 且代销协议有到期可能</li>
+<li><code>[00:59–01:00]</code> 第九名</li>
+<li><code>[01:00–01:01]</code> 长电科技</li>
+<li><code>[01:01–01:02]</code> 封测龙头</li>
+<li><code>[01:02–01:05]</code> 去年总营收约296亿</li>
+<li><code>[01:05–01:07]</code> 存储封测占18%</li>
+<li><code>[01:07–01:09]</code> DDR50代的先进封装</li>
+<li><code>[01:09–01:10]</code> 让单科价值量比</li>
+<li><code>[01:10–01:12]</code> DDR4提升超30%</li>
+<li><code>[01:12–01:13]</code> 增量确定</li>
+<li><code>[01:14–01:14]</code> 第八名</li>
+<li><code>[01:15–01:15]</code> 雅克科技</li>
+<li><code>[01:16–01:18]</code> 前驱体材料打破海外垄断</li>
+<li><code>[01:18–01:20]</code> 年营收约18亿</li>
+<li><code>[01:20–01:22]</code> 毛利率高达40%</li>
+<li><code>[01:22–01:25]</code> 以新三期投产后产能拉升至500吨</li>
+<li><code>[01:25–01:27]</code> DDR50代前驱体消耗量</li>
+<li><code>[01:27–01:28]</code> 暴增约5成</li>
+<li><code>[01:28–01:29]</code> 量价齐升</li>
+<li><code>[01:29–01:30]</code> 第七名</li>
+<li><code>[01:30–01:31]</code> 沪硅产业</li>
+<li><code>[01:32–01:34]</code> 国内首家量产300毫米大硅片</li>
+<li><code>[01:34–01:36]</code> 月产能60万片</li>
+<li><code>[01:36–01:38]</code> 长兴第四座工厂</li>
+<li><code>[01:38–01:40]</code> 带来每月10万片以上新增需求</li>
+<li><code>[01:40–01:42]</code> 采购额30到40亿</li>
+<li><code>[01:42–01:43]</code> 但硅片赛道</li>
+<li><code>[01:43–01:45]</code> 同时受海外巨头</li>
+<li><code>[01:45–01:46]</code> 和国内价格夹击</li>
+<li><code>[01:47–01:47]</code> 第六名</li>
+<li><code>[01:47–01:48]</code> 安集科技</li>
+<li><code>[01:49–01:51]</code> CMP抛光液国内龙头</li>
+<li><code>[01:51–01:53]</code> 长兴产线国产化率超8成</li>
+<li><code>[01:53–01:55]</code> 年产能3万吨</li>
+<li><code>[01:55–01:56]</code> 更关键的是</li>
+<li><code>[01:56–01:58]</code> DDR5产线良率反馈</li>
+<li><code>[01:58–02:00]</code> 以超越部分进口竞品</li>
+<li><code>[02:00–02:01]</code> 第五名</li>
+<li><code>[02:01–02:02]</code> 盛美上海</li>
+<li><code>[02:02–02:04]</code> 清洗设备国内最强</li>
+<li><code>[02:04–02:06]</code> 长兴合肥第四厂区</li>
+<li><code>[02:06–02:07]</code> 预估采购超30亿</li>
+<li><code>[02:07–02:09]</code> 盛美有望拿下4成份额</li>
+<li><code>[02:10–02:12]</code> 但北方华创也在加速追赶</li>
+<li><code>[02:12–02:14]</code> 份额之争刚开始</li>
+<li><code>[02:14–02:15]</code> 第四名</li>
+<li><code>[02:15–02:16]</code> 华海清科</li>
+<li><code>[02:16–02:18]</code> 国内唯一量产12英寸</li>
+<li><code>[02:18–02:19]</code> CMP设备</li>
+<li><code>[02:19–02:21]</code> 覆盖DDR4和</li>
+<li><code>[02:21–02:22]</code> DDR5全产线</li>
+<li><code>[02:22–02:24]</code> 长兴装机超30台</li>
+<li><code>[02:24–02:25]</code> 已交付超20亿</li>
+<li><code>[02:26–02:27]</code> 新增产能对应采购额</li>
+<li><code>[02:27–02:28]</code> 40-50亿</li>
+<li><code>[02:29–02:31]</code> 最新Universal 300X</li>
+<li><code>[02:31–02:32]</code> 正做5nm以下验证</li>
+<li><code>[02:32–02:33]</code> 第三名</li>
+<li><code>[02:33–02:34]</code> 拓荆科技</li>
+<li><code>[02:35–02:36]</code> 薄膜成绩设备龙头</li>
+<li><code>[02:36–02:38]</code> 覆盖CVD</li>
+<li><code>[02:38–02:39]</code> PVD</li>
+<li><code>[02:39–02:40]</code> ALD全路线</li>
+<li><code>[02:40–02:41]</code> 薄膜设备</li>
+<li><code>[02:41–02:44]</code> 是晶圆厂投资最大单一品类</li>
+<li><code>[02:44–02:45]</code> 占2成以上</li>
+<li><code>[02:45–02:47]</code> 双基地年产能超300台</li>
+<li><code>[02:47–02:48]</code> 长兴新厂区</li>
+<li><code>[02:48–02:50]</code> 蕴含超150亿采购预期</li>
+<li><code>[02:50–02:53]</code> ALD已几乎完全替代进口</li>
+<li><code>[02:53–02:54]</code> 第二名</li>
+<li><code>[02:54–02:55]</code> 中微公司</li>
+<li><code>[02:55–02:57]</code> 刻蚀设备天花板</li>
+<li><code>[02:57–02:58]</code> CCP达国际一流</li>
+<li><code>[02:59–03:00]</code> 长兴装机超200台</li>
+<li><code>[03:01–03:02]</code> 深宽比超60比1</li>
+<li><code>[03:02–03:03]</code> 一季度营收</li>
+<li><code>[03:03–03:05]</code> 同比涨超9成</li>
+<li><code>[03:05–03:06]</code> 比海外便宜2成多</li>
+<li><code>[03:06–03:08]</code> DDR5产能拉升后</li>
+<li><code>[03:08–03:10]</code> 单机出货量暴增超5倍</li>
+<li><code>[03:10–03:11]</code> 第一名</li>
+<li><code>[03:11–03:12]</code> 北方华创</li>
+<li><code>[03:12–03:13]</code> 全能航母</li>
+<li><code>[03:13–03:16]</code> 国内设备最全的平台型龙头</li>
+<li><code>[03:16–03:18]</code> 独占长兴约3成设备采购</li>
+<li><code>[03:18–03:20]</code> 单一最大供应商</li>
+<li><code>[03:20–03:21]</code> 一季度营收破百亿</li>
+<li><code>[03:22–03:24]</code> 同期再拿50-60亿订单</li>
+<li><code>[03:24–03:26]</code> 护城河再与打包解决方案</li>
+<li><code>[03:26–03:28]</code> 增量空间超360亿</li>
+<li><code>[03:28–03:30]</code> 高端光刻仍需ASML</li>
+<li><code>[03:31–03:32]</code> 这是最后拼图</li>
+<li><code>[03:32–03:33]</code> 最后看终局</li>
+<li><code>[03:34–03:36]</code> 从点状突破到全链条闭环</li>
+<li><code>[03:36–03:38]</code> 设备端强势引领</li>
+<li><code>[03:38–03:39]</code> 材料端加速渗透</li>
+<li><code>[03:40–03:42]</code> 千亿资本开支不止造就长兴</li>
+<li><code>[03:42–03:44]</code> 更多托举整个A股半导体硬</li>
+<li><code>[03:44–03:45]</code> 科技板块的未来</li>
+<li><code>[03:46–03:47]</code> 供应链深度绑定</li>
+<li><code>[03:47–03:49]</code> 已是国产力量最强底牌</li>
+<li><code>[03:49–03:53]</code> 以上就是长兴科技十大核心供应商全景梳理</li>
+<li><code>[03:53–03:54]</code> 下期再见</li>
+</ul>
+</details>
+<details>
+<summary>关键帧 + OCR</summary>
+<p><strong><code>[00:00]</code></strong> 开卷有财价#　/　2026年业绩炸裂IPO招股书深度分析　/　长鑫存储10大核心供应商　/　内容仅作科普，不作为投资建议　/　大家好今天我们来拆解一家正在重塑</p>
+<p><img loading="lazy" alt="00:00" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0001.jpg" /></p>
+<p><strong><code>[00:03]</code></strong> 1巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　不足30%　/　超70%　/　其余为封测/厂务。　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　中国半导体格局的公司长鑫科技塑整条国产硅基生命线.　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:03" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0002.jpg" /></p>
+<p><strong><code>[00:06]</code></strong> 1巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　其余为封测/厂务。　/　不足30%　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　它刚披露招股书开支，正在重塑整条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:06" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0003.jpg" /></p>
+<p><strong><code>[00:09]</code></strong> 巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　其余为封测/厂务。　/　不足30%　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　同比增长超7倍上半年预估净利润　/　整条国产硅基生命线。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:09" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0004.jpg" /></p>
+<p><strong><code>[00:12]</code></strong> 巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财I　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　其余为封测/厂务。　/　不足30%　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　500到570亿　/　资本开支，正在重塑整条国产硅基生命线。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:12" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0005.jpg" /></p>
+<p><strong><code>[00:15]</code></strong> 巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　不足30%　/　其余为封测/厂务。　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　生命线围绕资本开支，正在重塑整条国产硅基生命线。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:15" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0006.jpg" /></p>
+<p><strong><code>[00:18]</code></strong> 巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　不足30%　/　其余为封测/厂务。　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　这头巨兽的十大核心供应商我们　/　塑整条国产硅基生命线。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:18" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0007.jpg" /></p>
+<p><strong><code>[00:21]</code></strong> 1巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财i　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　不足30%　/　其余为封测/厂务。　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　先看长鑫本身三年内实现从　/　在重塑整条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:21" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0008.jpg" /></p>
+<p><strong><code>[00:24]</code></strong> 1巨头崛起：长鑫科技的“狂”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　不足30%　/　其余为封测/厂务。　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　19纳米到DDR5的四代亚艺量产整条国产硅基生命线.　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:24" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0009.jpg" /></p>
+<p><strong><code>[00:27]</code></strong> 1巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%1　/　不足30%　/　超70%　/　其余为封测/厂务。　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　研发投入188亿占营收33%设备　/　整条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:27" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0010.jpg" /></p>
+<p><strong><code>[00:30]</code></strong> 巨头崛起：长鑫科技的“狂”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　不足30%　/　超70%　/　其余为封测/厂务。　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　采购占6成5以上材料端约两成　/　塑整条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:30" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0011.jpg" /></p>
+<p><strong><code>[00:33]</code></strong> 巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　其余为封测/厂务。　/　不足30%　/　超70%　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　这意味巨额资本开支，正在重塑整条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:33" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0012.jpg" /></p>
+<p><strong><code>[00:36]</code></strong> 1巨头崛起：长鑫科技的“狂飙”时刻　/　开卷有财　/　国产化跃升轨迹　/　业绩炸裂　/　2026年Q1营收508亿（+719%），　/　上半年预估净利达500-570亿。　/　巨额研发　/　募资295亿扩产；累计研发投入　/　188.67亿（占营收33.11%）　/　采购解构　/　2021年　/　2025年　/　设备&gt;65%|材料约20%|　/　不足30%　/　超70%　/　其余为封测/厂务。　/　三年内实现四代工艺量产（19nm→DDR5/LPDDR5）。　/　着长鑫花的每一分钱都在喂养它背后　/　条国产硅基生命线。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:36" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0013.jpg" /></p>
+<p><strong><code>[00:39]</code></strong> 开卷有财　/　第十名：兆易创新　/　斤一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　第10名兆易创新NR及代销协议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:39" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0014.jpg" /></p>
+<p><strong><code>[00:42]</code></strong> 开卷有财　/　第十名：兆易创新　/　斤一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　Flash和MCU国内双料第D　/　办议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:42" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0015.jpg" /></p>
+<p><strong><code>[00:45]</code></strong> 开卷有财　/　第十名：兆易创新一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:45" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0016.jpg" /></p>
+<p><strong><code>[00:48]</code></strong> 开卷有财　/　第十名：兆易创新一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　2024年50亿起步预计　/　及代销协议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:48" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0017.jpg" /></p>
+<p><strong><code>[00:51]</code></strong> 开卷有财　/　第十名：兆易创新　/　斤一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　2026年冲击　/　润率偏低及代销协议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:51" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0018.jpg" /></p>
+<p><strong><code>[00:54]</code></strong> 开卷有财　/　第十名：兆易创新一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　150亿风险在于利润率仅1　/　代销协议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:54" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0019.jpg" /></p>
+<p><strong><code>[00:57]</code></strong> 开卷有财　/　第十名：兆易创新一制造与销售的深度绑定　/　国内NORFlash/MCU双料第一|　/　长鑫制造　/　长鑫第十大股东（持股1.80%）　/　DRAM销售收入　/　2024年超50亿　/　预计2026年冲击150亿　/　2024年整体毛利率　/　38.65%　/　1.66%　/　兆易销售　/　【商业洞察】代销模式是其当前最大收入增量，但也　/　66%且代销协议有到期可能　/　销协议到期的潜在风险。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="00:57" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0020.jpg" /></p>
+<p><strong><code>[01:00]</code></strong> 开卷有财　/　第九名：长电科技一高端封测的核心枢纽　/　全球封测第三、国内第一|承接长鑫外包核心业务　/　2024总营收约296亿　/　TSV硅通孔　/　存储封测占比约18%（约53亿）　/　Micro-　/　合肥扩建产线预计2026年底投产，产能翻倍。　/　bumping微　/　凸块　/　InsightCallout　/　【技术红利】DDR5时代的FCCSP、PoP封装先进工　/　艺，单颗封装价值量较DDR4提升30%以上。国产替　/　第9名长电科技封测龙　/　但增量确定。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:00" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0021.jpg" /></p>
+<p><strong><code>[01:03]</code></strong> 开卷有财　/　第九名：长电科技一高端封测的核心枢纽　/　全球封测第三、国内第一|承接长鑫外包核心业务　/　2024总营收约296亿　/　TSV硅通孔　/　存储封测占比约18%（约53亿）　/　Micro-　/　合肥扩建产线预计2026年底投产，产能翻倍。　/　bumping微　/　凸块　/　InsightCallout　/　【技术红利】DDR5时代的FCCSP、PoP封装先进工　/　艺，单颗封装价值量较DDR4提升30%以上。国产替　/　18%DDR5时　/　硝弱，但增量确定。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:03" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0022.jpg" /></p>
+<p><strong><code>[01:06]</code></strong> 开卷有财　/　第九名：长电科技一高端封测的核心枢纽　/　全球封测第三、国内第一|承接长鑫外包核心业务　/　2024总营收约296亿　/　TSV硅通孔　/　存储封测占比约18%（约53亿）　/　Micro-　/　合肥扩建产线预计2026年底投产，产能翻倍。　/　bumping微　/　凸块　/　InsightCallout　/　【技术红利】DDR5时代的FCCSP、PoP封装先进工　/　艺，单颗封装价值量较DDR4提升30%以上。国产替　/　代的先进封装让单颗价值量比定　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:06" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0023.jpg" /></p>
+<p><strong><code>[01:09]</code></strong> 开卷有财　/　第九名：长电科技一高端封测的核心枢纽　/　全球封测第三、国内第一|承接长鑫外包核心业务　/　2024总营收约296亿　/　TSV硅通孔　/　存储封测占比约18%（约53亿）　/　Micro-　/　合肥扩建产线预计2026年底投产，产能翻倍。　/　bumping微　/　凸块　/　InsightCallout　/　【技术红利】DDR5时代的FCCSP、PoP封装先进工　/　艺，单颗封装价值量较DDR4提升30%以上。国产替　/　代的先进封装让单颗价值量比定　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:09" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0024.jpg" /></p>
+<p><strong><code>[01:12]</code></strong> 开卷有财　/　第九名：长电科技一高端封测的核心枢纽　/　全球封测第三、国内第一|承接长鑫外包核心业务　/　2024总营收约296亿　/　TSV硅通孔　/　存储封测占比约18%（约53亿）　/　Micro-　/　合肥扩建产线预计2026年底投产，产能翻倍。　/　bumping微　/　凸块　/　InsightCallout　/　【技术红利】DDR5时代的FCCSP、PoP封装先进工　/　艺，单颗封装价值量较DDR4提升30%以上。国产替　/　DDR4提升超30%增量确定　/　确定。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:12" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0025.jpg" /></p>
+<p><strong><code>[01:15]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外垄断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　材料打破海外垄断年营收约18亿　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:15" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0026.jpg" /></p>
+<p><strong><code>[01:18]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外垄断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　毛利率高达40%宜兴三期投　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:18" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0027.jpg" /></p>
+<p><strong><code>[01:21]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外垄断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:21" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0028.jpg" /></p>
+<p><strong><code>[01:24]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师”　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　DDR5时代前驱体消耗　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:24" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0029.jpg" /></p>
+<p><strong><code>[01:27]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师”　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　量暴增约5成量价齐升　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:27" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0030.jpg" /></p>
+<p><strong><code>[01:30]</code></strong> 开卷有财　/　第八名：雅克科技一突破垄断的“材料魔法师　/　收购韩国UPChemical切入核心工艺　/　前驱体　/　半导体材料业务年营收约18亿　/　毛利率高达40%　/　打破海外垄断　/　前驱体总产能拉升至500吨/年（宜兴二期投产）。　/　InsightCallout　/　STI隔离填充　/　【消耗倍增】DDR5电容从单层演进为多层堆叠，　/　单颗芯片前驱体消耗量暴增约50%。　/　第7名沪硅产业国内首家　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:30" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0031.jpg" /></p>
+<p><strong><code>[01:33]</code></strong> 第七名：沪硅产业一核心原料“大硅片”的主力　/　开卷有财#　/　国内首家实现300mm（12英寸）大硅片规模量产　/　300mm硅片产能60万片/月　/　15%-20%特供长鑫　/　长鑫晶圆年产超120万片　/　覆盖28nm至14nm逻辑芯片及长鑫DRAM验证。　/　年耗硅片150-180万片　/　Insight Callout　/　【产能饥渴】长鑫规划的第四座工厂将带来每月　/　对应采购颜30-40亿　/　10万片以上的巨量新增需求。但硅片领域仍受海　/　片长鑫第　/　外巨头及国内价格战双重夹击。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:33" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0032.jpg" /></p>
+<p><strong><code>[01:36]</code></strong> 第七名：沪硅产业一核心原料“大硅片”的主力　/　开卷有财　/　国内首家实现300mm（12英寸）大硅片规模量产　/　300mm硅片产能60万片/月　/　15%-20%特供长鑫　/　长鑫晶圆年产超120万片　/　覆盖28nm至14nm逻辑芯片及长鑫DRAM验证。　/　年耗硅片150-180万片　/　Insight Callout　/　【产能饥渴】长鑫规划的第四座工厂将带来每月　/　对应采购颜30-40亿　/　10万片以上的巨量新增需求。但硅片领域仍受海　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:36" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0033.jpg" /></p>
+<p><strong><code>[01:39]</code></strong> 第七名：沪硅产业一核心原料“大硅片”的主力　/　开卷有财　/　国内首家实现300mm（12英寸）大硅片规模量产　/　300mm硅片产能60万片/月　/　15%-20%特供长鑫　/　长鑫晶圆年产超120万片　/　覆盖28nm至14nm逻辑芯片及长鑫DRAM验证。　/　年耗硅片150-180万片　/　Insight Callout　/　【产能饥渴】长鑫规划的第四座工厂将带来每月　/　对应采购颜30-40亿　/　10万片以上的巨量新增需求。但硅片领域仍受海　/　及国内价格战双重夹击。　/　求采购额30到40　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:39" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0034.jpg" /></p>
+<p><strong><code>[01:42]</code></strong> 第七名：沪硅产业一核心原料“大硅片”的主力　/　开卷有财　/　国内首家实现300mm（12英寸）大硅片规模量产　/　300mm硅片产能60万片/月　/　15%-20%特供长鑫　/　长鑫晶圆年产超120万片　/　覆盖28nm至14nm逻辑芯片及长鑫DRAM验证。　/　年耗硅片150-180万片　/　Insight Callout　/　【产能饥渴】长鑫规划的第四座工厂将带来每月　/　对应采购颜30-40亿　/　10万片以上的巨量新增需求。但硅片领域仍受海　/　亿但硅片　/　外巨头及国内价格战双重夹击。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:42" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0035.jpg" /></p>
+<p><strong><code>[01:45]</code></strong> 第七名：沪硅产业一核心原料“大硅片”的主力　/　开卷有财　/　国内首家实现300mm（12英寸）大硅片规模量产　/　300mm硅片产能60万片/月　/　15%-20%特供长鑫　/　长鑫晶圆年产超120万片　/　覆盖28nm至14nm逻辑芯片及长鑫DRAM验证。　/　年耗硅片150-180万片　/　Insight Callout　/　【产能饥渴】长鑫规划的第四座工厂将带来每月　/　对应采购额30-40亿　/　10万片以上的巨量新增需求。但硅片领域仍受海　/　外巨头及国内价格战双重夹击。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:45" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0036.jpg" /></p>
+<p><strong><code>[01:48]</code></strong> 开卷有财　/　第六名：安集科技一抛光液领域的“平坦化龙头　/　单颗DDR5=需超30道CMP工序　/　国内CMP抛光液/清洗液龙头|长鑫CMP材料主力（国产化率&gt;80%）　/　TrendBar　/　单颗DDR5材料　/　月产20万片　/　成本$0.15-$0.2　/　年采购额5-8亿　/　StatBox　/　净利率：14.20%　/　CMP浆料年产能：3万吨　/　InsightCallout　/　【技术迭代】新一代低缺陷铜阻挡层抛光液，在长　/　鑫DDR5产线上的良率反馈已超越部分进口竞品。　/　抛光液国内龙头长鑫　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:48" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0037.jpg" /></p>
+<p><strong><code>[01:51]</code></strong> 开卷有财　/　第六名：安集科技一抛光液领域的“平坦化龙头　/　单颗DDR5=需超30道CMP工序　/　国内CMP抛光液/清洗液龙头|长鑫CMP材料主力（国产化率&gt;80%）　/　TrendBar　/　单颗DDR5材料　/　月产20万片　/　成本$0.15-$0.2　/　年采购额5-8亿　/　StatBox　/　净利率：14.20%　/　CMP浆料年产能：3万吨　/　InsightCallout　/　【技术迭代】新一代低缺陷铜阻挡层抛光液，在长　/　鑫DDR5产线上的良率反馈已超越部分进口竞品。　/　产线国产化率超8成年产能3万吨　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:51" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0038.jpg" /></p>
+<p><strong><code>[01:54]</code></strong> 开卷有财　/　第六名：安集科技一抛光液领域的“平坦化龙头　/　单颗DDR5=需超30道CMP工序　/　国内CMP抛光液/清洗液龙头|长鑫CMP材料主力（国产化率&gt;80%）　/　TrendBar　/　单颗DDR5材料　/　月产20万片　/　成本$0.15-$0.2　/　年采购额5-8亿　/　StatBox　/　净利率：14.20%　/　CMP浆料年产能：3万吨　/　InsightCallout　/　【技术迭代】新一代低缺陷铜阻挡层抛光液，在长　/　鑫DDR5产线上的良率反馈已超越部分进口竞品。　/　键的是DDR5产线上良率反馈已　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:54" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0039.jpg" /></p>
+<p><strong><code>[01:57]</code></strong> 开卷有财　/　第六名：安集科技一抛光液领域的“平坦化龙头　/　单颗DDR5=需超30道CMP工序　/　国内CMP抛光液/清洗液龙头|长鑫CMP材料主力（国产化率&gt;80%）　/　TrendBar　/　单颗DDR5材料　/　月产20万片　/　成本$0.15-$0.2　/　年采购额5-8亿　/　StatBox　/　净利率：14.20%　/　CMP浆料年产能：3万吨　/　InsightCallout　/　【技术迭代】新一代低缺陷铜阻挡层抛光液，在长　/　鑫DDR5产线上的良率反馈已超越部分进口竞品。　/　键的是DDR5产线上良率反馈已　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="01:57" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0040.jpg" /></p>
+<p><strong><code>[02:00]</code></strong> 第五名：盛美上海一独门秘籍把控“芯片沐浴　/　国内清洗设备技术最强|覆盖前道FEOL至后道BEOL　/　长鑫采购份额跨越　/　25%　/　10%　/　SAPS兆声波　/　26年Q1营收暴涨：　/　净利率：　/　约78%　/　12.80%　/　TEBO时序能激波　/　InsightCallout　/　【份额争夺】长鑫合肥第四厂区预估采购清洗设备　/　超30亿，盛美有望拿下40%份额。同时需警惕国　/　第5名盛美上海清洗　/　内同行（如北华创）开始的贴身肉搏竞争。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="02:00" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0041.jpg" /></p>
+<p><strong><code>[02:03]</code></strong> 第五名：盛美上海一独门秘籍把控“芯片沐浴　/　国内清洗设备技术最强|覆盖前道FEOL至后道BEOL　/　长鑫采购份额跨越　/　25%　/　10%　/　SAPS兆声波　/　26年Q1营收暴涨：　/　净利率：　/　约78%　/　12.80%　/　TEBO时序能激波　/　InsightCallout　/　【份额争夺】长鑫合肥第四厂区预估采购清洗设备　/　超30亿，盛美有望拿下40%份额。同时需警惕国　/　合肥第四厂区预估采购超30亿　/　创）开始的贴身肉搏竞争。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="02:03" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0042.jpg" /></p>
+<p><strong><code>[02:06]</code></strong> 开卷有贴　/　第五名：盛美上海一独门秘籍把控“芯片沐浴　/　国内清洗设备技术最强|覆盖前道FEOL至后道BEOL　/　长鑫采购份额跨越　/　25%　/　10%　/　SAPS兆声波　/　26年Q1营收暴涨：　/　净利率：　/　约78%　/　12.80%　/　TEBO时序能激波　/　InsightCallout　/　【份额争夺】长鑫合肥第四厂区预估采购清洗设备　/　超30亿，盛美有望拿下40%份额。同时需警惕国　/　合肥第四厂区预估采购超30亿　/　创）开始的贴身肉搏竞争。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="02:06" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0043.jpg" /></p>
+<p><strong><code>[02:09]</code></strong> 开卷有贴　/　第五名：盛美上海一独门秘籍把控“芯片沐浴　/　国内清洗设备技术最强|覆盖前道FEOL至后道BEOL　/　长鑫采购份额跨越　/　25%　/　10%　/　SAPS兆声波　/　26年Q1营收暴涨：　/　净利率：　/　约78%　/　12.80%　/　TEBO时序能激波　/　InsightCallout　/　【份额争夺】长鑫合肥第四厂区预估采购清洗设备　/　超30亿，盛美有望拿下40%份额。同时需警惕国　/　额但北方华创也在加速追　/　内同行如北华创）开始的贴身肉搏竞争。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="02:09" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0044.jpg" /></p>
+<p><strong><code>[02:12]</code></strong> 开卷有　/　第五名：盛美上海一独门秘籍把控“芯片沐浴　/　国内清洗设备技术最强|覆盖前道FEOL至后道BEOL　/　长鑫采购份额跨越　/　25%　/　10%　/　SAPS兆声波　/　26年Q1营收暴涨：　/　净利率：　/　约78%　/　12.80%　/　TEBO时序能激波　/　InsightCallout　/　【份额争夺】长鑫合肥第四厂区预估采购清洗设备　/　超30亿，盛美有望拿下40%份额。同时需警惕国　/　赶份额之争刚开始　/　内同行（如北华创）开始的贴身肉搏竞争。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="02:12" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0045.jpg" /></p>
+<p><strong><code>[02:15]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　Insight Callout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　(2021)　/　第4名华海清科国内唯一　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:15" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0046.jpg" /></p>
+<p><strong><code>[02:18]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　Insight Callout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　(2021)　/　量产12英寸CMP设备覆盖D　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:18" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0047.jpg" /></p>
+<p><strong><code>[02:21]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　Insight Callout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　DR4和DDR5全产线长鑫装机　/　(202　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:21" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0048.jpg" /></p>
+<p><strong><code>[02:24]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　InsightCallout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　对应　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　(2021)　/　国产替代率　/　程验证。　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:24" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0049.jpg" /></p>
+<p><strong><code>[02:27]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　Insight Callout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　(2021)　/　采购额40到50亿最新Uni　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:27" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0050.jpg" /></p>
+<p><strong><code>[02:30]</code></strong> 开卷有财　/　第四名：华海清科一突破垄断的“平坦化巨匠　/　国内唯一12英寸CMP设备量产商|覆盖DDR4与DDR5全产线　/　TrendBar　/　长鑫产线装机超80台→对应已交付价值超20亿　/　StatBox　/　单台设备价值：　/　ROE:4.33%　/　2500-3500万　/　（盈利质量领跑）　/　QInsight Callout　/　~65%　/　【未来订单】长鑫新增产能对应CMP设备采购额预估40-　/　0%　/　50亿。公司最新Universal-300X系列正进行5nm以下制　/　(2021)　/　正做5纳米以下验证　/　内容仅作科普　/　不作为投资建议</p>
+<p><img loading="lazy" alt="02:30" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0051.jpg" /></p>
+<p><strong><code>[02:33]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilibi　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积几乎完全第3名拓荆科技薄膜沉　/　蕴含超150亿采购预期。</p>
+<p><img loading="lazy" alt="02:33" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0052.jpg" /></p>
+<p><strong><code>[02:36]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilbil　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积几平积设备龙头覆盖CVDPVD　/　超150亿采购预期。</p>
+<p><img loading="lazy" alt="02:36" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0053.jpg" /></p>
+<p><strong><code>[02:39]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilbi　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长</p>
+<p><img loading="lazy" alt="02:39" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0054.jpg" /></p>
+<p><strong><code>[02:42]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilbi　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积是晶圆网投资最大单一品类占两　/　亿采购预期。</p>
+<p><img loading="lazy" alt="02:42" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0055.jpg" /></p>
+<p><strong><code>[02:45]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilibi　/　555666　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积成以上双基地年产超300苔长鑫　/　亿采购预期。</p>
+<p><img loading="lazy" alt="02:45" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0056.jpg" /></p>
+<p><strong><code>[02:48]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilibi　/　66660　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积几新区蕴含超150亿采购预期　/　150亿采购预期。</p>
+<p><img loading="lazy" alt="02:48" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0057.jpg" /></p>
+<p><strong><code>[02:51]</code></strong> 第三名：拓荆科技一原子级薄膜的“建筑师”　/　开卷有财　/　bilibi　/　国内薄膜沉积设备（CVD/PVD/ALD）龙头|　/　全技术路线覆盖　/　薄膜设备占晶圆厂总投资　/　20%-25%（最大单一品类）　/　双基地年产超300台　/　2026年Q1营收同比翻倍　/　2025年　/　(40%)　/　2023年　/　【极致精度】DDR5的高K金属栅极需原子级沉积　/　(15%)　/　精度，单芯片薄膜超60层，设备价值量倍增。长　/　ALD原子层沉积几乎完ALD巴几乎完全替代进口　/　含超150亿采购预期。</p>
+<p><img loading="lazy" alt="02:51" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0058.jpg" /></p>
+<p><strong><code>[02:54]</code></strong> 开卷有财　/　第二名：中微公司一挑战极限深宽比的“雕刻家　/　国内刻蚀设备技术天花板|CCP刻蚀达国际一流水平　/　TrendBar　/　长鑫产线装机超200台→占该类采购份额35%以上　/　深宽比超60:1　/　StatBox　/　Q1营收同比涨：　/　相比海外竞品：　/　超90%　/　便宜20%-25%　/　Insight Callout　/　【爆发节点】2025年下半年DDR5产能拉升致使单季　/　出货超40台。长鑫新产能对应超200亿刻蚀采购，中　/　第2名中微公司刻蚀　/　下40%；但ICP刻蚀环节仍待全面突破。　/　内容仅作科普</p>
+<p><img loading="lazy" alt="02:54" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0059.jpg" /></p>
+<p><strong><code>[02:57]</code></strong> 开卷有财　/　第二名：中微公司一挑战极限深宽比的“雕刻家　/　国内刻蚀设备技术天花板|CCP刻蚀达国际一流水平　/　TrendBar　/　长鑫产线装机超200台→占该类采购份额35%以上　/　深宽比超60:1　/　StatBox　/　Q1营收同比涨：　/　相比海外竞品：　/　超90%　/　便宜20%-25%　/　InsightCallout　/　【爆发节点】2025年下半年DDR5产能拉升致使单季　/　设备天花板CCP达国际一流长鑫装环节仍待全面突破。　/　出货超40台。长鑫新产能对应超200亿刻蚀采购，中　/　内容仅作科普</p>
+<p><img loading="lazy" alt="02:57" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0060.jpg" /></p>
+<p><strong><code>[03:00]</code></strong> 开卷有财　/　第二名：中微公司一挑战极限深宽比的“雕刻家　/　国内刻蚀设备技术天花板|CCP刻蚀达国际一流水平　/　TrendBar　/　长鑫产线装机超200台→占该类采购份额35%以上　/　深宽比超60:1　/　StatBox　/　Q1营收同比涨：　/　相比海外竞品：　/　超90%　/　便宜20%-25%　/　Insight Callout　/　【爆发节点】2025年下半年DDR5产能拉升致使单季　/　60比1一季度　/　出货超40台。长鑫新产能对应超200亿刻蚀采购，中　/　望拿下40%；但ICP刻蚀环节仍待全面突破。　/　内容仅作科普</p>
+<p><img loading="lazy" alt="03:00" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0061.jpg" /></p>
+<p><strong><code>[03:03]</code></strong> 开卷有财　/　第二名：中微公司一挑战极限深宽比的“雕刻家　/　国内刻蚀设备技术天花板|CCP刻蚀达国际一流水平　/　TrendBar　/　长鑫产线装机超200台→占该类采购份额35%以上　/　深宽比超60:1　/　StatBox　/　Q1营收同比涨：　/　相比海外竞品：　/　超90%　/　便宜20%-25%　/　InsightCallout　/　【爆发节点】2025年下半年DDR5产能拉升致使单季　/　出货超40台。长鑫新产能对应超200亿刻蚀采购，中　/　内容仅作科普</p>
+<p><img loading="lazy" alt="03:03" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0062.jpg" /></p>
+<p><strong><code>[03:06]</code></strong> 开卷有财　/　第二名：中微公司一挑战极限深宽比的“雕刻家　/　国内刻蚀设备技术天花板|CCP刻蚀达国际一流水平　/　TrendBar　/　长鑫产线装机超200台→占该类采购份额35%以上　/　深宽比超60:1　/　StatBox　/　Q1营收同比涨：　/　相比海外竞品：　/　超90%　/　便宜20%-25%　/　InsightCallout　/　【爆发节点】2025年下半年DDR5产能拉升致使单季　/　R5产能拉升后单季出货量　/　出货超40台。长鑫新产能对应超200亿刻蚀采购，中　/　但ICP刻蚀环节仍待全面突破。　/　内容仅作科普　/　不作为投资整议</p>
+<p><img loading="lazy" alt="03:06" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0063.jpg" /></p>
+<p><strong><code>[03:09]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　项膜　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　暴增超5倍　/　增量空间超360亿。（注：高端光刻仍需依赖ASML）。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:09" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0064.jpg" /></p>
+<p><strong><code>[03:12]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　刻校　/　项膜　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　母国内设备最全的平台型龙头　/　（注：高端光刻仍需依赖ASML）。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:12" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0065.jpg" /></p>
+<p><strong><code>[03:15]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　InsightCallout　/　【降维打击】全能型选手的护城河是“打包解决方案”　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　约3成设备　/　增量空间超360亿。（注：高端光刻仍需依赖ASML）。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:15" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0066.jpg" /></p>
+<p><strong><code>[03:18]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　采购单一最大供应商一季度营　/　（注：高端光刻仍需依赖ASML）。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:18" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0067.jpg" /></p>
+<p><strong><code>[03:21]</code></strong> 开卷有财山　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　项膜　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　订单护　/　增量空间超360亿。（注：高端光刻仍需依赖ASML）。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:21" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0068.jpg" /></p>
+<p><strong><code>[03:24]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　项膜　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　城河在于打包解决方案增量空间超　/　高端光刻仍需依赖ASML）。　/　内客仅作科普、不作为投资建议</p>
+<p><img loading="lazy" alt="03:24" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0069.jpg" /></p>
+<p><strong><code>[03:27]</code></strong> 开卷有财　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　项膜　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　360亿　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　增量空间超360亿。（注：高端光刻仍需依赖ASML）。　/　内客仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:27" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0070.jpg" /></p>
+<p><strong><code>[03:30]</code></strong> 开卷有财册　/　第一名：北方华创一无法撼动的“全能航母平台　/　国内设备最全的平台型龙头|覆盖前道一半以上工艺　/　独占长鑫超30%总设备采购份额（单一最大供应商）　/　清洗　/　热处理　/　氧化扩散　/　StatBox　/　2026年Q1　/　长鑫募资中预计斩　/　营收破百亿　/　获50-60亿订单　/　Insight Callout　/　【降维打击】全能型选手的护城河是“打包解决方案”，　/　免去繁琐设备整合，单品公司无法匹敌。未来五年潜在　/　高端光刻仍需ASML这是最后拼图　/　高端光刻仍需依赖ASML）。　/　内容仅作科普，不作为投资建议</p>
+<p><img loading="lazy" alt="03:30" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0071.jpg" /></p>
+<p><strong><code>[03:33]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创斯　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗透。　/　突破到全链条闭环设备　/　全球硅基争夺战中，供应链的深度绑定　/　已成为国产力量的最强底牌。</p>
+<p><img loading="lazy" alt="03:33" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0072.jpg" /></p>
+<p><strong><code>[03:36]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗　/　朵夺战中，供应链的深度绑定</p>
+<p><img loading="lazy" alt="03:36" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0073.jpg" /></p>
+<p><strong><code>[03:39]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗透。　/　开支不只造就长鑫更托举　/　全球硅基争夺战中，供应链的深度绑定　/　已成为国产力量的最强底牌。</p>
+<p><img loading="lazy" alt="03:39" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0074.jpg" /></p>
+<p><strong><code>[03:42]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场</p>
+<p><img loading="lazy" alt="03:42" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0075.jpg" /></p>
+<p><strong><code>[03:45]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗透。　/　供应链深度绑定　/　全球硅基争夺战中，供应链的深度绑定　/　已成为国产力量的最强底牌。</p>
+<p><img loading="lazy" alt="03:45" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0076.jpg" /></p>
+<p><strong><code>[03:48]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗透。　/　已是国产力量最强底牌以　/　全球硅基争夺战中，供应链的深度绑定　/　已成为国产力量的最强底牌。</p>
+<p><img loading="lazy" alt="03:48" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0077.jpg" /></p>
+<p><strong><code>[03:51]</code></strong> 终局视野：长鑫国产替代全景生态圈　/　【封测与销售】　/　【材料】　/　安集料技　/　【设备】　/　北方华创　/　中微公司　/　长电科技　/　兆易创新　/　长鑫存储　/　(CXMT)　/　沪硅产业　/　雅克科技　/　盛美上海　/　拓荆料技　/　华海清科　/　盛美上海　/　生态成型　/　板块共振　/　价值底牌　/　从点状突破走向全链条闭环。设备端　/　千亿级的资本开支不仅造就了长鑫的　/　替代的速度取决于扩产的决心。在这场　/　强势引领，材料端加速渗透。　/　全球硅基争夺战中，供应链的深度绑定　/　已成为国产力量的最强底牌。</p>
+<p><img loading="lazy" alt="03:51" src="assets/BV1fj5f6iEH5_v2md/frames/kf_0078.jpg" /></p>
+</details><footer>md2html · 2026-08-23</footer></main></body></html>

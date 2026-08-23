@@ -1,0 +1,1555 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>别听马斯克吹牛！特斯拉 Optimus 也不是通用人形机器人【科技狐】</title><style>
+:root{
+  --bg:#F6F9F7; --surface:#FFFFFF; --ink:#1C2622; --dim:#5F6F67;
+  --accent:#0E9A68; --accent-soft:rgba(14,154,104,.14); --gold:#8A6400;
+  --gold-soft:rgba(255,200,61,.22); --line:#DCE5E0; --code-bg:#EEF3F0;
+  --card-shadow:0 1px 2px rgba(28,38,34,.05),0 8px 24px rgba(28,38,34,.06);
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C120F; --surface:#121A16; --ink:#E6EFEA; --dim:#8FA39A;
+  --accent:#39E6A8; --accent-soft:rgba(57,230,168,.13); --gold:#FFC83D;
+  --gold-soft:rgba(255,200,61,.14); --line:#233029; --code-bg:#18221D;
+  --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:18px/1.9 "Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+  -webkit-font-smoothing:antialiased}
+main{max-width:1140px;margin:0 auto;padding:44px 40px 96px}
+@media(max-width:720px){main{padding:24px 18px 64px}body{font-size:16.5px}}
+
+/* —— 字体分工：标题黑体 / 元信息等宽 —— */
+h1,h2,h3,h4,.sans{font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",
+  -apple-system,"Segoe UI",sans-serif}
+.mono,code,pre,.meta,.eyebrow,.pill{font-family:"JetBrains Mono",Menlo,Consolas,
+  "Noto Sans Mono CJK SC",monospace}
+
+/* —— 眉标 + 返回 —— */
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--dim);
+  font-size:12.5px;letter-spacing:2.5px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:8px;
+  background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+  transition:border-color .15s,background .15s}
+.back:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* —— 标题：签名进度线 —— */
+h1{font-size:clamp(27px,3.1vw,38px);font-weight:800;line-height:1.32;
+  letter-spacing:.5px;margin:.2em 0 .55em;position:relative;padding-bottom:20px}
+h1::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;
+  border-radius:3px;background:linear-gradient(90deg,var(--accent) 0%,
+  var(--accent) 34%,var(--gold) 35%,var(--gold) 37%,var(--line) 38%)}
+h2{font-size:23px;font-weight:800;margin:2.2em 0 .8em;padding-left:16px;
+  position:relative;letter-spacing:.5px}
+h2::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:5px;
+  border-radius:5px;background:linear-gradient(var(--accent),var(--accent-soft))}
+h3{font-size:18.5px;font-weight:700;margin:1.7em 0 .5em;color:var(--ink)}
+h4{font-size:16.5px;margin:1.4em 0 .4em}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;
+  transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,.back:focus-visible,summary:focus-visible{outline:2px solid var(--accent);
+  outline-offset:3px;border-radius:4px}
+strong{color:var(--ink);background:linear-gradient(transparent 62%,var(--gold-soft) 62%);
+  padding:0 1px}
+p{margin:.9em 0}
+ul,ol{padding-left:1.6em}li{margin:.32em 0}
+hr{border:none;border-top:1px solid var(--line);margin:2.4em 0}
+
+/* —— 文档头部 meta（首个引用块）—— */
+blockquote{margin:1.1em 0;padding:.35em 1.1em;border-left:4px solid var(--line);
+  color:var(--dim);background:var(--surface);border-radius:0 10px 10px 0}
+h1+blockquote{border-left-color:var(--accent);font-size:14px;
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:.3px}
+
+/* —— 代码 / 时间戳 —— */
+code{background:var(--code-bg);color:var(--accent);padding:.14em .45em;
+  border-radius:6px;font-size:.82em}
+pre{background:var(--code-bg);border:1px solid var(--line);padding:16px 18px;
+  border-radius:12px;overflow-x:auto;line-height:1.65}
+pre code{padding:0;background:none;color:var(--ink);font-size:.85em}
+
+/* —— 表格 —— */
+table{border-collapse:collapse;display:block;overflow-x:auto;margin:1.2em 0;
+  font-size:.92em;font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th,td{border:1px solid var(--line);padding:8px 14px;text-align:left}
+th{background:var(--accent-soft);font-weight:700;letter-spacing:.5px;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--surface)}
+
+/* —— 关键帧图 —— */
+img{max-width:100%;border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--card-shadow);margin:.4em 0}
+
+/* —— 附录折叠面板（终端面板风）—— */
+details{border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:0;margin:1.2em 0;overflow:hidden}
+details>*:not(summary){margin-left:20px;margin-right:20px}
+details>p:last-child,details>img:last-child{margin-bottom:18px}
+summary{cursor:pointer;font-weight:700;padding:14px 20px;letter-spacing:1px;
+  font-family:"Noto Sans SC",sans-serif;font-size:15px;color:var(--dim);
+  display:flex;align-items:center;gap:10px;user-select:none;
+  transition:color .15s,background .15s}
+summary::before{content:"";width:7px;height:7px;border-radius:7px;
+  background:var(--accent);flex:none}
+summary:hover{color:var(--ink);background:var(--accent-soft)}
+details[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}
+
+/* —— 索引页 —— */
+.idx-head{margin-bottom:8px}
+.en-sub{font-size:.48em;font-weight:600;color:var(--dim);letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;vertical-align:middle;margin-left:10px}
+.idx-meta{color:var(--dim);font-size:13px;margin:0 0 34px}
+.group{margin:34px 0 10px;display:flex;align-items:baseline;gap:12px}
+.group .g-name{font-weight:800;font-size:15px;letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;color:var(--dim)}
+.group::after{content:"";flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{position:relative;display:block;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;
+  text-decoration:none;color:var(--ink);box-shadow:var(--card-shadow);
+  transition:transform .16s,border-color .16s;border-bottom:none}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card .no{position:absolute;top:16px;right:18px;font-size:11.5px;color:var(--accent);
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:1px;opacity:.85}
+.card h3{margin:0 42px .5em 0;font-size:16.5px;line-height:1.5;font-weight:700}
+.card .meta{color:var(--dim);font-size:12px;letter-spacing:.3px;margin:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(prefers-reduced-motion:no-preference){
+  .card{animation:rise .4s cubic-bezier(.2,.7,.3,1) backwards}
+  .cards .card:nth-child(2){animation-delay:.04s}.cards .card:nth-child(3){animation-delay:.08s}
+  .cards .card:nth-child(4){animation-delay:.12s}.cards .card:nth-child(5){animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}}
+}
+footer{margin-top:64px;color:var(--dim);font-size:12px;letter-spacing:1px;
+  font-family:"JetBrains Mono",Menlo,monospace;display:flex;gap:10px;align-items:center}
+footer::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+</style></head><body><main><div class="topbar"><span class="eyebrow">REF · 视频文档 VIDEO DOCS</span><a class="back" href="index.html">← 返回索引 · Index</a></div><h1 id="optimus">别听马斯克吹牛！特斯拉 Optimus 也不是通用人形机器人【科技狐】</h1>
+<blockquote>
+<p>时长 23:19 · 分辨率 852x480 · 生成于 2026-08-23　|　来源 <code>ref/BV17W8q6LED8.mp4</code> · <a href="https://www.bilibili.com/video/BV17W8q6LED8">视频链接</a></p>
+</blockquote>
+<h2 id="_1">概述</h2>
+<p>本次对话围绕机器人产业展开，嘉宾分享了在中国实际应用场景中的观察，指出机器人已从实验室走向真实场景，并演化出新的组织形态。讨论涵盖机器人管理、通用与人形机器人路线之争、与自动驾驶的类比、特斯拉及马斯克的战略争议、机器人落地场景选择、人机关系未来，以及2029年泡沫风险的预判。核心观点是：短期内通用型机器人难以实现，特定场景的解决方案将率先落地；机器人管理将成为一门新学问；未来人机边界清晰，但人与Agent的边界将更模糊。</p>
+<h2 id="_2">中国机器人产业的实际观察</h2>
+<h3 id="_3">应用场景丰富，已非实验室阶段</h3>
+<ul>
+<li>中国机器人应用场景非常多，且是<strong>实际应用场景</strong>而非实验室场景。</li>
+<li>在大量应用场景驱动下，中国已演化出机器人新的<strong>组织形态</strong>和<strong>社会形态</strong>，这些原本只在科幻小说或思想实验中设想。</li>
+</ul>
+<h3 id="_4">酒店机器人管理实践</h3>
+<ul>
+<li>酒店管理中，一个酒店实际管理着<strong>十几个机器人</strong>。</li>
+<li>实践中发现的问题：如何让机器人协同、如何评估其行为是否符合价值观。</li>
+<li>解决方案探索：</li>
+<li>给每个机器人设定一个<strong>智能体</strong>。</li>
+<li>机器人可汇报当天工作，管理者判断其行为对错。</li>
+<li>机器人会记住反馈，<strong>举一反三</strong>。</li>
+<li>一个机器人学会后，其他机器人会跟着学。</li>
+<li>每个机器人有自己的特点，甚至形成<strong>自我认同</strong>（如“我有点跛脚的机器人”），某些任务由特定机器人完成效果更好。</li>
+<li>这些问题是在实践中<strong>一边解决一边涌现</strong>的。</li>
+</ul>
+<h3 id="_5">具身智能进展与大脑瓶颈</h3>
+<ul>
+<li><strong>小脑（具身性）</strong> 越来越强，能做出各种动作。</li>
+<li><strong>大脑（认知与决策）</strong> 问题仍未解决，很多场景仍靠<strong>遥控操纵</strong>。</li>
+<li>目前方案均局限在特定场景，缺乏对世界的通用认知。</li>
+</ul>
+<h2 id="_6">未来几年机器人发展判断</h2>
+<h3 id="_7">通用型机器人短期内不可行</h3>
+<ul>
+<li>未来几年，机器人<strong>不太可能出现通用型方案</strong>，人形机器人“到哪儿都能干”不太可行。</li>
+<li>更多是<strong>特定场景</strong>的解决方案，在更多场景落地。</li>
+<li>短期内（至少是未来几年），通用机器人<strong>达不到</strong>。</li>
+</ul>
+<h3 id="_8">与自动驾驶的类比</h3>
+<ul>
+<li>自动驾驶是<strong>单一应用</strong>，可视为机器人里<strong>最简单的任务</strong>，因为它不需要对物理世界有充分了解。</li>
+<li>自动驾驶已到L4水平（FSD端到端基本没问题），说明<strong>最简单的机器人处理方案</strong>落地没有问题。</li>
+<li>类似地，<strong>固定场景的解决方案</strong>机器人可以做得很好。</li>
+</ul>
+<h3 id="vs">固定场景 vs. 复杂场景</h3>
+<table>
+<thead>
+<tr>
+<th>场景类型</th>
+<th>示例</th>
+<th>可行性</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>固定场景</td>
+<td>冲咖啡、泡面、做头像</td>
+<td>可做得很精致</td>
+</tr>
+<tr>
+<td>半固定场景</td>
+<td>酒店送咖啡到房间</td>
+<td>需要较高智能，已在实践中</td>
+</tr>
+<tr>
+<td>复杂场景</td>
+<td>酒店收盘子（桌面凌乱）、踢足球</td>
+<td>无法固定化，难以实现</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_9">对创业者的考验</h3>
+<ul>
+<li>最大考验：<strong>识别哪些场景既有足够大的需求，又是机器人技术已能满足的</strong>。</li>
+<li>需求大但技术达不到的场景（如踢足球）没有意义——机器人对物理世界感知、配合协同都差很远。</li>
+<li>对比：机器人世界杯中，滚轮机器人（小墩子）配合行云流水，因为主要是<strong>信息传输问题</strong>；而人形机器人既要理解外部环境，又要控制自身复杂身体，<strong>难度加倍</strong>。</li>
+</ul>
+<h3 id="_10">值得关注的落地领域</h3>
+<ul>
+<li><strong>矿山</strong>：足够大，适合机器人替代。</li>
+<li><strong>物流分拣中心</strong>：忙时人力不足，机器人可替代分拣职业，中国从事该职业人数众多，市场足够大。</li>
+<li>未来几年，众多创业公司将一起挖掘哪些领域、哪些岗位能被机器人逐步替代。</li>
+</ul>
+<h2 id="_11">人形机器人路线之争</h2>
+<h3 id="vs_1">通用 vs. 垂直</h3>
+<ul>
+<li>中国观念中似乎<strong>通用价值更大</strong>，但嘉宾认为<strong>各领域专用机器人价值可能更大</strong>。</li>
+<li>王老师一贯不太认可人形机器人路线。</li>
+</ul>
+<h3 id="_12">通用人形机器人的技术路径</h3>
+<ul>
+<li>通用人形机器人首先要解决<strong>大脑问题</strong>，即<strong>VLA（Vision-Language-Action）通用智能</strong>。</li>
+<li>有公司提出<strong>“原子能力”</strong>概念：如手伸出去、胳膊角度、手指每个角度都是一个原子能力；将“拿咖啡”的意图翻译成原子能力组合。</li>
+<li>已有几家中国公司在做这件事，这是通用人形机器人的<strong>唯一办法</strong>。</li>
+</ul>
+<h3 id="optimus_1">对特斯拉Optimus的质疑</h3>
+<ul>
+<li><strong>马斯克是会吹牛的</strong>：前年说量产十万台，去年改口一万台，预计数字逐年递减，从未实现。</li>
+<li>Robotaxi至今未上路。</li>
+<li>Optimus“进工厂”被澄清：只是进工厂场地训练，<strong>未完成产线任务</strong>——进工厂容易，进产线干活很难。</li>
+<li>马斯克称停产部分产线去造机器人，但若停产产线，工厂会开始缺库存，理论上不可容忍，存在不可预测风险。</li>
+</ul>
+<h3 id="_13">特斯拉的战略失误</h3>
+<ul>
+<li><strong>放弃Model 2转做Cybertruck是巨大昏招</strong>：</li>
+<li>Model 2能卖，Cybertruck没法卖（无方向盘）。</li>
+<li>FSD城市仅开放三四个，容纳量有限。</li>
+<li>年产量目标百万，若产量达50万辆，49万辆将在车库吃灰。</li>
+<li>有产能却不敢生产，是愚蠢决策。</li>
+<li>若做Model 2：价格足够低 + FSD足够好，一定畅销；未来可做<strong>Robotaxi</strong>，城市随时召唤，不存在“无车可用”或“车库吃灰”问题。</li>
+</ul>
+<h3 id="spacex">SpaceX的算力赌注</h3>
+<ul>
+<li>马斯克重心已转向SpaceX，这次可能<strong>赌对了</strong>。</li>
+<li>美国基建无人比马斯克更懂，而当前最需要基建的是<strong>计算中心</strong>。</li>
+<li>计划明年做到<strong>10吉瓦计算中心</strong>（目前仅1.3吉瓦，扩7-8倍），10吉瓦算力<strong>稳赚不赔</strong>。</li>
+<li>美国其他公司建计算中心需5-7年，SpaceX效率极高，一两年即可建成。</li>
+<li>2025年收入150亿美元，10吉瓦租赁算力可达<strong>千亿规模</strong>，两三年后大头收入来自算力租赁，公司可能成为<strong>几万亿市值</strong>的公司。</li>
+<li>时间判断：明年底做到10吉瓦夸张，可能后年底；2027-2028年底应能冲到10吉瓦。</li>
+</ul>
+<h2 id="_14">车企与机器人产业</h2>
+<h3 id="_15">车企缺席机器人大会的原因</h3>
+<ul>
+<li>很多并非车企，而是<strong>汽车供应链相关企业</strong>在造机器人零部件，它们参加供应链相关会议而非终端大会。</li>
+<li>原来给车造轴承、马达、装备的企业，现在都给机器人造了，<strong>量非常大</strong>，但在终端大会上看不见。</li>
+<li>主流车企自身不景气，竞争太激烈，顾不上机器人业务。</li>
+<li>目前涉足机器人较多的主要是<strong>小鹏和小米</strong>，但都在卷车，无暇顾及。</li>
+</ul>
+<h2 id="_16">机器人替代人类与就业影响</h2>
+<h3 id="_17">机器人管理成为新职业</h3>
+<ul>
+<li>机器人能干的事特点是<strong>重复</strong>，如巡检、分拣包裹、缠线打螺丝，这些工作本就没人爱干。</li>
+<li>机器人管理将是一门<strong>很大的学问</strong>：</li>
+<li>每个现场需要一个人管理一群机器人。</li>
+<li>机器人执行体分身运行在统一平台（如飞书、龙芯）。</li>
+<li>管理者需要与机器人对话，评估其工作表现。</li>
+<li>关键问题：<strong>人真的愿意去干机器人能干的事儿吗？</strong> 机器人替代的是重复性工作，人应该把价值积累到机器人上，让它去重复。</li>
+</ul>
+<h3 id="_18">责任归属与兜底</h3>
+<ul>
+<li>AI对事情<strong>不负责任</strong>，需要人兜底、背锅。</li>
+<li>机器人管理学问的核心：<strong>业务模式设计能否容忍出事</strong>。</li>
+<li>Mission Critical（关键任务）场景一个错误都不能出，不适合用机器人。</li>
+<li>允许出事的场景，事先准备好善后方案即可。</li>
+<li>类比：飞机会失事，民航仍运营，失事理赔是必要成本。</li>
+</ul>
+<h2 id="5-10">未来5-10年人机关系</h2>
+<h3 id="agent">人与Agent边界更模糊</h3>
+<ul>
+<li>5年后，机器人本身没那么严重，<strong>人机边界仍清晰</strong>。</li>
+<li>但<strong>人与Agent的边界会更模糊</strong>：未来会有很多Agent协助做事，决策绕不开Agent支持。</li>
+<li>机器人也是Agent之一——每个机器人有Agent作为其<strong>智慧部、大脑或灵魂</strong>。</li>
+</ul>
+<h3 id="_19">机器人将形成自己的做事方法</h3>
+<ul>
+<li>机器人跟人学做事速度太慢，它们会<strong>自己摸索、自我迭代</strong>出独特的做事方法。</li>
+<li>5年后很多事不再按现在的方式做，机器人会有<strong>自己独特的做事方法</strong>，让人感叹“原来这事应该这么做”。</li>
+<li>机器人之间会有<strong>自己的沟通语言</strong>：人类语言效率低，机器人沟通用人类语言只是为了让人听懂；若仅机器间沟通，会创造更高效的语言。</li>
+</ul>
+<h2 id="2029">2029年泡沫风险预判</h2>
+<h3 id="_20">泡沫的性质</h3>
+<ul>
+<li>泡沫要分<strong>好的和坏的</strong>。历史规律看，大多数泡沫破灭是因为<strong>经济向好但预期增长更快</strong>，预期过高绷不住导致下跌，但跌后一般会回升（如互联网泡沫、08年两房危机，几个月就恢复）。</li>
+<li>2029年泡沫不是“一地鸡毛”，而是<strong>大的震荡</strong>。</li>
+</ul>
+<h3 id="_21">受冲击最大的领域</h3>
+<table>
+<thead>
+<tr>
+<th>领域</th>
+<th>风险</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>美国基建（计算中心）</td>
+<td>2029年有一劫，类似互联网泡沫时基建受创最大，靠曝光仙（光纤）的很多破产</td>
+</tr>
+<tr>
+<td>特斯拉</td>
+<td>若2029年冲到10吉瓦，突然不值钱，是特别大的风险</td>
+</tr>
+<tr>
+<td>韩国</td>
+<td>2029年国家可能破产，受冲击比中国大得多</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_22">中美差异</h3>
+<ul>
+<li>中国不是2029年的问题，风险<strong>更晚</strong>。</li>
+<li>中国有<strong>国家队入市、耐心资本</strong>支撑，机器人产业2029年可能受美国波动连累，但影响不大，两三年出不了事。</li>
+</ul>
+<h2 id="_23">关键术语</h2>
+<ul>
+<li><strong>VLA（Vision-Language-Action）</strong>：视觉-语言-动作通用智能模型，通用人形机器人的大脑基础。</li>
+<li><strong>原子能力</strong>：将意图翻译为机器人肢体动作的最小单元（如手臂角度、手指角度）。</li>
+<li><strong>具身性（小脑）</strong>：机器人对自身身体的控制能力。</li>
+<li><strong>Agent</strong>：智能体，机器人的智慧部/大脑/灵魂。</li>
+<li><strong>FSD（Full Self-Driving）</strong>：特斯拉全自动驾驶系统，已达L4水平。</li>
+<li><strong>耐心资本</strong>：中国国家队入市支撑产业的中长期资金。</li>
+<li><strong>Mission Critical</strong>：关键任务场景，不允许出错。</li>
+</ul>
+<h2 id="_24">要点速览</h2>
+<ol>
+<li>中国机器人已进入实际应用场景，酒店机器人管理已涌现出组织形态新问题。</li>
+<li>具身性（小脑）进步快，但大脑（认知决策）问题未解决，通用机器人短期不可行。</li>
+<li>固定场景机器人可做好，复杂场景（收盘子、踢足球）难以实现。</li>
+<li>创业者的核心考验：找到需求足够大且技术能满足的场景（矿山、物流分拣）。</li>
+<li>通用人形机器人需VLA通用智能，已有中国公司在做“原子能力”路线。</li>
+<li>马斯克多次跳票，Optimus未真正进产线干活；放弃Model 2做Cybertruck是昏招。</li>
+<li>SpaceX押注10吉瓦计算中心，算力租赁可能带来千亿收入。</li>
+<li>车企缺席机器人大会，因供应链企业才是主要参与者，且车企自身竞争激烈。</li>
+<li>机器人管理将成为新职业，核心是业务模式能否容忍出事。</li>
+<li>未来5年人机边界清晰，但人与Agent边界模糊；机器人将形成自己的做事方法和沟通语言。</li>
+<li>2029年可能有泡沫大震荡，美国基建和特斯拉风险最大，中国因耐心资本受影响较小。</li>
+</ol>
+<hr />
+<h2 id="_25">附录：原始提取素材</h2>
+<details>
+<summary>语音全文转写（带时间戳）</summary>
+<ul>
+<li><code>[00:00–00:02]</code> 宋家是机器人里最简单的任务</li>
+<li><code>[00:02–00:04]</code> 你手上的机器人出的事儿你得负责</li>
+<li><code>[00:04–00:06]</code> 啊 马斯克是会吹牛的</li>
+<li><code>[00:06–00:07]</code> 科井</li>
+<li><code>[00:07–00:09]</code> 真的愿意吗</li>
+<li><code>[00:09–00:12]</code> 机器人可以做到很好</li>
+<li><code>[00:12–00:15]</code> 人真的愿意去干机器人能干的事儿吗</li>
+<li><code>[00:15–00:17]</code> 短期内至少是达不到的</li>
+<li><code>[00:25–00:27]</code> 那你们两位看来</li>
+<li><code>[00:27–00:29]</code> 就是最大的一个感受是什么</li>
+<li><code>[00:29–00:33]</code> 最大的感受就是说现在机器人在中国的应用场景非常多</li>
+<li><code>[00:33–00:34]</code> 而且是实际的应用场景</li>
+<li><code>[00:34–00:36]</code> 不是实验室应用场景</li>
+<li><code>[00:36–00:38]</code> 实际应用场景在这有这么多应用场景之下</li>
+<li><code>[00:38–00:44]</code> 中国已经演化出了一些机器人新的组织形态</li>
+<li><code>[00:44–00:45]</code> 啊 组织形态</li>
+<li><code>[00:45–00:48]</code> 社会形态 包括他们的思想实验</li>
+<li><code>[00:48–00:51]</code> 这些东西原本只在科幻小说中设想</li>
+<li><code>[00:51–00:55]</code> 原本只是说我们做思想实验</li>
+<li><code>[00:55–00:56]</code> 那现在完全不是这样</li>
+<li><code>[00:56–00:58]</code> 科技狐</li>
+<li><code>[00:58–01:01]</code> 他们就是切实在酒店管理中</li>
+<li><code>[01:01–01:03]</code> 管理着可能有十几个机器人</li>
+<li><code>[01:03–01:04]</code> 一个酒店实际的机器人</li>
+<li><code>[01:04–01:06]</code> 他们就切实发现了</li>
+<li><code>[01:06–01:08]</code> 他们就切实发现了</li>
+<li><code>[01:08–01:11]</code> 那他们怎么解决</li>
+<li><code>[01:11–01:12]</code> 他们就在摸索</li>
+<li><code>[01:12–01:13]</code> 他们实际上就是</li>
+<li><code>[01:13–01:15]</code> 他们让机器人自主学习</li>
+<li><code>[01:15–01:18]</code> 就是给每个机器人设定一个智能体</li>
+<li><code>[01:18–01:19]</code> 然后你整体今天做的这个事</li>
+<li><code>[01:19–01:20]</code> 你可以跟我说你今天做的</li>
+<li><code>[01:20–01:22]</code> 你今天做的哪些事</li>
+<li><code>[01:22–01:23]</code> 符合我们价值观</li>
+<li><code>[01:23–01:24]</code> 然后我告诉你</li>
+<li><code>[01:24–01:26]</code> 你这个事做的对还是不对</li>
+<li><code>[01:26–01:28]</code> 你这个事做的对还是不对</li>
+<li><code>[01:28–01:30]</code> 然后他会迅速对待</li>
+<li><code>[01:30–01:31]</code> 他会记住</li>
+<li><code>[01:31–01:33]</code> 他下次他会举一反三</li>
+<li><code>[01:33–01:34]</code> 然后一个机器人学会</li>
+<li><code>[01:34–01:35]</code> 另外机器人会跟着学</li>
+<li><code>[01:35–01:37]</code> 每个机器人又有自己的特点</li>
+<li><code>[01:37–01:39]</code> 他甚至想有意义</li>
+<li><code>[01:39–01:40]</code> 有机器人的一个模子</li>
+<li><code>[01:40–01:42]</code> 又测模可能不会好使</li>
+<li><code>[01:42–01:43]</code> 他就自我认同</li>
+<li><code>[01:43–01:46]</code> 我有点玻脚的机器人</li>
+<li><code>[01:46–01:47]</code> 那有些任务完成了</li>
+<li><code>[01:47–01:48]</code> 就不是别人完成好</li>
+<li><code>[01:48–01:49]</code> 可能我认</li>
+<li><code>[01:49–01:51]</code> 你说你是个健康的机器人</li>
+<li><code>[01:51–01:52]</code> 这件事我</li>
+<li><code>[01:52–01:54]</code> 我说你替我去处理</li>
+<li><code>[01:54–01:57]</code> 就会对整体的效果会更好</li>
+<li><code>[01:57–01:59]</code> 现在还在探索解决的一个阶段</li>
+<li><code>[01:59–02:00]</code> 但是已经发现问题了</li>
+<li><code>[02:00–02:01]</code> 不是</li>
+<li><code>[02:01–02:02]</code> 他就已经在实现中</li>
+<li><code>[02:02–02:05]</code> 在实践中涌现出来的问题</li>
+<li><code>[02:05–02:07]</code> 一边解决一边涌现</li>
+<li><code>[02:07–02:09]</code> 你希望你的机器人很聪明</li>
+<li><code>[02:09–02:10]</code> 实现机器人</li>
+<li><code>[02:10–02:12]</code> 哪怕他只是一个酒店负责</li>
+<li><code>[02:12–02:14]</code> 把咖啡送到</li>
+<li><code>[02:14–02:17]</code> 送给那个房间的这么一个机器人</li>
+<li><code>[02:17–02:20]</code> 他也会有很高的智能</li>
+<li><code>[02:20–02:22]</code> 这件事很出乎我的意料</li>
+<li><code>[02:22–02:24]</code> 但是他就是如此之合理</li>
+<li><code>[02:26–02:27]</code> 然后王老师这边呢</li>
+<li><code>[02:27–02:29]</code> 还是没有解决</li>
+<li><code>[02:29–02:30]</code> 就是说</li>
+<li><code>[02:30–02:31]</code> 因为一方面</li>
+<li><code>[02:31–02:31]</code> 我们墙的地方</li>
+<li><code>[02:31–02:33]</code> 在越来越强</li>
+<li><code>[02:33–02:34]</code> 就我们的具身性的问题</li>
+<li><code>[02:34–02:35]</code> 就是我们的小脑的问题</li>
+<li><code>[02:35–02:36]</code> 越来越强</li>
+<li><code>[02:36–02:37]</code> 做出各种动作来</li>
+<li><code>[02:37–02:37]</code> 对吧</li>
+<li><code>[02:37–02:38]</code> 越来越强</li>
+<li><code>[02:38–02:39]</code> 但是另一方面</li>
+<li><code>[02:39–02:40]</code> 科技狐</li>
+<li><code>[02:40–02:43]</code> 观察到很多是靠遥控操纵</li>
+<li><code>[02:43–02:44]</code> 也就是说我们的大脑</li>
+<li><code>[02:44–02:45]</code> 不问的还是没有解决</li>
+<li><code>[02:45–02:47]</code> 科技</li>
+<li><code>[02:47–02:48]</code> 但是总的来说</li>
+<li><code>[02:48–02:51]</code> 都是局限在某个特定场景的方案</li>
+<li><code>[02:51–02:53]</code> 没有看到有什么办法的问题</li>
+<li><code>[02:53–02:54]</code> 就是说</li>
+<li><code>[02:54–02:55]</code> 所以对这个世界的认知</li>
+<li><code>[02:55–02:58]</code> 所以对这个世界的</li>
+<li><code>[02:58–02:59]</code> 那就意味着说</li>
+<li><code>[02:59–03:01]</code> 未来几年</li>
+<li><code>[03:01–03:03]</code> 机器人不太可能出现</li>
+<li><code>[03:03–03:06]</code> 通用型的机器人的方案</li>
+<li><code>[03:06–03:08]</code> 或者说通用的机器人的人</li>
+<li><code>[03:08–03:10]</code> 就是人形到哪儿都能干</li>
+<li><code>[03:10–03:11]</code> 不太可行</li>
+<li><code>[03:11–03:13]</code> 而更多是特定场景</li>
+<li><code>[03:13–03:16]</code> 也让我看到乐观的部分</li>
+<li><code>[03:16–03:18]</code> 科技狐</li>
+<li><code>[03:18–03:19]</code> 所以呢</li>
+<li><code>[03:19–03:19]</code> 而且呢</li>
+<li><code>[03:19–03:21]</code> 大家对这个机器人</li>
+<li><code>[03:21–03:21]</code> 对人工智能</li>
+<li><code>[03:21–03:24]</code> 对高科技足够欢迎</li>
+<li><code>[03:24–03:25]</code> 所以呢</li>
+<li><code>[03:25–03:27]</code> 大家在积极地探索各个场景</li>
+<li><code>[03:27–03:28]</code> 在更多的场景落地</li>
+<li><code>[03:28–03:29]</code> 有很多的细分</li>
+<li><code>[03:29–03:30]</code> 很有特色</li>
+<li><code>[03:30–03:32]</code> 就是必须要机器人</li>
+<li><code>[03:32–03:34]</code> 所以这个是让我觉得还不错</li>
+<li><code>[03:34–03:36]</code> 所以这个时候也还不错</li>
+<li><code>[03:36–03:37]</code> 就是在落地上</li>
+<li><code>[03:37–03:38]</code> 对我们预计未来几年</li>
+<li><code>[03:38–03:39]</code> 短期内至少是达不到的</li>
+<li><code>[03:39–03:42]</code> 就会有更多的机器人的具体解决方案</li>
+<li><code>[03:42–03:43]</code> 因为我们方案</li>
+<li><code>[03:43–03:45]</code> 在更多的场景落地</li>
+<li><code>[03:45–03:46]</code> 甚至我们身边</li>
+<li><code>[03:46–03:47]</code> 能看到更多的机器人</li>
+<li><code>[03:47–03:48]</code> 但是呢</li>
+<li><code>[03:48–03:50]</code> 现在看起来基本都不是通用</li>
+<li><code>[03:50–03:51]</code> 这个方案干这个</li>
+<li><code>[03:51–03:51]</code> 那个方案干吗</li>
+<li><code>[03:51–03:52]</code> 无论方案谁都不通用</li>
+<li><code>[03:52–03:53]</code> 就通用的</li>
+<li><code>[03:53–03:55]</code> 在你看来还等其力</li>
+<li><code>[03:55–03:56]</code> 至少是达不到的</li>
+<li><code>[03:56–03:56]</code> 差不多</li>
+<li><code>[03:56–03:57]</code> 达不到</li>
+<li><code>[03:57–03:58]</code> 是</li>
+<li><code>[03:58–03:59]</code> 还是因为模型的问题</li>
+<li><code>[03:59–04:00]</code> 有它大脑</li>
+<li><code>[04:00–04:02]</code> 还没有一个这样的</li>
+<li><code>[04:02–04:03]</code> 注意力的这个模型</li>
+<li><code>[04:03–04:04]</code> 对</li>
+<li><code>[04:04–04:05]</code> OK</li>
+<li><code>[04:05–04:06]</code> 那你们两位看到</li>
+<li><code>[04:06–04:08]</code> 就是现在这个阶段</li>
+<li><code>[04:08–04:09]</code> 假如我们用这个</li>
+<li><code>[04:09–04:10]</code> 自动驾驶来类比的话</li>
+<li><code>[04:10–04:12]</code> 可能这类比不是特别合理</li>
+<li><code>[04:12–04:14]</code> 这里觉得现在大概是一个</li>
+<li><code>[04:14–04:16]</code> 什么阶段</li>
+<li><code>[04:16–04:18]</code> 你看自动驾驶我们到L3就觉得</li>
+<li><code>[04:18–04:18]</code> 对吧</li>
+<li><code>[04:18–04:20]</code> 是一个起点</li>
+<li><code>[04:20–04:20]</code> 对吧</li>
+<li><code>[04:20–04:23]</code> 但是我们现在处在什么阶段呢</li>
+<li><code>[04:23–04:25]</code> 它确实不能这么比</li>
+<li><code>[04:25–04:27]</code> 因为自动驾驶是个单一应用</li>
+<li><code>[04:27–04:28]</code> 所以就说</li>
+<li><code>[04:28–04:30]</code> 你和自动驾驶比</li>
+<li><code>[04:30–04:32]</code> 而且自动驾驶其实是这个</li>
+<li><code>[04:32–04:34]</code> 因为自动驾驶机器人</li>
+<li><code>[04:34–04:35]</code> 自动驾驶可以当做一个机器人看</li>
+<li><code>[04:35–04:38]</code> 但是自动驾驶机器人里最简单的任务</li>
+<li><code>[04:38–04:39]</code> 最简单的任务</li>
+<li><code>[04:39–04:40]</code> 因为它不需要</li>
+<li><code>[04:40–04:41]</code> 对物理世界有充分了解</li>
+<li><code>[04:41–04:43]</code> 它就可以做到了</li>
+<li><code>[04:43–04:44]</code> 那么</li>
+<li><code>[04:44–04:45]</code> 所以呢</li>
+<li><code>[04:45–04:48]</code> 因为自动驾驶已经都到L4了</li>
+<li><code>[04:48–04:50]</code> 其实就它FSD基本L4的水平了</li>
+<li><code>[04:50–04:52]</code> 就是这个端到端</li>
+<li><code>[04:52–04:53]</code> 已经马上没有问题了</li>
+<li><code>[04:53–04:55]</code> 所以就最简单的</li>
+<li><code>[04:55–04:56]</code> 机器人处理方案</li>
+<li><code>[04:56–04:58]</code> 应该是落地没有问题的</li>
+<li><code>[04:58–04:59]</code> 同样的类似的</li>
+<li><code>[04:59–05:02]</code> 就叫做固定场景的解决方案</li>
+<li><code>[05:02–05:03]</code> 就相对固定场景</li>
+<li><code>[05:03–05:04]</code> 不过来的解决方案</li>
+<li><code>[05:04–05:06]</code> 机器人可以做很好</li>
+<li><code>[05:06–05:07]</code> 比如说你看云际展台</li>
+<li><code>[05:07–05:09]</code> 还有冲过咖啡</li>
+<li><code>[05:09–05:11]</code> 甚至你的头像给你</li>
+<li><code>[05:11–05:11]</code> 对吧</li>
+<li><code>[05:11–05:12]</code> 这个你这边</li>
+<li><code>[05:12–05:14]</code> 咖啡就是刚刚冲完菜的</li>
+<li><code>[05:14–05:14]</code> 对吧</li>
+<li><code>[05:14–05:14]</code> 对吧</li>
+<li><code>[05:14–05:15]</code> 我还能带个头像</li>
+<li><code>[05:15–05:16]</code> 对不对</li>
+<li><code>[05:16–05:17]</code> 就是它可以做很精致的</li>
+<li><code>[05:17–05:17]</code> 泡个泡面</li>
+<li><code>[05:17–05:19]</code> 都可以做很精致的</li>
+<li><code>[05:19–05:20]</code> 但是呢</li>
+<li><code>[05:20–05:21]</code> 你说稍微一变化</li>
+<li><code>[05:21–05:22]</code> 稍微一个</li>
+<li><code>[05:22–05:24]</code> 包括场景再复杂一步</li>
+<li><code>[05:24–05:25]</code> 就刚才讲的</li>
+<li><code>[05:25–05:26]</code> 如果去酒店收个盘子</li>
+<li><code>[05:26–05:28]</code> 因为桌上的非常凌乱</li>
+<li><code>[05:28–05:29]</code> 就没法固定化</li>
+<li><code>[05:29–05:30]</code> 这就不好弄</li>
+<li><code>[05:30–05:32]</code> 所以你会看到说</li>
+<li><code>[05:32–05:33]</code> 这个未来一段时间</li>
+<li><code>[05:33–05:35]</code> 其实对我们的最大的考验是什么</li>
+<li><code>[05:35–05:37]</code> 就是学会识别</li>
+<li><code>[05:37–05:40]</code> 哪些场景既有足够大的需求</li>
+<li><code>[05:40–05:41]</code> 又是机器人的技术</li>
+<li><code>[05:41–05:43]</code> 已经能满足的场景</li>
+<li><code>[05:43–05:45]</code> 就是如果说不能满足</li>
+<li><code>[05:45–05:47]</code> 这个需求在那没有用</li>
+<li><code>[05:47–05:48]</code> 你比如踢足球</li>
+<li><code>[05:48–05:49]</code> 他满足不了</li>
+<li><code>[05:49–05:50]</code> 他技术水平拿不到</li>
+<li><code>[05:50–05:51]</code> 对吧</li>
+<li><code>[05:51–05:52]</code> 那就没有意义</li>
+<li><code>[05:52–05:54]</code> 我刚刚也看了踢足球</li>
+<li><code>[05:54–05:56]</code> 我刚刚也看了踢足球</li>
+<li><code>[05:56–05:57]</code> 对吧</li>
+<li><code>[05:57–05:58]</code> 他其实差很远</li>
+<li><code>[05:58–06:00]</code> 他对环境的感知</li>
+<li><code>[06:00–06:01]</code> 尤其是物理世界感知</li>
+<li><code>[06:01–06:03]</code> 包括配合协同</li>
+<li><code>[06:03–06:04]</code> 都差很远</li>
+<li><code>[06:04–06:05]</code> 然后我们原来去看机器人</li>
+<li><code>[06:05–06:06]</code> 世界杯什么做的好</li>
+<li><code>[06:06–06:08]</code> 然后就是地上小墩子</li>
+<li><code>[06:08–06:09]</code> 那个墩子</li>
+<li><code>[06:09–06:10]</code> 它没有</li>
+<li><code>[06:10–06:11]</code> 就是一个圆的</li>
+<li><code>[06:11–06:12]</code> 滚轮的</li>
+<li><code>[06:12–06:13]</code> 然后第一</li>
+<li><code>[06:13–06:14]</code> 互相间传输很快</li>
+<li><code>[06:14–06:15]</code> 它配合做得特别好</li>
+<li><code>[06:15–06:16]</code> 特别流畅</li>
+<li><code>[06:16–06:18]</code> 就是几个滚轮机器人</li>
+<li><code>[06:18–06:19]</code> 在地上的配合</li>
+<li><code>[06:19–06:20]</code> 真的是行云流水</li>
+<li><code>[06:20–06:21]</code> 特别漂亮</li>
+<li><code>[06:21–06:23]</code> 因为它就是信息传输问题</li>
+<li><code>[06:23–06:23]</code> 然后另一个</li>
+<li><code>[06:23–06:25]</code> 它就拿这身子去撞球</li>
+<li><code>[06:25–06:27]</code> 也可以做到非常好的配合</li>
+<li><code>[06:27–06:28]</code> 反正这人形行不行</li>
+<li><code>[06:28–06:30]</code> 因为人生你意味着说</li>
+<li><code>[06:30–06:31]</code> 你的具身要求</li>
+<li><code>[06:31–06:32]</code> 你对身体的控制</li>
+<li><code>[06:32–06:34]</code> 就本身就非常复杂</li>
+<li><code>[06:34–06:35]</code> 如果你想想看</li>
+<li><code>[06:35–06:36]</code> 我要理解外部环境</li>
+<li><code>[06:36–06:38]</code> 我本身控制不复杂</li>
+<li><code>[06:38–06:40]</code> 我也可以形成好的互动</li>
+<li><code>[06:40–06:41]</code> 现在是双向的</li>
+<li><code>[06:41–06:43]</code> 我既要求对外部复杂环境</li>
+<li><code>[06:43–06:44]</code> 能控制</li>
+<li><code>[06:44–06:46]</code> 而我自身的控制也很复杂</li>
+<li><code>[06:46–06:47]</code> 这个难度加倍了</li>
+<li><code>[06:47–06:49]</code> 这就很难弄</li>
+<li><code>[06:49–06:50]</code> 所以就说</li>
+<li><code>[06:50–06:51]</code> 现在的最大的问题在于</li>
+<li><code>[06:51–06:53]</code> 对所有的创业者的考验</li>
+<li><code>[06:53–06:55]</code> 那么多创业公司的考验</li>
+<li><code>[06:55–06:58]</code> 就是如何找到一个充分大</li>
+<li><code>[06:58–07:00]</code> 但是人工智能有实现的东西</li>
+<li><code>[07:00–07:02]</code> 而且你还能做出特色来</li>
+<li><code>[07:03–07:04]</code> 所以我们看得像</li>
+<li><code>[07:04–07:05]</code> 矿山那种就蛮好的</li>
+<li><code>[07:05–07:06]</code> 那足够大</li>
+<li><code>[07:06–07:07]</code> 还包括我们说</li>
+<li><code>[07:07–07:08]</code> 那个物流配送</li>
+<li><code>[07:08–07:10]</code> 它我就讲一件事</li>
+<li><code>[07:10–07:12]</code> 我就解决的就是</li>
+<li><code>[07:12–07:15]</code> 各城市都有很多的分拣中心</li>
+<li><code>[07:15–07:16]</code> 分拣中心</li>
+<li><code>[07:16–07:17]</code> 包括一来忙起来</li>
+<li><code>[07:17–07:18]</code> 你根本忙不过来</li>
+<li><code>[07:18–07:19]</code> 我就弄个机器</li>
+<li><code>[07:19–07:21]</code> 在这就带着一个人</li>
+<li><code>[07:21–07:23]</code> 这个职业一被替代</li>
+<li><code>[07:23–07:24]</code> 我就算一下</li>
+<li><code>[07:24–07:25]</code> 这个中国有多少人</li>
+<li><code>[07:25–07:26]</code> 从事这职业</li>
+<li><code>[07:26–07:28]</code> 我就期待多少人就好了</li>
+<li><code>[07:28–07:29]</code> 它就有一个足够大的适合</li>
+<li><code>[07:29–07:30]</code> 这就好的</li>
+<li><code>[07:30–07:32]</code> 所以我觉得我们未来几年</li>
+<li><code>[07:32–07:33]</code> 希望说</li>
+<li><code>[07:33–07:34]</code> 等于那么多创业公司</li>
+<li><code>[07:34–07:36]</code> 一起挖掘出哪些领域</li>
+<li><code>[07:36–07:38]</code> 哪些岗位</li>
+<li><code>[07:38–07:40]</code> 哪些工作是能够被这样一点点</li>
+<li><code>[07:40–07:41]</code> 期待着</li>
+<li><code>[07:42–07:43]</code> 所以就是未来可能会有</li>
+<li><code>[07:43–07:44]</code> 各种各样的机器人</li>
+<li><code>[07:44–07:46]</code> 而不是说一个工人</li>
+<li><code>[07:46–07:46]</code> 对</li>
+<li><code>[07:46–07:48]</code> 现在看来是这个其实</li>
+<li><code>[07:48–07:49]</code> 这个是</li>
+<li><code>[07:49–07:50]</code> 那你为什么看人形机器人</li>
+<li><code>[07:50–07:52]</code> 因为现在好像</li>
+<li><code>[07:52–07:53]</code> 不管说我的观众也好</li>
+<li><code>[07:53–07:55]</code> 还是好像资本也好</li>
+<li><code>[07:55–07:56]</code> 好像对人形机器人</li>
+<li><code>[07:56–07:58]</code> 这种的小厦会更感冒一点</li>
+<li><code>[07:58–07:59]</code> 那其实我们</li>
+<li><code>[07:59–08:00]</code> 好像我们现在看来</li>
+<li><code>[08:00–08:02]</code> 好像不一定</li>
+<li><code>[08:02–08:03]</code> 可能各个领域的机器人</li>
+<li><code>[08:03–08:05]</code> 会价值更大</li>
+<li><code>[08:05–08:06]</code> 这是王老师的一贯</li>
+<li><code>[08:06–08:07]</code> 一贯思想</li>
+<li><code>[08:07–08:10]</code> 王老师比较不认可</li>
+<li><code>[08:10–08:12]</code> 我们来之前主办方刚说了</li>
+<li><code>[08:12–08:14]</code> 不要批评人形机器人</li>
+<li><code>[08:15–08:17]</code> 其实因为我今天也逛了一圈下来</li>
+<li><code>[08:17–08:20]</code> 我觉得好像他们的身体已经很强了</li>
+<li><code>[08:20–08:21]</code> 但是确实不够聪明</li>
+<li><code>[08:21–08:22]</code> 没必要对</li>
+<li><code>[08:22–08:24]</code> 所以就是你们觉得是身体重要</li>
+<li><code>[08:24–08:25]</code> 还是大脑重要</li>
+<li><code>[08:25–08:26]</code> 当然大脑重要</li>
+<li><code>[08:26–08:27]</code> 大脑是吧</li>
+<li><code>[08:27–08:28]</code> 当然呢</li>
+<li><code>[08:28–08:30]</code> 这准备就有设定场景</li>
+<li><code>[08:30–08:32]</code> 就是说比如我遥控</li>
+<li><code>[08:32–08:33]</code> 对吧</li>
+<li><code>[08:33–08:34]</code> 就是我如果是救灾</li>
+<li><code>[08:34–08:36]</code> 那不只能遥控就好了</li>
+<li><code>[08:36–08:37]</code> 对吧</li>
+<li><code>[08:37–08:38]</code> 你比如说</li>
+<li><code>[08:38–08:39]</code> 核电站</li>
+<li><code>[08:39–08:41]</code> 最后关内阀门</li>
+<li><code>[08:41–08:42]</code> 我遥控都被连接下来</li>
+<li><code>[08:42–08:44]</code> 遥控</li>
+<li><code>[08:44–08:44]</code> 对吧</li>
+<li><code>[08:44–08:47]</code> 就是这个是会有广泛用途的</li>
+<li><code>[08:47–08:50]</code> 随未来会有很多的机器人遥控操作员</li>
+<li><code>[08:50–08:52]</code> 是吧</li>
+<li><code>[08:52–08:53]</code> 人进不去的领域</li>
+<li><code>[08:53–08:54]</code> 我遥控进去做</li>
+<li><code>[08:54–08:54]</code> 是吧</li>
+<li><code>[08:54–08:58]</code> 那像都是他的这个人形机器人</li>
+<li><code>[08:58–09:00]</code> 也受到量产了吗</li>
+<li><code>[09:00–09:01]</code> 这个</li>
+<li><code>[09:01–09:01]</code> 这个</li>
+<li><code>[09:01–09:02]</code> 我们怎么看这个东西</li>
+<li><code>[09:02–09:05]</code> 因为好像在我们中国的这个观念里面</li>
+<li><code>[09:05–09:07]</code> 好像通用的</li>
+<li><code>[09:07–09:08]</code> 通用的价值更大</li>
+<li><code>[09:08–09:09]</code> 应用更丰富</li>
+<li><code>[09:09–09:10]</code> 但是好像他们是在做</li>
+<li><code>[09:10–09:12]</code> 这一次我的感觉呢</li>
+<li><code>[09:12–09:14]</code> 是有些中国公司也在做</li>
+<li><code>[09:14–09:15]</code> 重用的这个路线</li>
+<li><code>[09:15–09:16]</code> 通用人性机器人这个路线</li>
+<li><code>[09:16–09:17]</code> 通用人性的路线</li>
+<li><code>[09:17–09:19]</code> 你首先要解决一个大脑问题</li>
+<li><code>[09:19–09:20]</code> 就是一个</li>
+<li><code>[09:20–09:22]</code> 这个所谓VLA的一个通用智能</li>
+<li><code>[09:22–09:23]</code> 有家公司说法</li>
+<li><code>[09:23–09:25]</code> 叫做原子能力</li>
+<li><code>[09:25–09:27]</code> 比如这个手伸出去</li>
+<li><code>[09:27–09:28]</code> 这个胳膊的角度</li>
+<li><code>[09:28–09:30]</code> 手指的每个角度是一个原子能力</li>
+<li><code>[09:30–09:32]</code> 我要拿拿这杯咖啡</li>
+<li><code>[09:32–09:34]</code> 这个意图翻译成所谓的原子能力</li>
+<li><code>[09:34–09:36]</code> 有几家公司我们看到</li>
+<li><code>[09:36–09:37]</code> 已经在做了</li>
+<li><code>[09:37–09:39]</code> 这个是找通用人形机器人</li>
+<li><code>[09:40–09:41]</code> 唯一的办法</li>
+<li><code>[09:41–09:45]</code> 但是它是的确有中国公司在做的</li>
+<li><code>[09:46–09:47]</code> 可不可以再理解</li>
+<li><code>[09:47–09:48]</code> 就是其实我们在</li>
+<li><code>[09:48–09:49]</code> 垂直的细致的细致领域要更强</li>
+<li><code>[09:49–09:51]</code> 但是如果说通用来说的话</li>
+<li><code>[09:51–09:53]</code> 可能特斯拉的那个</li>
+<li><code>[09:53–09:55]</code> 好像不是</li>
+<li><code>[09:55–09:57]</code> 这个有一个很大的区别在哪</li>
+<li><code>[09:57–10:00]</code> 就因为你没有到一线去看</li>
+<li><code>[10:00–10:01]</code> 你只能听他吹</li>
+<li><code>[10:01–10:02]</code> 对 它还没有两小时</li>
+<li><code>[10:02–10:04]</code> 马斯克是会吹牛的</li>
+<li><code>[10:04–10:06]</code> 所以我们不批评中国人形机器人</li>
+<li><code>[10:06–10:08]</code> 我们可以评论美国的</li>
+<li><code>[10:09–10:11]</code> 马斯克早就跳票了</li>
+<li><code>[10:11–10:12]</code> 恩作回了</li>
+<li><code>[10:12–10:13]</code> 他前年就说我要量产</li>
+<li><code>[10:13–10:14]</code> 十万台</li>
+<li><code>[10:14–10:15]</code> 后来是吧</li>
+<li><code>[10:15–10:16]</code> 去年说成一万台</li>
+<li><code>[10:16–10:17]</code> 去年说二零二五年</li>
+<li><code>[10:17–10:19]</code> 消账量多少多少多少多少</li>
+<li><code>[10:19–10:20]</code> 从来没实现过</li>
+<li><code>[10:20–10:22]</code> 而且说的预计数字在递减</li>
+<li><code>[10:22–10:22]</code> 对</li>
+<li><code>[10:22–10:23]</code> 而且他在Robotaxi</li>
+<li><code>[10:23–10:25]</code> 现在也没有上路跑</li>
+<li><code>[10:25–10:25]</code> 对</li>
+<li><code>[10:25–10:27]</code> 而且他原来</li>
+<li><code>[10:27–10:29]</code> 包括他前一阵人还公布说</li>
+<li><code>[10:29–10:32]</code> 我的Optimus进到工厂了</li>
+<li><code>[10:32–10:33]</code> 然后后来就</li>
+<li><code>[10:33–10:35]</code> 因为美国的问题是个刁钻的</li>
+<li><code>[10:35–10:36]</code> 无厘头的</li>
+<li><code>[10:36–10:38]</code> 他被迫澄清</li>
+<li><code>[10:38–10:39]</code> 我确实进工厂了</li>
+<li><code>[10:39–10:41]</code> 但没说去完成产线的任务</li>
+<li><code>[10:41–10:44]</code> 他说我只去我特斯拉工厂里呆着了</li>
+<li><code>[10:44–10:46]</code> 我可能在这场地上训练</li>
+<li><code>[10:46–10:47]</code> 但我可不是在干活</li>
+<li><code>[10:47–10:49]</code> 帮着叫造气说</li>
+<li><code>[10:50–10:52]</code> 这是本质区别对吧</li>
+<li><code>[10:52–10:52]</code> 进工厂容易</li>
+<li><code>[10:52–10:54]</code> 你的造气说进产线</li>
+<li><code>[10:54–10:56]</code> 干一个活的很难</li>
+<li><code>[10:56–10:57]</code> 还是要眼见为实</li>
+<li><code>[10:58–10:59]</code> 那他前段时间都说</li>
+<li><code>[10:59–11:02]</code> 把特斯拉的一些产线停产</li>
+<li><code>[11:02–11:04]</code> 去造他的机器人了</li>
+<li><code>[11:05–11:06]</code> 这就是</li>
+<li><code>[11:07–11:08]</code> 就是第一个</li>
+<li><code>[11:08–11:10]</code> 就说他有可能就这么做了</li>
+<li><code>[11:10–11:11]</code> 那我们要看</li>
+<li><code>[11:11–11:12]</code> 第二个</li>
+<li><code>[11:12–11:14]</code> 互排除他在吹牛</li>
+<li><code>[11:15–11:16]</code> 他应该做了</li>
+<li><code>[11:16–11:17]</code> 对 但是问题是这样</li>
+<li><code>[11:17–11:18]</code> 就是说</li>
+<li><code>[11:18–11:19]</code> 你只要这杯停产</li>
+<li><code>[11:19–11:21]</code> 那杯产量</li>
+<li><code>[11:21–11:21]</code> 你就常理</li>
+<li><code>[11:21–11:23]</code> 工厂就会开始库存了</li>
+<li><code>[11:23–11:24]</code> 就理论一下</li>
+<li><code>[11:24–11:25]</code> 这不可容忍</li>
+<li><code>[11:25–11:26]</code> 就这帮人现在都是越来越明显</li>
+<li><code>[11:26–11:28]</code> 知道我这没库存</li>
+<li><code>[11:28–11:29]</code> 订单我不可能</li>
+<li><code>[11:29–11:30]</code> 读一批东西出来</li>
+<li><code>[11:30–11:32]</code> 但是他现在正在冒这个险</li>
+<li><code>[11:32–11:34]</code> 这块是有一个不可预测的东西</li>
+<li><code>[11:34–11:35]</code> 就是特斯拉</li>
+<li><code>[11:35–11:36]</code> 因为马斯克现在是</li>
+<li><code>[11:36–11:38]</code> 心思完全不在特斯拉</li>
+<li><code>[11:38–11:38]</code> 特斯拉出了</li>
+<li><code>[11:38–11:39]</code> 恩多个昏招</li>
+<li><code>[11:39–11:40]</code> 不止这一个</li>
+<li><code>[11:40–11:41]</code> 还有一个大昏招是什么</li>
+<li><code>[11:41–11:42]</code> 就是那个</li>
+<li><code>[11:44–11:45]</code> 他说他把那个</li>
+<li><code>[11:45–11:48]</code> 原来要造Model 2不搞了</li>
+<li><code>[11:48–11:50]</code> 要去做Cybertruck</li>
+<li><code>[11:50–11:51]</code> 那是个巨大的昏招</li>
+<li><code>[11:51–11:52]</code> 为什么是昏招</li>
+<li><code>[11:52–11:54]</code> Model 2能卖</li>
+<li><code>[11:54–11:55]</code> Cybertruck没法卖</li>
+<li><code>[11:55–11:55]</code> 对不对</li>
+<li><code>[11:55–11:57]</code> 你没方向盘怎么卖</li>
+<li><code>[11:57–11:58]</code> 好 问题来了</li>
+<li><code>[11:58–12:00]</code> 您现在开了几个城市</li>
+<li><code>[12:00–12:02]</code> 就金山就奥斯丁对吧</li>
+<li><code>[12:02–12:03]</code> 一共三四个城市</li>
+<li><code>[12:03–12:05]</code> 您能容纳多少辆Cybercamp</li>
+<li><code>[12:05–12:06]</code> 而且产量</li>
+<li><code>[12:06–12:07]</code> 你也赶上了</li>
+<li><code>[12:07–12:08]</code> 对不对</li>
+<li><code>[12:08–12:09]</code> 意味着什么</li>
+<li><code>[12:09–12:09]</code> 意味着说</li>
+<li><code>[12:09–12:11]</code> 那问题是你那个</li>
+<li><code>[12:11–12:12]</code> Cybercamp目的是</li>
+<li><code>[12:12–12:14]</code> 年产量百万去的</li>
+<li><code>[12:14–12:15]</code> 今年就算没有百万</li>
+<li><code>[12:15–12:16]</code> 有50万辆</li>
+<li><code>[12:16–12:17]</code> 您产量得了吗</li>
+<li><code>[12:17–12:20]</code> 49万辆在车库里吃灰</li>
+<li><code>[12:20–12:21]</code> 对不对</li>
+<li><code>[12:21–12:22]</code> 那最后怎么办</li>
+<li><code>[12:22–12:23]</code> 我实在有产能</li>
+<li><code>[12:23–12:23]</code> 我不敢生产</li>
+<li><code>[12:23–12:24]</code> 我不敢生产</li>
+<li><code>[12:24–12:25]</code> 协制</li>
+<li><code>[12:25–12:27]</code> 是个愚蠢的决策</li>
+<li><code>[12:27–12:28]</code> 你去卖Model 2</li>
+<li><code>[12:28–12:31]</code> 你现在把价钱拉到足够低</li>
+<li><code>[12:31–12:32]</code> FSD足够好</li>
+<li><code>[12:32–12:33]</code> 大家爱使</li>
+<li><code>[12:33–12:35]</code> 因为你想我都FSD了</li>
+<li><code>[12:35–12:36]</code> 我再固执Model 3</li>
+<li><code>[12:36–12:36]</code> Model 2</li>
+<li><code>[12:36–12:37]</code> 还是Model X</li>
+<li><code>[12:37–12:38]</code> 对不对</li>
+<li><code>[12:38–12:38]</code> 到哪去</li>
+<li><code>[12:38–12:40]</code> 能自动去就完了吗</li>
+<li><code>[12:40–12:41]</code> 这Model 2一定畅销嘛</li>
+<li><code>[12:42–12:44]</code> 然后你将来就说Model 2</li>
+<li><code>[12:44–12:45]</code> 你们大家</li>
+<li><code>[12:46–12:48]</code> 我送驾能力上来</li>
+<li><code>[12:48–12:49]</code> 我出租车能力上来</li>
+<li><code>[12:49–12:50]</code> 你就租给我就好了</li>
+<li><code>[12:50–12:51]</code> 我瞬间</li>
+<li><code>[12:51–12:52]</code> 也就是它是个Bubble</li>
+<li><code>[12:52–12:53]</code> 是个缓冲液</li>
+<li><code>[12:53–12:54]</code> 我这城市</li>
+<li><code>[12:54–12:55]</code> 我要多少辆租车</li>
+<li><code>[12:55–12:57]</code> 我随时召唤就完了</li>
+<li><code>[12:57–12:57]</code> 对吧</li>
+<li><code>[12:57–12:59]</code> 我就不存在一个</li>
+<li><code>[12:59–13:00]</code> 要么就是没出租可用</li>
+<li><code>[13:00–13:02]</code> 要么就是都在控制吃亏</li>
+<li><code>[13:02–13:03]</code> 对吧</li>
+<li><code>[13:03–13:04]</code> 尤其是它现在的重心</li>
+<li><code>[13:04–13:06]</code> 全都放在SpaceX了</li>
+<li><code>[13:06–13:07]</code> 我们现在就说</li>
+<li><code>[13:07–13:10]</code> SpaceX这回它可能赌对了</li>
+<li><code>[13:10–13:12]</code> 它赌了一个特别聪明的事</li>
+<li><code>[13:12–13:14]</code> 因为它牛在哪你知道吗</li>
+<li><code>[13:14–13:16]</code> 美国基建没有人比它懂</li>
+<li><code>[13:16–13:18]</code> 那现在什么需要基建</li>
+<li><code>[13:18–13:19]</code> 就基建中心</li>
+<li><code>[13:19–13:20]</code> 计算中心是吧</li>
+<li><code>[13:20–13:20]</code> 没有</li>
+<li><code>[13:20–13:21]</code> 无左太空地面</li>
+<li><code>[13:21–13:22]</code> 地面是</li>
+<li><code>[13:22–13:25]</code> 它说它要在明年</li>
+<li><code>[13:25–13:27]</code> 做到10吉瓦的基建中心</li>
+<li><code>[13:27–13:29]</code> 它现在才一点几个吉瓦</li>
+<li><code>[13:29–13:31]</code> 扩到七八倍</li>
+<li><code>[13:31–13:33]</code> 而10吉瓦计算中心</li>
+<li><code>[13:33–13:34]</code> 现在计算中心的需求都不保障</li>
+<li><code>[13:34–13:37]</code> 10吉瓦是稳赚不赔</li>
+<li><code>[13:37–13:38]</code> 你想想看这个</li>
+<li><code>[13:38–13:39]</code> 卖算力了</li>
+<li><code>[13:39–13:40]</code> 卖算力</li>
+<li><code>[13:40–13:42]</code> 卖算力一件事会成为</li>
+<li><code>[13:42–13:43]</code> Swiss</li>
+<li><code>[13:43–13:44]</code> 我认为10吉瓦在</li>
+<li><code>[13:44–13:46]</code> 明年底做到</li>
+<li><code>[13:46–13:46]</code> 有点夸张</li>
+<li><code>[13:46–13:47]</code> 可能要到后年底</li>
+<li><code>[13:47–13:49]</code> 它甚至说是今年底</li>
+<li><code>[13:49–13:50]</code> 二六年底的实际上</li>
+<li><code>[13:50–13:51]</code> 肯定不可能</li>
+<li><code>[13:51–13:52]</code> 在理论上讲</li>
+<li><code>[13:52–13:53]</code> 二七二八年底</li>
+<li><code>[13:53–13:55]</code> 它应该能冲到10吉瓦</li>
+<li><code>[13:55–13:56]</code> 它的工程能力特别强</li>
+<li><code>[13:56–13:58]</code> 对应来讲</li>
+<li><code>[13:58–14:00]</code> 美国这帮人的工程能力超级弱</li>
+<li><code>[14:00–14:01]</code> 就建一个计算中心</li>
+<li><code>[14:01–14:03]</code> 五到七年的时间</li>
+<li><code>[14:03–14:03]</code> 对吧</li>
+<li><code>[14:03–14:04]</code> 就特别长</li>
+<li><code>[14:04–14:05]</code> 它不是</li>
+<li><code>[14:05–14:06]</code> 它效率特别高</li>
+<li><code>[14:06–14:07]</code> 所以它一两年就起得来</li>
+<li><code>[14:07–14:08]</code> 那就意味着说</li>
+<li><code>[14:08–14:10]</code> 都知道计算中心需求在暴涨</li>
+<li><code>[14:10–14:11]</code> 大家都见不起来</li>
+<li><code>[14:11–14:12]</code> 只有它能快速建建</li>
+<li><code>[14:12–14:14]</code> 那就稳赚了钱</li>
+<li><code>[14:14–14:16]</code> 所以真的有可能</li>
+<li><code>[14:16–14:16]</code> 它在</li>
+<li><code>[14:16–14:18]</code> 因为它现在不是</li>
+<li><code>[14:18–14:19]</code> 二五年是150个亿</li>
+<li><code>[14:19–14:21]</code> 收入</li>
+<li><code>[14:21–14:22]</code> 很有可能它的租赁</li>
+<li><code>[14:22–14:24]</code> 因为它说10吉瓦的租赁算力</li>
+<li><code>[14:24–14:26]</code> 能达到千亿规模</li>
+<li><code>[14:26–14:27]</code> 你想想看</li>
+<li><code>[14:27–14:28]</code> 就两三年</li>
+<li><code>[14:28–14:29]</code> 它的大头收入</li>
+<li><code>[14:29–14:32]</code> 来自于算力租赁</li>
+<li><code>[14:32–14:33]</code> 这公司你想想</li>
+<li><code>[14:33–14:34]</code> 它得翻多少倍</li>
+<li><code>[14:34–14:35]</code> 对吧</li>
+<li><code>[14:35–14:37]</code> 这可能是几万亿的一公司</li>
+<li><code>[14:37–14:39]</code> 对 它一定得到那去了</li>
+<li><code>[14:39–14:40]</code> 我们再聊回来</li>
+<li><code>[14:40–14:41]</code> 两位车员</li>
+<li><code>[14:41–14:43]</code> 我们今天聊机器人</li>
+<li><code>[14:43–14:44]</code> 其实我有个发现</li>
+<li><code>[14:44–14:45]</code> 就是你看</li>
+<li><code>[14:45–14:46]</code> 好像国内的车企</li>
+<li><code>[14:46–14:48]</code> 说也在造机器了</li>
+<li><code>[14:48–14:48]</code> 但是我们今天看到</li>
+<li><code>[14:48–14:50]</code> 好像没有一家车企过来</li>
+<li><code>[14:51–14:53]</code> 两位都对这个没看法</li>
+<li><code>[14:53–14:54]</code> 或者是觉得</li>
+<li><code>[14:54–14:56]</code> 为什么会议是这样的一个现象</li>
+<li><code>[14:56–14:58]</code> 还是说车企</li>
+<li><code>[14:58–14:59]</code> 可能他们更会影响</li>
+<li><code>[14:59–15:00]</code> 其实两个</li>
+<li><code>[15:00–15:01]</code> 一个就是说</li>
+<li><code>[15:01–15:03]</code> 其实好多并不是车企</li>
+<li><code>[15:03–15:06]</code> 而是汽车供应链相关企业</li>
+<li><code>[15:06–15:08]</code> 再造机器人的零部件</li>
+<li><code>[15:08–15:10]</code> 所以他们一般不参加这种会</li>
+<li><code>[15:10–15:11]</code> 因为这是机器人</li>
+<li><code>[15:11–15:12]</code> 这是终端的大会</li>
+<li><code>[15:12–15:14]</code> 他们参加供应链相关的会</li>
+<li><code>[15:14–15:17]</code> 就是一个机器人产业的会</li>
+<li><code>[15:17–15:18]</code> 我们原来去看</li>
+<li><code>[15:18–15:19]</code> 好多供应链都是</li>
+<li><code>[15:19–15:21]</code> 原来是给车造轴承的</li>
+<li><code>[15:21–15:22]</code> 给车造马达的</li>
+<li><code>[15:22–15:24]</code> 给车造各种的装备</li>
+<li><code>[15:24–15:26]</code> 都给机器人造了</li>
+<li><code>[15:26–15:27]</code> 基本上车的主流车企上</li>
+<li><code>[15:27–15:28]</code> 都在参与</li>
+<li><code>[15:28–15:29]</code> 那个量非常大</li>
+<li><code>[15:29–15:31]</code> 但是在这看不见</li>
+<li><code>[15:31–15:32]</code> 另一个主流车企</li>
+<li><code>[15:32–15:34]</code> 我认为现在不景气</li>
+<li><code>[15:34–15:35]</code> 竞争太激烈</li>
+<li><code>[15:35–15:36]</code> 顾不上那个</li>
+<li><code>[15:36–15:38]</code> 然后自己主业可能都弄不上了</li>
+<li><code>[15:38–15:40]</code> 对 您现在就这几家</li>
+<li><code>[15:40–15:41]</code> 当然也没那么多</li>
+<li><code>[15:41–15:44]</code> 就主要是小鹏和小米</li>
+<li><code>[15:44–15:45]</code> 对吧</li>
+<li><code>[15:45–15:46]</code> 那都在卷车呢</li>
+<li><code>[15:48–15:49]</code> 因为相比之下</li>
+<li><code>[15:49–15:50]</code> 就是它是血统</li>
+<li><code>[15:50–15:52]</code> 我这边收拾率好的时候</li>
+<li><code>[15:52–15:53]</code> 我需要出名要血统</li>
+<li><code>[15:53–15:54]</code> 我那边收拾率不行</li>
+<li><code>[15:54–15:55]</code> 我要抢救收拾率</li>
+<li><code>[15:55–15:56]</code> 这也顾不上</li>
+<li><code>[15:57–15:58]</code> 可能是这样的</li>
+<li><code>[15:58–16:00]</code> 我还有一个问题就是</li>
+<li><code>[16:01–16:02]</code> 也比较老生常谈</li>
+<li><code>[16:02–16:03]</code> 我还是想听一下两位的看法</li>
+<li><code>[16:03–16:05]</code> 就是我们会发现</li>
+<li><code>[16:05–16:07]</code> 今天在很多垂直领域</li>
+<li><code>[16:07–16:08]</code> 真的已经可以取代人类了</li>
+<li><code>[16:09–16:10]</code> 那我们</li>
+<li><code>[16:10–16:11]</code> 我们</li>
+<li><code>[16:11–16:13]</code> 我们用户该怎么办</li>
+<li><code>[16:13–16:15]</code> 比如说刚才那个我们说的</li>
+<li><code>[16:15–16:16]</code> 机器人维修</li>
+<li><code>[16:16–16:17]</code> 如果想像每个商铺</li>
+<li><code>[16:17–16:18]</code> 都都有一个机器人</li>
+<li><code>[16:18–16:19]</code> 或者甚至每家都有机器人的话</li>
+<li><code>[16:19–16:21]</code> 这机器人坏了的话</li>
+<li><code>[16:21–16:22]</code> 你需要一个人上去</li>
+<li><code>[16:22–16:22]</code> 去维修</li>
+<li><code>[16:22–16:24]</code> 然后比如说刚才我们说想</li>
+<li><code>[16:24–16:26]</code> 那个就是机器人管理</li>
+<li><code>[16:26–16:28]</code> 就是机器人管理会是一门学问</li>
+<li><code>[16:28–16:29]</code> 会是一门很大的学问</li>
+<li><code>[16:29–16:29]</code> 就是</li>
+<li><code>[16:29–16:32]</code> 对 因为每一个现场的组织</li>
+<li><code>[16:32–16:34]</code> 现场的机器人组织需要</li>
+<li><code>[16:34–16:36]</code> 针对这个现场的持续</li>
+<li><code>[16:36–16:38]</code> 然后这个现场的机器人</li>
+<li><code>[16:38–16:38]</code> 就会有</li>
+<li><code>[16:38–16:41]</code> 就是你需要一个人来管理</li>
+<li><code>[16:41–16:42]</code> 他们</li>
+<li><code>[16:42–16:44]</code> 他们这个机器人的执行体分身</li>
+<li><code>[16:44–16:45]</code> 大家都运行在一个</li>
+<li><code>[16:45–16:47]</code> 比如说像飞书</li>
+<li><code>[16:47–16:49]</code> 或者是龙芯一样的</li>
+<li><code>[16:49–16:49]</code> 这么一个机器人上</li>
+<li><code>[16:49–16:51]</code> 然后你要需要跟他们说话</li>
+<li><code>[16:51–16:52]</code> 你要跟他们说</li>
+<li><code>[16:52–16:53]</code> 你需要说今天你这个事儿干怎么样</li>
+<li><code>[16:53–16:54]</code> 明天你</li>
+<li><code>[16:54–16:56]</code> 你这些都需要人去做</li>
+<li><code>[16:56–16:58]</code> 而且关键是</li>
+<li><code>[16:58–16:59]</code> 你会想这个问题</li>
+<li><code>[16:59–17:01]</code> 就是人真的愿意去干</li>
+<li><code>[17:01–17:03]</code> 机器人能干的事儿吗</li>
+<li><code>[17:03–17:05]</code> 机器人能干的事儿的特点就是重复</li>
+<li><code>[17:05–17:07]</code> 它机器人会被人抢饭碗</li>
+<li><code>[17:07–17:08]</code> 但是是怎么</li>
+<li><code>[17:08–17:09]</code> 本来就不想干了</li>
+<li><code>[17:09–17:10]</code> 对</li>
+<li><code>[17:10–17:11]</code> 比如说巡检</li>
+<li><code>[17:11–17:13]</code> 你看那个</li>
+<li><code>[17:13–17:14]</code> 分拣包裹</li>
+<li><code>[17:14–17:14]</code> 谁爱干</li>
+<li><code>[17:14–17:16]</code> 就天天就那</li>
+<li><code>[17:16–17:17]</code> 对吧</li>
+<li><code>[17:17–17:19]</code> 缠线打螺丝谁爱干</li>
+<li><code>[17:19–17:21]</code> 包括那个分拣包裹</li>
+<li><code>[17:21–17:23]</code> 对</li>
+<li><code>[17:23–17:24]</code> 暴力</li>
+<li><code>[17:24–17:27]</code> 我们也都是深受其害</li>
+<li><code>[17:27–17:28]</code> 对</li>
+<li><code>[17:28–17:29]</code> 非常希望这个</li>
+<li><code>[17:29–17:30]</code> 因为你想不</li>
+<li><code>[17:30–17:31]</code> 机器期间能做的事儿</li>
+<li><code>[17:31–17:32]</code> 就是</li>
+<li><code>[17:32–17:34]</code> 虽然可能是智力的工作</li>
+<li><code>[17:34–17:36]</code> 但是依然是高度重复的</li>
+<li><code>[17:36–17:37]</code> 那这事儿就不该人干</li>
+<li><code>[17:37–17:38]</code> 就是我应该把我的价值</li>
+<li><code>[17:38–17:40]</code> 积累到机器人上</li>
+<li><code>[17:40–17:41]</code> 让它去重复</li>
+<li><code>[17:41–17:43]</code> 这迭代是这次的一个新设置</li>
+<li><code>[17:43–17:46]</code> 就是机器人不是一个</li>
+<li><code>[17:46–17:47]</code> 没有不会积累经验</li>
+<li><code>[17:47–17:48]</code> 不会学习的</li>
+<li><code>[17:48–17:50]</code> 他不是一个机器</li>
+<li><code>[17:50–17:51]</code> 对</li>
+<li><code>[17:51–17:52]</code> 机器人迭代是一个比人更会</li>
+<li><code>[17:52–17:53]</code> 积累经验</li>
+<li><code>[17:53–17:54]</code> 他学习的</li>
+<li><code>[17:54–17:54]</code> 是的</li>
+<li><code>[17:54–17:55]</code> 他会自我迭代</li>
+<li><code>[17:55–17:56]</code> 他会自我迭代</li>
+<li><code>[17:56–17:57]</code> 他听他说的非常不准</li>
+<li><code>[17:57–17:58]</code> 所以这是很有意义</li>
+<li><code>[17:58–18:00]</code> 那其实我还有一个疑问</li>
+<li><code>[18:00–18:01]</code> 我个人有一个疑问</li>
+<li><code>[18:01–18:03]</code> 就像现在他用AI</li>
+<li><code>[18:03–18:05]</code> 其实AI对事情是不负责任的</li>
+<li><code>[18:05–18:06]</code> 什么负责任</li>
+<li><code>[18:06–18:08]</code> 就是现在他用AI</li>
+<li><code>[18:08–18:10]</code> AI他不会负责的</li>
+<li><code>[18:10–18:12]</code> 就是还是要给他兜底</li>
+<li><code>[18:12–18:12]</code> 背锅</li>
+<li><code>[18:12–18:13]</code> 对</li>
+<li><code>[18:13–18:14]</code> 发现有人了</li>
+<li><code>[18:14–18:16]</code> 那我们回到机器人这一块</li>
+<li><code>[18:16–18:17]</code> 虽然他能力比人强</li>
+<li><code>[18:17–18:19]</code> 那假如说他做错了</li>
+<li><code>[18:19–18:19]</code> 或怎么样</li>
+<li><code>[18:19–18:21]</code> 是不是还是在一个逻辑</li>
+<li><code>[18:21–18:22]</code> 还是需要人来兜底</li>
+<li><code>[18:22–18:22]</code> 对</li>
+<li><code>[18:22–18:23]</code> 就需要你的</li>
+<li><code>[18:23–18:25]</code> 这是说机器管理的这个学问</li>
+<li><code>[18:25–18:26]</code> 就是说</li>
+<li><code>[18:26–18:27]</code> 有肯定有</li>
+<li><code>[18:27–18:29]</code> 机器管理的这个人</li>
+<li><code>[18:29–18:30]</code> 你手下的机器人出个事</li>
+<li><code>[18:30–18:31]</code> 你得服务</li>
+<li><code>[18:31–18:31]</code> 对</li>
+<li><code>[18:31–18:32]</code> 你得服务</li>
+<li><code>[18:32–18:32]</code> 你得服务</li>
+<li><code>[18:32–18:34]</code> 而且核心是你的业务模式设计</li>
+<li><code>[18:34–18:36]</code> 能不能容忍他出事</li>
+<li><code>[18:36–18:37]</code> 有的是Mission Critical</li>
+<li><code>[18:37–18:38]</code> 一个错误都不能出</li>
+<li><code>[18:38–18:40]</code> 那你就别有机器人了</li>
+<li><code>[18:40–18:42]</code> 但有的很多是可以允许出事的</li>
+<li><code>[18:42–18:42]</code> 无外乎出事</li>
+<li><code>[18:42–18:43]</code> 我怎么善后</li>
+<li><code>[18:43–18:45]</code> 你事先准备好就完了</li>
+<li><code>[18:45–18:46]</code> 像我们说的严重点</li>
+<li><code>[18:46–18:48]</code> 那飞机不失事吗</li>
+<li><code>[18:48–18:48]</code> 也失事</li>
+<li><code>[18:48–18:50]</code> 那民航非人为障碍飞</li>
+<li><code>[18:50–18:50]</code> 对</li>
+<li><code>[18:50–18:53]</code> 可能有些事作为必要的成本</li>
+<li><code>[18:53–18:53]</code> 是可以接受</li>
+<li><code>[18:53–18:55]</code> 我失事理赔嘛</li>
+<li><code>[18:55–18:55]</code> 对吧</li>
+<li><code>[18:56–18:56]</code> 好</li>
+<li><code>[18:56–18:57]</code> 最后还有两个问题</li>
+<li><code>[18:57–18:59]</code> 表决去</li>
+<li><code>[18:59–19:01]</code> 就我今天其实看到很多</li>
+<li><code>[19:01–19:02]</code> 这种赛博朋克的时刻</li>
+<li><code>[19:02–19:04]</code> 就感觉人机已经真的在共存</li>
+<li><code>[19:04–19:05]</code> 在协作了</li>
+<li><code>[19:05–19:06]</code> 是的</li>
+<li><code>[19:06–19:08]</code> 我们可以参考一下</li>
+<li><code>[19:08–19:09]</code> 我们在看远一点</li>
+<li><code>[19:09–19:11]</code> 大概五年十年之后</li>
+<li><code>[19:11–19:12]</code> 就是我们怎么跟机器人相处呢</li>
+<li><code>[19:16–19:18]</code> 就我今天已经大概看到这样的</li>
+<li><code>[19:18–19:20]</code> 一个前兆了</li>
+<li><code>[19:20–19:21]</code> 可能真的就一个人</li>
+<li><code>[19:21–19:22]</code> 在管一群机器人</li>
+<li><code>[19:22–19:24]</code> 那那</li>
+<li><code>[19:24–19:25]</code> 我觉得其实五年之后</li>
+<li><code>[19:25–19:28]</code> 可能机器人这件事没那么严重</li>
+<li><code>[19:28–19:30]</code> 就人机的边界还是比较清晰的</li>
+<li><code>[19:30–19:32]</code> 但是人和Agent边界会更模糊</li>
+<li><code>[19:32–19:34]</code> 就是虚拟部门会更模糊</li>
+<li><code>[19:34–19:36]</code> 就说未来你会发现</li>
+<li><code>[19:36–19:38]</code> 你有很多Agent在协助你做事</li>
+<li><code>[19:38–19:39]</code> 甚至你的很多决策</li>
+<li><code>[19:39–19:41]</code> 根本就绕不开Agent的支持</li>
+<li><code>[19:41–19:43]</code> 就那个我觉得是更</li>
+<li><code>[19:43–19:45]</code> 哦 机器人有Agent之一</li>
+<li><code>[19:45–19:46]</code> 也就是每个机器人</li>
+<li><code>[19:46–19:48]</code> 也一定有个Agent是他的智慧部</li>
+<li><code>[19:48–19:49]</code> 或者是他的大脑</li>
+<li><code>[19:49–19:51]</code> 或者是他的灵魂</li>
+<li><code>[19:51–19:52]</code> 他是你现实中的的一个Agent</li>
+<li><code>[19:52–19:53]</code> 对</li>
+<li><code>[19:54–19:55]</code> 我还可以预期一点</li>
+<li><code>[19:55–19:57]</code> 就是我们原来的逻辑是说</li>
+<li><code>[19:57–19:59]</code> 你这个机器人怎么做这事</li>
+<li><code>[19:59–19:59]</code> 应该跟人学</li>
+<li><code>[19:59–20:01]</code> 再看人是怎么做的</li>
+<li><code>[20:01–20:02]</code> 但事实上发现</li>
+<li><code>[20:02–20:03]</code> 就他们跟人学的速度太慢了</li>
+<li><code>[20:03–20:05]</code> 他们还不是自己摸索</li>
+<li><code>[20:05–20:07]</code> 然后自己跟自己</li>
+<li><code>[20:07–20:08]</code> 迭代出的做事方法</li>
+<li><code>[20:08–20:09]</code> 就发现</li>
+<li><code>[20:09–20:11]</code> 也就是我们会发现</li>
+<li><code>[20:11–20:14]</code> 现在我们看见的很多事</li>
+<li><code>[20:14–20:16]</code> 将来五年之后就不这么做了</li>
+<li><code>[20:16–20:18]</code> 干脆就不是说机器人</li>
+<li><code>[20:18–20:19]</code> 代表人去做这事</li>
+<li><code>[20:19–20:21]</code> 而是机器人有他自己独特的做事方法</li>
+<li><code>[20:21–20:22]</code> 会让我们感觉</li>
+<li><code>[20:22–20:24]</code> 原来这事应该这么做</li>
+<li><code>[20:25–20:26]</code> 没错</li>
+<li><code>[20:26–20:28]</code> 其实这点一个例子就是</li>
+<li><code>[20:28–20:30]</code> 未来机器人一定有自己沟通的语言</li>
+<li><code>[20:30–20:31]</code> 对吧</li>
+<li><code>[20:31–20:32]</code> 机器人跟机器人沟通</li>
+<li><code>[20:32–20:34]</code> 速度比我们快得多</li>
+<li><code>[20:34–20:35]</code> 我用人类语言沟通</li>
+<li><code>[20:35–20:36]</code> 第一 人类语言效率低</li>
+<li><code>[20:36–20:38]</code> 第二 我之所以用他</li>
+<li><code>[20:38–20:39]</code> 只不过为了让你听得懂而已</li>
+<li><code>[20:39–20:41]</code> 如果我只为了我机器互相沟通</li>
+<li><code>[20:41–20:42]</code> 我们自己创造个语言</li>
+<li><code>[20:42–20:43]</code> 更高效就完了</li>
+<li><code>[20:45–20:46]</code> 好 只要一个问题</li>
+<li><code>[20:46–20:47]</code> 王老师前段时间</li>
+<li><code>[20:47–20:49]</code> 有一个言论火他出圈</li>
+<li><code>[20:49–20:52]</code> 就是泡沫会出现在2029年</li>
+<li><code>[20:52–20:54]</code> 2019年 对</li>
+<li><code>[20:54–20:55]</code> 我们今天观察</li>
+<li><code>[20:55–20:56]</code> 你觉得机器人在这里面</li>
+<li><code>[20:56–20:57]</code> 有没有泡沫</li>
+<li><code>[20:57–20:58]</code> 有</li>
+<li><code>[20:58–21:00]</code> 但是这个不一样</li>
+<li><code>[21:00–21:03]</code> 就是又是两个部分不一样在哪</li>
+<li><code>[21:03–21:05]</code> 就是我们说泡沫</li>
+<li><code>[21:05–21:08]</code> 对泡沫要分成这个好的坏的的</li>
+<li><code>[21:08–21:09]</code> 就是我们以前理解说</li>
+<li><code>[21:09–21:11]</code> 这个泡沫破灭的都是</li>
+<li><code>[21:11–21:12]</code> 资本主义腐朽了</li>
+<li><code>[21:12–21:14]</code> 经济完蛋了 不是这样的</li>
+<li><code>[21:14–21:15]</code> 历史规律看</li>
+<li><code>[21:15–21:16]</code> 大多数泡沫</li>
+<li><code>[21:16–21:17]</code> 为什么是泡沫破灭</li>
+<li><code>[21:17–21:19]</code> 是因为经济的往好了走</li>
+<li><code>[21:19–21:21]</code> 但是我们的预期长得更快</li>
+<li><code>[21:21–21:23]</code> 就是它明明明天更好</li>
+<li><code>[21:23–21:24]</code> 但我认为今天就应该好</li>
+<li><code>[21:24–21:26]</code> 结果预期过高造成</li>
+<li><code>[21:26–21:27]</code> 绷不住了</li>
+<li><code>[21:27–21:28]</code> 就会跌下来</li>
+<li><code>[21:28–21:30]</code> 但是一般跌了以后又会回升上去</li>
+<li><code>[21:30–21:33]</code> 你比如说互联网危机</li>
+<li><code>[21:33–21:34]</code> 互联网泡沫</li>
+<li><code>[21:34–21:36]</code> 几个月就回来了 对吧</li>
+<li><code>[21:36–21:38]</code> 包括08年</li>
+<li><code>[21:38–21:39]</code> 这个两房危机</li>
+<li><code>[21:39–21:40]</code> 每几个月都恢复了</li>
+<li><code>[21:40–21:42]</code> 所以就是说不能理解</li>
+<li><code>[21:42–21:44]</code> 我说的这个二九年的泡沫</li>
+<li><code>[21:44–21:46]</code> 不是之后一地鸡毛</li>
+<li><code>[21:46–21:47]</code> 而是它是一个大的震荡</li>
+<li><code>[21:47–21:49]</code> 你说你是从股市的意义上讲</li>
+<li><code>[21:49–21:50]</code> 对</li>
+<li><code>[21:50–21:52]</code> 但是它股市现在对</li>
+<li><code>[21:52–21:53]</code> 股市可能跌下</li>
+<li><code>[21:53–21:53]</code> 但是这个</li>
+<li><code>[21:53–21:55]</code> 股市对企业影响非常大</li>
+<li><code>[21:55–21:56]</code> 会造成很多企业破产</li>
+<li><code>[21:56–21:57]</code> 我们就说</li>
+<li><code>[21:57–22:00]</code> 一个就是说对美国的基建</li>
+<li><code>[22:00–22:03]</code> 就是这个是特斯拉的风险</li>
+<li><code>[22:03–22:05]</code> 2029年就互联网当时也是</li>
+<li><code>[22:05–22:06]</code> 互联网当时是基建</li>
+<li><code>[22:06–22:07]</code> 受创是最大的</li>
+<li><code>[22:07–22:09]</code> 就是说曝光仙的那个</li>
+<li><code>[22:09–22:10]</code> 很多就破产了</li>
+<li><code>[22:10–22:11]</code> 因为我就靠曝光仙</li>
+<li><code>[22:11–22:13]</code> 那你回一下就特别像今天的</li>
+<li><code>[22:13–22:14]</code> 马斯克对马斯克</li>
+<li><code>[22:14–22:16]</code> 这是29年有一劫</li>
+<li><code>[22:16–22:18]</code> 你29年你都哭到了</li>
+<li><code>[22:18–22:18]</code> 10吉瓦了</li>
+<li><code>[22:18–22:20]</code> 突然之间那么不值钱了</li>
+<li><code>[22:20–22:22]</code> 这个是一个特别大的风险</li>
+<li><code>[22:22–22:24]</code> 另一个是韩国</li>
+<li><code>[22:24–22:25]</code> 我都怀疑韩国29年</li>
+<li><code>[22:25–22:26]</code> 国家都得破产</li>
+<li><code>[22:27–22:28]</code> 这就是说</li>
+<li><code>[22:28–22:30]</code> 但是这个就是说</li>
+<li><code>[22:30–22:32]</code> 股市影响会影响到这么大</li>
+<li><code>[22:32–22:34]</code> 但是整体经济是向好的</li>
+<li><code>[22:34–22:35]</code> 整体是向好的</li>
+<li><code>[22:35–22:37]</code> 所以这是一个判断</li>
+<li><code>[22:37–22:39]</code> 另外一个就是说</li>
+<li><code>[22:39–22:40]</code> 中美不一样</li>
+<li><code>[22:40–22:42]</code> 机器人是中国产业</li>
+<li><code>[22:42–22:43]</code> 中国不是29年的问题</li>
+<li><code>[22:43–22:46]</code> 中国也会有一定的风险</li>
+<li><code>[22:46–22:47]</code> 是更晚</li>
+<li><code>[22:47–22:48]</code> 为什么中国现在</li>
+<li><code>[22:48–22:50]</code> 都是国家队入市</li>
+<li><code>[22:50–22:51]</code> 大笔资金撑着</li>
+<li><code>[22:51–22:54]</code> 就这个中国叫耐心资本</li>
+<li><code>[22:54–22:56]</code> 所以中国的机器人产业</li>
+<li><code>[22:56–22:57]</code> 29年可能受到</li>
+<li><code>[22:57–22:58]</code> 美国的一定的波动</li>
+<li><code>[22:58–23:00]</code> 但是不大</li>
+<li><code>[23:00–23:01]</code> 因为我们跟美国</li>
+<li><code>[23:01–23:02]</code> 首先就不通</li>
+<li><code>[23:02–23:03]</code> 其次我们后面的这个</li>
+<li><code>[23:03–23:05]</code> 耐心资本撑着</li>
+<li><code>[23:05–23:06]</code> 两三年出不了事</li>
+<li><code>[23:06–23:09]</code> 所以只会被他连累一下</li>
+<li><code>[23:09–23:10]</code> 所以我就讲说</li>
+<li><code>[23:10–23:10]</code> 即使是连累</li>
+<li><code>[23:10–23:12]</code> 韩国比我说连累大多了</li>
+<li><code>[23:14–23:16]</code> 好 谢谢</li>
+<li><code>[23:16–23:17]</code> 非常感谢两位</li>
+<li><code>[23:17–23:17]</code> 谢谢</li>
+<li><code>[23:17–23:19]</code> 好 谢谢</li>
+</ul>
+</details>
+<details>
+<summary>关键帧 + OCR</summary>
+<p><strong><code>[00:00]</code></strong> Bbii　/　马斯克是会吹牛的</p>
+<p><img loading="lazy" alt="00:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0001.jpg" /></p>
+<p><strong><code>[00:10]</code></strong> 科井　/　真的愿意吗　/　人真的愿意去干机器人能干的事吗　/　innovgtion</p>
+<p><img loading="lazy" alt="00:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0002.jpg" /></p>
+<p><strong><code>[00:20]</code></strong> 科技狐ii　/　妈妈</p>
+<p><img loading="lazy" alt="00:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0003.jpg" /></p>
+<p><strong><code>[00:30]</code></strong> 科技狐　/　mov8　/　而且是实际的应用场景</p>
+<p><img loading="lazy" alt="00:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0004.jpg" /></p>
+<p><strong><code>[00:40]</code></strong> 科技狐ii　/　组织形态</p>
+<p><img loading="lazy" alt="00:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0005.jpg" /></p>
+<p><strong><code>[00:50]</code></strong> 原本只是说那个我们做思想实验</p>
+<p><img loading="lazy" alt="00:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0006.jpg" /></p>
+<p><strong><code>[01:00]</code></strong> 科技狐　/　他们就切实发现了</p>
+<p><img loading="lazy" alt="01:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0007.jpg" /></p>
+<p><strong><code>[01:10]</code></strong> 他们让机器人自自主学习</p>
+<p><img loading="lazy" alt="01:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0008.jpg" /></p>
+<p><strong><code>[01:20]</code></strong> 技狐　/　bilibili　/　你这个事做的对还是不对</p>
+<p><img loading="lazy" alt="01:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0009.jpg" /></p>
+<p><strong><code>[01:30]</code></strong> 科技狐　/　bilibili　/　另外机器人会跟着学</p>
+<p><img loading="lazy" alt="01:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0010.jpg" /></p>
+<p><strong><code>[01:40]</code></strong> 我有点玻脚的机器人</p>
+<p><img loading="lazy" alt="01:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0011.jpg" /></p>
+<p><strong><code>[01:50]</code></strong> 科技狐　/　就会对整体的效果会更好</p>
+<p><img loading="lazy" alt="01:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0012.jpg" /></p>
+<p><strong><code>[02:00]</code></strong> 科技狐bil　/　在实践中涌现出来的问题</p>
+<p><img loading="lazy" alt="02:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0013.jpg" /></p>
+<p><strong><code>[02:10]</code></strong> 科技狐　/　送给那个</p>
+<p><img loading="lazy" alt="02:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0014.jpg" /></p>
+<p><strong><code>[02:20]</code></strong> 技狐-</p>
+<p><img loading="lazy" alt="02:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0015.jpg" /></p>
+<p><strong><code>[02:30]</code></strong> 也就是我们的小脑的部分越来越强</p>
+<p><img loading="lazy" alt="02:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0016.jpg" /></p>
+<p><strong><code>[02:40]</code></strong> 科技狐　/　还是没有解决</p>
+<p><img loading="lazy" alt="02:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0017.jpg" /></p>
+<p><strong><code>[02:50]</code></strong> 科技　/　所以对这个世界的</p>
+<p><img loading="lazy" alt="02:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0018.jpg" /></p>
+<p><strong><code>[03:00]</code></strong> 通用型的机器人的方案</p>
+<p><img loading="lazy" alt="03:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0019.jpg" /></p>
+<p><strong><code>[03:10]</code></strong> 科技狐　/　bilibii　/　也让我看到乐观的部分</p>
+<p><img loading="lazy" alt="03:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0020.jpg" /></p>
+<p><strong><code>[03:20]</code></strong> 科技狐I</p>
+<p><img loading="lazy" alt="03:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0021.jpg" /></p>
+<p><strong><code>[03:30]</code></strong> 科技狐ii　/　所以这个是让我觉得还不错</p>
+<p><img loading="lazy" alt="03:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0022.jpg" /></p>
+<p><strong><code>[03:40]</code></strong> 科技狐　/　bili　/　在更多的场景落地</p>
+<p><img loading="lazy" alt="03:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0023.jpg" /></p>
+<p><strong><code>[03:50]</code></strong> 科技狐　/　bilibil　/　短期内至少是达不到的</p>
+<p><img loading="lazy" alt="03:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0024.jpg" /></p>
+<p><strong><code>[04:00]</code></strong> 支洲　/　那你们两位看来</p>
+<p><img loading="lazy" alt="04:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0025.jpg" /></p>
+<p><strong><code>[04:10]</code></strong> silbili　/　就你觉得现在大概是一个什么阶段</p>
+<p><img loading="lazy" alt="04:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0026.jpg" /></p>
+<p><strong><code>[04:20]</code></strong> 它他确实不能这么比</p>
+<p><img loading="lazy" alt="04:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0027.jpg" /></p>
+<p><strong><code>[04:30]</code></strong> 科技狐　/　LiliL　/　自动驾驶也可以当成一个机器人看</p>
+<p><img loading="lazy" alt="04:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0028.jpg" /></p>
+<p><strong><code>[04:40]</code></strong> ibili　/　那么所以</p>
+<p><img loading="lazy" alt="04:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0029.jpg" /></p>
+<p><strong><code>[04:50]</code></strong> 所以就最简单的机器人处理</p>
+<p><img loading="lazy" alt="04:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0030.jpg" /></p>
+<p><strong><code>[05:00]</code></strong> 科技狐协l　/　机器人可以做到很好</p>
+<p><img loading="lazy" alt="05:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0031.jpg" /></p>
+<p><strong><code>[05:10]</code></strong> 科技狐i　/　我还能带个头像对不对</p>
+<p><img loading="lazy" alt="05:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0032.jpg" /></p>
+<p><strong><code>[05:20]</code></strong> 科技狐i　/　movotian　/　就刚才讲的</p>
+<p><img loading="lazy" alt="05:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0033.jpg" /></p>
+<p><strong><code>[05:30]</code></strong> 科技狐　/　Lilibil　/　其实对我们的最大的考验是什么</p>
+<p><img loading="lazy" alt="05:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0034.jpg" /></p>
+<p><strong><code>[05:40]</code></strong> 科技狐i　/　就是如果说不能满足</p>
+<p><img loading="lazy" alt="05:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0035.jpg" /></p>
+<p><strong><code>[05:50]</code></strong> 科技狐　/　晓驭万象　/　YUHESEN　/　我刚刚也看了踢足球</p>
+<p><img loading="lazy" alt="05:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0036.jpg" /></p>
+<p><strong><code>[06:00]</code></strong> 科技ll　/　然后我们原来去看机器人世界杯</p>
+<p><img loading="lazy" alt="06:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0037.jpg" /></p>
+<p><strong><code>[06:10]</code></strong> 技狐　/　它他配合做的特别好</p>
+<p><img loading="lazy" alt="06:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0038.jpg" /></p>
+<p><strong><code>[06:20]</code></strong> bilibili　/　它就拿着身子去撞球嘛</p>
+<p><img loading="lazy" alt="06:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0039.jpg" /></p>
+<p><strong><code>[06:30]</code></strong> 技狐　/　bilbil　/　如果你想想看</p>
+<p><img loading="lazy" alt="06:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0040.jpg" /></p>
+<p><strong><code>[06:40]</code></strong> 科技狐山　/　而我自身的控制也很复杂</p>
+<p><img loading="lazy" alt="06:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0041.jpg" /></p>
+<p><strong><code>[06:50]</code></strong> 科技狐　/　那么多创业公司的考验就是</p>
+<p><img loading="lazy" alt="06:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0042.jpg" /></p>
+<p><strong><code>[07:00]</code></strong> 科技狐　/　像矿山那种就蛮好的</p>
+<p><img loading="lazy" alt="07:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0043.jpg" /></p>
+<p><strong><code>[07:10]</code></strong> Bibili　/　irovp</p>
+<p><img loading="lazy" alt="07:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0044.jpg" /></p>
+<p><strong><code>[07:20]</code></strong> bilibi　/　那我就算一下这个中国</p>
+<p><img loading="lazy" alt="07:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0045.jpg" /></p>
+<p><strong><code>[07:30]</code></strong> 皮狐bilii　/　一起挖掘出哪些领域</p>
+<p><img loading="lazy" alt="07:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0046.jpg" /></p>
+<p><strong><code>[07:40]</code></strong> 而不是说一个通用的</p>
+<p><img loading="lazy" alt="07:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0047.jpg" /></p>
+<p><strong><code>[07:50]</code></strong> 还是好像资本也好</p>
+<p><img loading="lazy" alt="07:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0048.jpg" /></p>
+<p><strong><code>[08:00]</code></strong> 对这是王老师的一贯思想</p>
+<p><img loading="lazy" alt="08:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0049.jpg" /></p>
+<p><strong><code>[08:10]</code></strong> 科技狐I</p>
+<p><img loading="lazy" alt="08:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0050.jpg" /></p>
+<p><strong><code>[08:20]</code></strong> 你们觉得是身体重要还是大脑重要</p>
+<p><img loading="lazy" alt="08:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0051.jpg" /></p>
+<p><strong><code>[08:30]</code></strong> 科技狐　/　那智能遥控就好了嘛对吧</p>
+<p><img loading="lazy" alt="08:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0052.jpg" /></p>
+<p><strong><code>[08:40]</code></strong> 科技狐　/　对吧就是这个会有广泛用途的</p>
+<p><img loading="lazy" alt="08:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0053.jpg" /></p>
+<p><strong><code>[08:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="08:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0054.jpg" /></p>
+<p><strong><code>[09:00]</code></strong> 好像在我们中国的这个观念里面</p>
+<p><img loading="lazy" alt="09:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0055.jpg" /></p>
+<p><strong><code>[09:10]</code></strong> 技狐blli　/　故通用的这个路线</p>
+<p><img loading="lazy" alt="09:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0056.jpg" /></p>
+<p><strong><code>[09:20]</code></strong> 料技狐　/　Libili　/　有一家公司说法叫做原子能力</p>
+<p><img loading="lazy" alt="09:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0057.jpg" /></p>
+<p><strong><code>[09:30]</code></strong> 科技狐Ll　/　有几家公司我们看到已经在做了</p>
+<p><img loading="lazy" alt="09:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0058.jpg" /></p>
+<p><strong><code>[09:40]</code></strong> 技狐机　/　但的确有中国公司在做这件事</p>
+<p><img loading="lazy" alt="09:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0059.jpg" /></p>
+<p><strong><code>[09:50]</code></strong> 科技狐　/　不是</p>
+<p><img loading="lazy" alt="09:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0060.jpg" /></p>
+<p><strong><code>[10:00]</code></strong> 所以我们不批评中国人员机器人</p>
+<p><img loading="lazy" alt="10:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0061.jpg" /></p>
+<p><strong><code>[10:10]</code></strong> 后来就把去年说成一万台</p>
+<p><img loading="lazy" alt="10:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0062.jpg" /></p>
+<p><strong><code>[10:20]</code></strong> 科技狐　/　对而且他Robbtaxi现在也没有上路跑</p>
+<p><img loading="lazy" alt="10:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0063.jpg" /></p>
+<p><strong><code>[10:30]</code></strong> 山i　/　问问题是很刁钻的</p>
+<p><img loading="lazy" alt="10:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0064.jpg" /></p>
+<p><strong><code>[10:40]</code></strong> 科技狐　/　我可能在这场地上训练了</p>
+<p><img loading="lazy" alt="10:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0065.jpg" /></p>
+<p><strong><code>[10:50]</code></strong> 科技狐　/　进产线干一个活就很难</p>
+<p><img loading="lazy" alt="10:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0066.jpg" /></p>
+<p><strong><code>[11:00]</code></strong> 科技狐　/　mop8</p>
+<p><img loading="lazy" alt="11:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0067.jpg" /></p>
+<p><strong><code>[11:10]</code></strong> 支狐bi　/　inmovg8</p>
+<p><img loading="lazy" alt="11:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0068.jpg" /></p>
+<p><strong><code>[11:20]</code></strong> 就理论上讲这是不可容忍的</p>
+<p><img loading="lazy" alt="11:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0069.jpg" /></p>
+<p><strong><code>[11:30]</code></strong> 科技狐i　/　就是特斯拉</p>
+<p><img loading="lazy" alt="11:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0070.jpg" /></p>
+<p><strong><code>[11:40]</code></strong> 科技训　/　Silibi　/　innovtio　/　他说他把那个</p>
+<p><img loading="lazy" alt="11:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0071.jpg" /></p>
+<p><strong><code>[11:50]</code></strong> 技圾#　/　Cybertruck没法卖</p>
+<p><img loading="lazy" alt="11:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0072.jpg" /></p>
+<p><strong><code>[12:00]</code></strong> 您能容纳多少辆Cybertruck</p>
+<p><img loading="lazy" alt="12:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0073.jpg" /></p>
+<p><strong><code>[12:10]</code></strong> 科技狐　/　今年就算没有百万</p>
+<p><img loading="lazy" alt="12:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0074.jpg" /></p>
+<p><strong><code>[12:20]</code></strong> 科技blbil</p>
+<p><img loading="lazy" alt="12:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0075.jpg" /></p>
+<p><strong><code>[12:30]</code></strong> 因为你想我都FSD</p>
+<p><img loading="lazy" alt="12:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0076.jpg" /></p>
+<p><strong><code>[12:40]</code></strong> Libili　/　科技狐　/　那个你们大家这个</p>
+<p><img loading="lazy" alt="12:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0077.jpg" /></p>
+<p><strong><code>[12:50]</code></strong> 科技狐　/　bilibili　/　我这城市我要多少辆出租车</p>
+<p><img loading="lazy" alt="12:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0078.jpg" /></p>
+<p><strong><code>[13:00]</code></strong> 科技狐　/　LiliLi　/　重心全都放在SpaceX了</p>
+<p><img loading="lazy" alt="13:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0079.jpg" /></p>
+<p><strong><code>[13:10]</code></strong> 科技狐　/　bilibili　/　美国基建没有人比他懂</p>
+<p><img loading="lazy" alt="13:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0080.jpg" /></p>
+<p><strong><code>[13:20]</code></strong> 狐bilibili　/　明年做到10吉瓦的计算中心</p>
+<p><img loading="lazy" alt="13:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0081.jpg" /></p>
+<p><strong><code>[13:30]</code></strong> bilibili　/　科技狐　/　10吉瓦是稳赚不赔</p>
+<p><img loading="lazy" alt="13:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0082.jpg" /></p>
+<p><strong><code>[13:40]</code></strong> 科技狐</p>
+<p><img loading="lazy" alt="13:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0083.jpg" /></p>
+<p><strong><code>[13:50]</code></strong> 科技狐　/　bilibili　/　因为他的这个工程能力特别强</p>
+<p><img loading="lazy" alt="13:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0084.jpg" /></p>
+<p><strong><code>[14:00]</code></strong> 科技狐　/　binI　/　它不是它效率特别高</p>
+<p><img loading="lazy" alt="14:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0085.jpg" /></p>
+<p><strong><code>[14:10]</code></strong> 科技狐bilibili　/　所以真的有可能它在</p>
+<p><img loading="lazy" alt="14:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0086.jpg" /></p>
+<p><strong><code>[14:20]</code></strong> 科技狐　/　biisii　/　算力能达到干亿规模</p>
+<p><img loading="lazy" alt="14:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0087.jpg" /></p>
+<p><strong><code>[14:30]</code></strong> 科技狐　/　对吧</p>
+<p><img loading="lazy" alt="14:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0088.jpg" /></p>
+<p><strong><code>[14:40]</code></strong> 科技狐　/　就是你看好像国内的</p>
+<p><img loading="lazy" alt="14:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0089.jpg" /></p>
+<p><strong><code>[14:50]</code></strong> 科技狐　/　bilibili　/　或者是觉得为什么会</p>
+<p><img loading="lazy" alt="14:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0090.jpg" /></p>
+<p><strong><code>[15:00]</code></strong> 料技狐blli　/　而是汽车供应链相关企业</p>
+<p><img loading="lazy" alt="15:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0091.jpg" /></p>
+<p><strong><code>[15:10]</code></strong> 科技狐　/　biibii　/　imovctiop</p>
+<p><img loading="lazy" alt="15:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0092.jpg" /></p>
+<p><strong><code>[15:20]</code></strong> 科技狐　/　bilibli　/　都给机器人造了</p>
+<p><img loading="lazy" alt="15:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0093.jpg" /></p>
+<p><strong><code>[15:30]</code></strong> 科技狐　/　biibili　/　novtian　/　竞争太激烈</p>
+<p><img loading="lazy" alt="15:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0094.jpg" /></p>
+<p><strong><code>[15:40]</code></strong> 科技狐　/　movgtoa　/　对吧那都在卷车</p>
+<p><img loading="lazy" alt="15:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0095.jpg" /></p>
+<p><strong><code>[15:50]</code></strong> 科技狐　/　inov8g　/　我要抢救收视率</p>
+<p><img loading="lazy" alt="15:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0096.jpg" /></p>
+<p><strong><code>[16:00]</code></strong> 科技狐　/　就是我们会发现</p>
+<p><img loading="lazy" alt="16:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0097.jpg" /></p>
+<p><strong><code>[16:10]</code></strong> Siibili</p>
+<p><img loading="lazy" alt="16:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0098.jpg" /></p>
+<p><strong><code>[16:20]</code></strong> 牛技狐i　/　然后比如说刚才我们设想的那个</p>
+<p><img loading="lazy" alt="16:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0099.jpg" /></p>
+<p><strong><code>[16:30]</code></strong> 科技狐i　/　针对这个现场的持续学习</p>
+<p><img loading="lazy" alt="16:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0100.jpg" /></p>
+<p><strong><code>[16:40]</code></strong> 科技狐l　/　大家都运行在一个</p>
+<p><img loading="lazy" alt="16:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0101.jpg" /></p>
+<p><strong><code>[16:50]</code></strong> 科技狐ilM　/　明天你这些都需要人去做</p>
+<p><img loading="lazy" alt="16:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0102.jpg" /></p>
+<p><strong><code>[17:00]</code></strong> 科枝狐　/　Mili　/　机器人能干的事的特点就是重复</p>
+<p><img loading="lazy" alt="17:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0103.jpg" /></p>
+<p><strong><code>[17:10]</code></strong> bilibili　/　就天天就那　/　对吧</p>
+<p><img loading="lazy" alt="17:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0104.jpg" /></p>
+<p><strong><code>[17:20]</code></strong> 科技狐l　/　那个我们已经都是</p>
+<p><img loading="lazy" alt="17:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0105.jpg" /></p>
+<p><strong><code>[17:30]</code></strong> 科技狐　/　bilibi　/　但是依然是高度重复的</p>
+<p><img loading="lazy" alt="17:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0106.jpg" /></p>
+<p><strong><code>[17:40]</code></strong> 科技狐　/　bilibili　/　就是机器人不是一个没有</p>
+<p><img loading="lazy" alt="17:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0107.jpg" /></p>
+<p><strong><code>[17:50]</code></strong> 科技狐　/　bilb　/　它会自我送代</p>
+<p><img loading="lazy" alt="17:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0108.jpg" /></p>
+<p><strong><code>[18:00]</code></strong> libii　/　其实A对事情是不负责任的</p>
+<p><img loading="lazy" alt="18:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0109.jpg" /></p>
+<p><strong><code>[18:10]</code></strong> 科技狐ilibii　/　那那我们回到机器人这一块</p>
+<p><img loading="lazy" alt="18:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0110.jpg" /></p>
+<p><strong><code>[18:20]</code></strong> 科技狐l　/　就是说机器人管理的这这个学问</p>
+<p><img loading="lazy" alt="18:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0111.jpg" /></p>
+<p><strong><code>[18:30]</code></strong> biibili　/　设计能不能容忍它出事</p>
+<p><img loading="lazy" alt="18:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0112.jpg" /></p>
+<p><strong><code>[18:40]</code></strong> 科技狐　/　bilibii</p>
+<p><img loading="lazy" alt="18:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0113.jpg" /></p>
+<p><strong><code>[18:50]</code></strong> 科技狐　/　Silibii　/　我失事理赔嘛对吧</p>
+<p><img loading="lazy" alt="18:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0114.jpg" /></p>
+<p><strong><code>[19:00]</code></strong> 科技狐　/　bili　/　的在共存在协作了</p>
+<p><img loading="lazy" alt="19:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0115.jpg" /></p>
+<p><strong><code>[19:10]</code></strong> 科技狐　/　bilibili</p>
+<p><img loading="lazy" alt="19:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0116.jpg" /></p>
+<p><strong><code>[19:20]</code></strong> 科技狐　/　bilibili　/　没有我觉得其实5年之后</p>
+<p><img loading="lazy" alt="19:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0117.jpg" /></p>
+<p><strong><code>[19:30]</code></strong> 科技狐　/　bill　/　就是说未来你会发现你</p>
+<p><img loading="lazy" alt="19:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0118.jpg" /></p>
+<p><strong><code>[19:40]</code></strong> 科技狐#　/　机器人也是你的Agent之一</p>
+<p><img loading="lazy" alt="19:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0119.jpg" /></p>
+<p><strong><code>[19:50]</code></strong> 科技狐　/　我还可以预期的一点就是</p>
+<p><img loading="lazy" alt="19:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0120.jpg" /></p>
+<p><strong><code>[20:00]</code></strong> 科技狐　/　bili　/　它们还不如自己摸索</p>
+<p><img loading="lazy" alt="20:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0121.jpg" /></p>
+<p><strong><code>[20:10]</code></strong> bilibili　/　将来会5年之后就不这么做了</p>
+<p><img loading="lazy" alt="20:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0122.jpg" /></p>
+<p><strong><code>[20:20]</code></strong> libili　/　对对</p>
+<p><img loading="lazy" alt="20:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0123.jpg" /></p>
+<p><strong><code>[20:30]</code></strong> 我用人类语言沟通</p>
+<p><img loading="lazy" alt="20:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0124.jpg" /></p>
+<p><strong><code>[20:40]</code></strong> 科技狐</p>
+<p><img loading="lazy" alt="20:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0125.jpg" /></p>
+<p><strong><code>[20:50]</code></strong> 科技bubi　/　那我们今天观察</p>
+<p><img loading="lazy" alt="20:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0126.jpg" /></p>
+<p><strong><code>[21:00]</code></strong> 科技狐　/　就是我们说那个泡沫对</p>
+<p><img loading="lazy" alt="21:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0127.jpg" /></p>
+<p><strong><code>[21:10]</code></strong> 科技狐　/　历史规律看</p>
+<p><img loading="lazy" alt="21:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0128.jpg" /></p>
+<p><strong><code>[21:20]</code></strong> 科技狐#　/　结果预期过高造成了不能</p>
+<p><img loading="lazy" alt="21:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0129.jpg" /></p>
+<p><strong><code>[21:30]</code></strong> 科技狐　/　没等几个月就回来了对吧</p>
+<p><img loading="lazy" alt="21:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0130.jpg" /></p>
+<p><strong><code>[21:40]</code></strong> 科技狐l　/　泡沫不是之后一地鸡毛</p>
+<p><img loading="lazy" alt="21:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0131.jpg" /></p>
+<p><strong><code>[21:50]</code></strong> movgta　/　但是股市对企业影响会非常大</p>
+<p><img loading="lazy" alt="21:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0132.jpg" /></p>
+<p><strong><code>[22:00]</code></strong> bilibili　/　2029年就互联网当时也是</p>
+<p><img loading="lazy" alt="22:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0133.jpg" /></p>
+<p><strong><code>[22:10]</code></strong> 科技　/　ibii　/　这是2029年有一劫</p>
+<p><img loading="lazy" alt="22:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0134.jpg" /></p>
+<p><strong><code>[22:20]</code></strong> 技狐bilbi　/　我都怀疑韩国2029年国家都得破产</p>
+<p><img loading="lazy" alt="22:20" src="assets/BV17W8q6LED8_v2md/frames/kf_0135.jpg" /></p>
+<p><strong><code>[22:30]</code></strong> 科狐洲街　/　整体是向好的</p>
+<p><img loading="lazy" alt="22:30" src="assets/BV17W8q6LED8_v2md/frames/kf_0136.jpg" /></p>
+<p><strong><code>[22:40]</code></strong> 技狐　/　中国也会有一定的这个风险会更晚</p>
+<p><img loading="lazy" alt="22:40" src="assets/BV17W8q6LED8_v2md/frames/kf_0137.jpg" /></p>
+<p><strong><code>[22:50]</code></strong> 科技狐#市　/　所以中国的机器人产业2029年</p>
+<p><img loading="lazy" alt="22:50" src="assets/BV17W8q6LED8_v2md/frames/kf_0138.jpg" /></p>
+<p><strong><code>[23:00]</code></strong> 技狐ilil　/　耐心资本撑着</p>
+<p><img loading="lazy" alt="23:00" src="assets/BV17W8q6LED8_v2md/frames/kf_0139.jpg" /></p>
+<p><strong><code>[23:10]</code></strong> 科技　/　好嘞</p>
+<p><img loading="lazy" alt="23:10" src="assets/BV17W8q6LED8_v2md/frames/kf_0140.jpg" /></p>
+</details><footer>md2html · 2026-08-23</footer></main></body></html>
