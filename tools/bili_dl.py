@@ -84,16 +84,27 @@ def main():
 
     print(f"[1/4] 会话与元数据 ({bvid})")
     s = new_session(args.cookies)
-    info = api(s, "https://api.bilibili.com/x/web-interface/view", bvid=bvid)
-    pages = info["pages"]
+    # view 接口偶发被针对性限流(412)，回退到 pagelist（只给分P/cid，标题用 P1 分P名）
+    title = owner = None
+    try:
+        info = api(s, "https://api.bilibili.com/x/web-interface/view", bvid=bvid)
+        pages = info["pages"]
+        title, owner = info["title"], info["owner"]["name"]
+    except SystemExit:
+        raise
+    except Exception:
+        print("  ⚠ view 接口不可用(限流)，回退 pagelist")
+        pages = api(s, "https://api.bilibili.com/x/player/pagelist", bvid=bvid)
+        title, owner = pages[0]["part"], "?"
     if not 1 <= args.page <= len(pages):
         sys.exit(f"分 P 超范围：共 {len(pages)} P")
-    cid = pages[args.page - 1]["cid"]
-    print(f"  标题: {info['title']}")
-    print(f"  UP主: {info['owner']['name']} | 时长: {pages[args.page-1]['duration']}s | cid: {cid}")
+    pg = pages[args.page - 1]
+    cid = pg["cid"]
+    print(f"  标题: {title}")
+    print(f"  UP主: {owner} | 时长: {pg['duration']}s | cid: {cid} | 共 {len(pages)}P")
     # 写 sidecar 标题文件，供 video2md 自动用作文档标题与文件名后缀
     title_file = os.path.splitext(out)[0] + ".title.txt"
-    open(title_file, "w", encoding="utf-8").write(info["title"] + "\n")
+    open(title_file, "w", encoding="utf-8").write(title + "\n")
 
     print("[2/4] 取播放地址 (DASH)")
     play = api(s, "https://api.bilibili.com/x/player/playurl",
