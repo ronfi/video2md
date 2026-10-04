@@ -8,6 +8,40 @@ pip install -r requirements.txt
 ```
 > 注意用对 Python 环境：报 `ModuleNotFoundError` 通常是当前终端的 python/pip 不是安装时那个环境（如 conda env）。可用 `which python3` 确认，或直接 `python3 -m pip install -r requirements.txt`。
 
+## hot_radar.py — 选题雷达（抖音热榜 × B 站内容源）
+
+发现热点用抖音，拿内容用 B 站——分工来自实测的平台能力边界：
+
+| 平台 | 热榜 | 搜索 | 下载 | 定位 |
+|---|---|---|---|---|
+| 抖音 | ✅ | ❌ 签名墙(2483) | ❌ | 选题雷达：看大众在关注什么 |
+| B 站 | ✅ 全站榜/热门 | ✅ | ✅ | 内容源：搜到即可转写 |
+
+```bash
+python3 tools/hot_radar.py                       # 抖音热榜 + B站爆款，按仓库选题筛
+python3 tools/hot_radar.py --all                 # 不筛，全部列出
+python3 tools/hot_radar.py --topic "黄金|美联储|芯片"
+python3 tools/hot_radar.py --cross               # 抖音热词 → 自动去B站搜可转写候选
+python3 tools/hot_radar.py --search "华为 芯片"   # 直接按词搜B站
+python3 tools/hot_radar.py --cross -o radar.md   # 附带输出 Markdown 报告
+```
+
+| 参数 | 默认 | 说明 |
+|---|---|---|
+| `--topic` | 仓库选题正则 | 过滤关键词（AI/科技/财经） |
+| `--all` | 关 | 不过滤 |
+| `--douyin-only` / `--bili-only` | 关 | 只看单边 |
+| `--cross` | 关 | 热词跨平台换成 B 站候选 |
+| `--cross-top` | 5 | 最多为几个热词做跨平台搜索（控流） |
+| `--search` | — | 跳过热榜，直接按词搜 B 站 |
+| `-n, --limit` | 12 | 各榜展示条数 |
+| `-o, --out` | — | 输出 Markdown 报告 |
+
+命中的 BV 号直接接流水线：`bili_dl.py <BV号>` → `video2md.py ref/<BV号>.mp4 --auto-crop`。
+
+接口脾气（已在代码中处理）：B 站分区排行榜返回 -352、`order=pubdate` 易被限流，
+故只用全站榜 + 热门 + `order=click` 搜索，并在请求间加延时；任一接口失败会降级跳过而非中断。
+
 ## bili_dl.py — B 站视频下载（API 通道）
 
 绕开视频页 412 风控（数据中心 IP 常被拦、yt-dlp 因此失败），走 API 通道：
