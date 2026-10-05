@@ -1,0 +1,1005 @@
+<!DOCTYPE html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>逻辑折叠深度解析！华为Mate 90系列韬定律芯片有多强？</title><style>
+:root{
+  --bg:#F6F9F7; --surface:#FFFFFF; --ink:#1C2622; --dim:#5F6F67;
+  --accent:#0E9A68; --accent-soft:rgba(14,154,104,.14); --gold:#8A6400;
+  --gold-soft:rgba(255,200,61,.22); --line:#DCE5E0; --code-bg:#EEF3F0;
+  --card-shadow:0 1px 2px rgba(28,38,34,.05),0 8px 24px rgba(28,38,34,.06);
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#0C120F; --surface:#121A16; --ink:#E6EFEA; --dim:#8FA39A;
+  --accent:#39E6A8; --accent-soft:rgba(57,230,168,.13); --gold:#FFC83D;
+  --gold-soft:rgba(255,200,61,.14); --line:#233029; --code-bg:#18221D;
+  --card-shadow:0 1px 2px rgba(0,0,0,.4),0 8px 28px rgba(0,0,0,.35);
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:18px/1.9 "Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+  -webkit-font-smoothing:antialiased}
+main{max-width:1140px;margin:0 auto;padding:44px 40px 96px}
+@media(max-width:720px){main{padding:24px 18px 64px}body{font-size:16.5px}}
+
+/* —— 字体分工：标题黑体 / 元信息等宽 —— */
+h1,h2,h3,h4,.sans{font-family:"Noto Sans SC","Source Han Sans SC","PingFang SC",
+  -apple-system,"Segoe UI",sans-serif}
+.mono,code,pre,.meta,.eyebrow,.pill{font-family:"JetBrains Mono",Menlo,Consolas,
+  "Noto Sans Mono CJK SC",monospace}
+
+/* —— 眉标 + 返回 —— */
+.topbar{display:flex;align-items:center;gap:14px;margin-bottom:26px;flex-wrap:wrap}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--dim);
+  font-size:12.5px;letter-spacing:2.5px}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:8px;
+  background:var(--accent);box-shadow:0 0 8px var(--accent)}
+.back{margin-left:auto;font-size:13px;color:var(--accent);text-decoration:none;
+  border:1px solid var(--line);border-radius:999px;padding:5px 14px;
+  transition:border-color .15s,background .15s}
+.back:hover{border-color:var(--accent);background:var(--accent-soft)}
+
+/* —— 标题：签名进度线 —— */
+h1{font-size:clamp(27px,3.1vw,38px);font-weight:800;line-height:1.32;
+  letter-spacing:.5px;margin:.2em 0 .55em;position:relative;padding-bottom:20px}
+h1::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:3px;
+  border-radius:3px;background:linear-gradient(90deg,var(--accent) 0%,
+  var(--accent) 34%,var(--gold) 35%,var(--gold) 37%,var(--line) 38%)}
+h2{font-size:23px;font-weight:800;margin:2.2em 0 .8em;padding-left:16px;
+  position:relative;letter-spacing:.5px}
+h2::before{content:"";position:absolute;left:0;top:.18em;bottom:.18em;width:5px;
+  border-radius:5px;background:linear-gradient(var(--accent),var(--accent-soft))}
+h3{font-size:18.5px;font-weight:700;margin:1.7em 0 .5em;color:var(--ink)}
+h4{font-size:16.5px;margin:1.4em 0 .4em}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;
+  transition:border-color .15s}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,.back:focus-visible,summary:focus-visible{outline:2px solid var(--accent);
+  outline-offset:3px;border-radius:4px}
+strong{color:var(--ink);background:linear-gradient(transparent 62%,var(--gold-soft) 62%);
+  padding:0 1px}
+p{margin:.9em 0}
+ul,ol{padding-left:1.6em}li{margin:.32em 0}
+hr{border:none;border-top:1px solid var(--line);margin:2.4em 0}
+
+/* —— 文档头部 meta（首个引用块）—— */
+blockquote{margin:1.1em 0;padding:.35em 1.1em;border-left:4px solid var(--line);
+  color:var(--dim);background:var(--surface);border-radius:0 10px 10px 0}
+h1+blockquote{border-left-color:var(--accent);font-size:14px;
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:.3px}
+
+/* —— 代码 / 时间戳 —— */
+code{background:var(--code-bg);color:var(--accent);padding:.14em .45em;
+  border-radius:6px;font-size:.82em}
+pre{background:var(--code-bg);border:1px solid var(--line);padding:16px 18px;
+  border-radius:12px;overflow-x:auto;line-height:1.65}
+pre code{padding:0;background:none;color:var(--ink);font-size:.85em}
+
+/* —— 表格 —— */
+table{border-collapse:collapse;display:block;overflow-x:auto;margin:1.2em 0;
+  font-size:.92em;font-family:"Noto Sans SC","PingFang SC",sans-serif}
+th,td{border:1px solid var(--line);padding:8px 14px;text-align:left}
+th{background:var(--accent-soft);font-weight:700;letter-spacing:.5px;white-space:nowrap}
+tbody tr:nth-child(even){background:var(--surface)}
+
+/* —— 关键帧图 —— */
+img{max-width:100%;border:1px solid var(--line);border-radius:12px;
+  box-shadow:var(--card-shadow);margin:.4em 0}
+
+/* —— 附录折叠面板（终端面板风）—— */
+details{border:1px solid var(--line);border-radius:14px;background:var(--surface);
+  padding:0;margin:1.2em 0;overflow:hidden}
+details>*:not(summary){margin-left:20px;margin-right:20px}
+details>p:last-child,details>img:last-child{margin-bottom:18px}
+summary{cursor:pointer;font-weight:700;padding:14px 20px;letter-spacing:1px;
+  font-family:"Noto Sans SC",sans-serif;font-size:15px;color:var(--dim);
+  display:flex;align-items:center;gap:10px;user-select:none;
+  transition:color .15s,background .15s}
+summary::before{content:"";width:7px;height:7px;border-radius:7px;
+  background:var(--accent);flex:none}
+summary:hover{color:var(--ink);background:var(--accent-soft)}
+details[open]>summary{border-bottom:1px solid var(--line);color:var(--ink)}
+
+/* —— 索引页 —— */
+.idx-head{margin-bottom:8px}
+.en-sub{font-size:.48em;font-weight:600;color:var(--dim);letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;vertical-align:middle;margin-left:10px}
+.idx-meta{color:var(--dim);font-size:13px;margin:0 0 34px}
+.group{margin:34px 0 10px;display:flex;align-items:baseline;gap:12px}
+.group .g-name{font-weight:800;font-size:15px;letter-spacing:2px;
+  font-family:"JetBrains Mono",Menlo,monospace;color:var(--dim)}
+.group::after{content:"";flex:1;height:1px;background:var(--line)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px}
+.card{position:relative;display:block;background:var(--surface);
+  border:1px solid var(--line);border-radius:14px;padding:18px 20px 15px;
+  text-decoration:none;color:var(--ink);box-shadow:var(--card-shadow);
+  transition:transform .16s,border-color .16s;border-bottom:none}
+.card:hover{transform:translateY(-2px);border-color:var(--accent)}
+.card .no{position:absolute;top:16px;right:18px;font-size:11.5px;color:var(--accent);
+  font-family:"JetBrains Mono",Menlo,monospace;letter-spacing:1px;opacity:.85}
+.card h3{margin:0 42px .5em 0;font-size:16.5px;line-height:1.5;font-weight:700}
+.card .meta{color:var(--dim);font-size:12px;letter-spacing:.3px;margin:0;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(prefers-reduced-motion:no-preference){
+  .card{animation:rise .4s cubic-bezier(.2,.7,.3,1) backwards}
+  .cards .card:nth-child(2){animation-delay:.04s}.cards .card:nth-child(3){animation-delay:.08s}
+  .cards .card:nth-child(4){animation-delay:.12s}.cards .card:nth-child(5){animation-delay:.16s}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}}
+}
+footer{margin-top:64px;color:var(--dim);font-size:12px;letter-spacing:1px;
+  font-family:"JetBrains Mono",Menlo,monospace;display:flex;gap:10px;align-items:center}
+footer::before{content:"";width:26px;height:2px;background:var(--accent);border-radius:2px}
+</style></head><body><main><div class="topbar"><span class="eyebrow">REF · 视频文档 VIDEO DOCS</span><a class="back" href="index.html">← 返回索引 · Index</a></div><h1 id="mate-90">逻辑折叠深度解析！华为Mate 90系列韬定律芯片有多强？</h1>
+<blockquote>
+<p>时长 16:58 · 分辨率 852x480 · 生成于 2026-10-05　|　来源 <code>ref/BV1heam6TExz.mp4</code> · <a href="https://www.bilibili.com/video/BV1heam6TExz">视频链接</a></p>
+</blockquote>
+<h2 id="_1">概述</h2>
+<p>本期内容围绕华为新一代直板旗舰 <strong>Mate 90 Pro Max</strong> 及其搭载的 <strong>麒麟9050 Pro</strong> 芯片展开。麒麟9050 Pro 是首颗基于<strong>逻辑折叠技术</strong>打造的芯片，本文将通过芯片拆解与3D结构重建，详细解析逻辑折叠的实现原理，并实测 Mate 90 Pro Max 的游戏性能、续航表现及NPU能力。</p>
+<h2 id="mate-90_1">Mate 90 家族概览</h2>
+<p>华为本次发布了整个 Mate 90 家族，包含三款机型：</p>
+<table>
+<thead>
+<tr>
+<th>机型</th>
+<th>搭载芯片</th>
+<th>性能提升（对比前代）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mate 90</td>
+<td>麒麟9030</td>
+<td>整机性能提升 27%（对比 Mate 80）</td>
+</tr>
+<tr>
+<td>Mate 90 Pro</td>
+<td>麒麟9035</td>
+<td>提升 20%（对比 Mate 80 Pro）</td>
+</tr>
+<tr>
+<td>Mate 90 Pro Max</td>
+<td>麒麟9050 Pro</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="9030-9035">麒麟9030 与 麒麟9035</h3>
+<ul>
+<li><strong>麒麟9030</strong>：即 Mate 80 Pro 上的同款芯片，8核12线程，相较于9030 Pro砍掉一颗CPU大核和一颗GPU。</li>
+<li><strong>麒麟9035</strong>：相当于9030 Pro，CPU、GPU规格完全相同，仅分支频率做了调整。</li>
+<li>两者均遵循<strong>韬定律</strong>，但<strong>并未采用逻辑折叠</strong>，CPU核心架构与9050 Pro相同，可享受鸿蒙软硬协同加成。</li>
+</ul>
+<h2 id="9050-pro">麒麟9050 Pro 芯片规格</h2>
+<ul>
+<li><strong>CPU</strong>：9核16线程，1+2+4+2 核心配置</li>
+<li><strong>GPU</strong>：马良995，迎来大更新</li>
+<li><strong>制程</strong>：主Die工艺比副Die更先进</li>
+<li><strong>内存</strong>：最高 4×24bit LPDDR5 10667MT/s</li>
+</ul>
+<h2 id="_2">逻辑折叠结构解析</h2>
+<h3 id="_3">整体封装</h3>
+<p>麒麟9050 Pro 乍看与9030 Pro区别不大，仍为 <strong>PoP封装</strong>（内存叠在SOC上面）。但切开SOC截面放大后可发现：</p>
+<ul>
+<li>传统芯片：从基板开始，金属层逐层向上，最顶上埋逻辑电路。</li>
+<li>麒麟9050 Pro：由<strong>上下两大块</strong>组成，上下两块相向排布，中间使用<strong>铜-铜混合键合</strong>技术将金属层粘在一起。整个结构被夹在两层厚厚的硅基之间，不直接接触封装基板。</li>
+</ul>
+<h3 id="diedie">主Die与副Die</h3>
+<ul>
+<li><strong>主Die</strong>（上层）：逻辑电路所在，工艺制程更先进。</li>
+<li><strong>副Die</strong>（下层）：逻辑电路所在。</li>
+<li>两片Die的逻辑电路之间通过上下两叠金属层加铜-铜键合进行通信。</li>
+</ul>
+<h3 id="tsv">硅穿孔（TSV）技术</h3>
+<p>由于上下两层芯片被夹在两层硅之间，基板无法直接供电通信，因此引入 <strong>TSV（硅穿孔）技术</strong>：</p>
+<ul>
+<li>TSV导电通路穿过底下硅层，再穿过下面逻辑电路区域，一路灌穿连接到靠近铜-铜键合的金属层。</li>
+<li>海思总共在芯片和基板之间打了约 <strong>8万个TSV</strong>。</li>
+<li>下层Die被大量TSV打穿，周围设置禁布区，约占其 <strong>8%的可用面积</strong>，属于必要牺牲。</li>
+</ul>
+<h3 id="_4">逻辑电路排布策略</h3>
+<p>逻辑折叠并非简单地上层放CPU、下层放GPU，而是精细分割：</p>
+<ul>
+<li><strong>超大核</strong>：大部分执行单元（整数、浮点、Load/Store单元）放在主Die；L1、L2缓存放在副Die。</li>
+<li>缓存正好盖在Load/Store正下方，通过铜-铜键合直连，<strong>走线缩短</strong>，降低延迟，同频下实现更低电压和功耗。</li>
+<li>整体策略：将缓存、IO接口、PLL等热密度低、对工艺不敏感的部分移到副Die；密度和能效要求高、发热大的运算部分安排在主Die。</li>
+</ul>
+<h3 id="_5">集成度提升</h3>
+<ul>
+<li>上下两片Die每片仅 <strong>120多平方毫米</strong>，叠起来占用空间比前代140多平方毫米还小。</li>
+<li>两片Die合计 <strong>240多平方毫米</strong>，裸片总面积增大 <strong>70%</strong>。</li>
+<li>副Die面积被TSV占掉一小部分，但有限占地内可安排的电路大幅增加。</li>
+<li>在制程未迭代的情况下实现了进步。</li>
+</ul>
+<h3 id="_6">成本与定位</h3>
+<p>逻辑折叠初期主要用在旗舰产品上，现阶段成本相当高，需要不停迭代摸索以提高良率、降低成本。华为将<strong>韬定律</strong>和逻辑折叠定义为包含关系——未来海思芯片可能都以韬定律为指导方针，但短期内并非所有芯片都会采用逻辑折叠。</p>
+<h2 id="mate-90-pro-max">Mate 90 Pro Max 性能实测</h2>
+<h3 id="_7">能效回顾</h3>
+<ul>
+<li>CPU超大核和大核均有一定能效进步，多核能效凭借多出的两颗性能大核提升不小，已达天玑9400水平。</li>
+<li>GPU大幅迭代，性能强了不少。</li>
+<li>CPU多核与GPU能效均已打赢谷歌基于台积电N3P的新旗舰 <strong>Tensor G6</strong>。</li>
+</ul>
+<h3 id="_8">游戏表现</h3>
+<p>测试条件：高性能模式、关闭插针、25°C室温、300尼特亮度、WiFi。</p>
+<h4 id="70890p">原神（7.0版本，890P分辨率）</h4>
+<table>
+<thead>
+<tr>
+<th>机型</th>
+<th>分辨率</th>
+<th>平均帧/1%Low帧</th>
+<th>整机平均功耗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华为Mate 90 Pro Max</td>
+<td>1920×890</td>
+<td>59.2 / 42.1</td>
+<td><strong>4.2W</strong></td>
+</tr>
+<tr>
+<td>华为Mate 80 Pro Max</td>
+<td>1730×804</td>
+<td>59.9 / 42.0</td>
+<td>5.5W</td>
+</tr>
+<tr>
+<td>iPhone 17 Pro Max（A19 Pro）</td>
+<td>1920×884</td>
+<td>59.1 / —</td>
+<td>3.9W</td>
+</tr>
+<tr>
+<td>骁龙8 Elite Gen 6 机型</td>
+<td>1920×884</td>
+<td>59.9 / —</td>
+<td>4.2W</td>
+</tr>
+<tr>
+<td>骁龙8 Elite Gen 5 机型</td>
+<td>1920×873</td>
+<td>59.9 / 49.5</td>
+<td>4.6W</td>
+</tr>
+<tr>
+<td>天玑9500 机型</td>
+<td>—</td>
+<td>59.1 / —</td>
+<td>4.8W</td>
+</tr>
+</tbody>
+</table>
+<p>Mate 90 Pro Max 仅需 <strong>4.2W</strong> 整机功耗即可实现原神满帧，优于部分A19机型，与骁龙8 Elite Gen 6、A19 Pro差距不大。</p>
+<h4 id="30648p">鸣潮（玄方城摩托跑图30分钟，648P分辨率）</h4>
+<table>
+<thead>
+<tr>
+<th>机型</th>
+<th>分辨率</th>
+<th>平均帧/1%Low帧</th>
+<th>整机平均功耗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华为Mate 90 Pro Max</td>
+<td>1400×648</td>
+<td>50.0 / 17.8</td>
+<td><strong>6.3W</strong></td>
+</tr>
+<tr>
+<td>华为Mate 80 Pro Max</td>
+<td>1400×648</td>
+<td>43.1 / 16.7</td>
+<td>7.0W</td>
+</tr>
+<tr>
+<td>iPhone 17 Pro Max</td>
+<td>1339×616</td>
+<td>50.3 / —</td>
+<td>5.6W</td>
+</tr>
+<tr>
+<td>骁龙8 Elite 机型</td>
+<td>1428×644</td>
+<td>56.9 / 24.7</td>
+<td>6.0W</td>
+</tr>
+</tbody>
+</table>
+<p>帧率大幅提升的同时功耗大幅下降，性能表现优于天玑9500机型。</p>
+<h4 id="720p">异环（雨天开车跑图，720P）</h4>
+<table>
+<thead>
+<tr>
+<th>机型</th>
+<th>分辨率</th>
+<th>平均帧/1%Low帧</th>
+<th>整机平均功耗</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>华为Mate 90 Pro Max</td>
+<td>1552×720</td>
+<td>53.0 / 19.4</td>
+<td><strong>6.8W</strong></td>
+</tr>
+<tr>
+<td>华为Mate 80 Pro Max</td>
+<td>1552×720</td>
+<td>42.0 / 19.2</td>
+<td>6.4W</td>
+</tr>
+<tr>
+<td>iPhone 17 Pro Max</td>
+<td>1721×792</td>
+<td>53.7 / —</td>
+<td>5.4W</td>
+</tr>
+<tr>
+<td>骁龙8 Elite Gen 5 机型</td>
+<td>1736×792</td>
+<td>52.6 / 17.9</td>
+<td>6.7W</td>
+</tr>
+</tbody>
+</table>
+<p>帧率高出整整10帧，53帧6.8W的能效表现几乎打平安卓阵营天玑9500和骁龙8 Elite机型。</p>
+<blockquote>
+<p><strong>注意</strong>：以上出色表现前提是鸿蒙原生游戏。非原生游戏（如通过卓易通转移的明日方舟终末地）可流畅运行，但能效不如原生游戏突出。</p>
+</blockquote>
+<h3 id="_9">图形技术</h3>
+<ul>
+<li><strong>AI超分算法</strong>：借助NPU和GPU协同实现超分，已有多款游戏支持，效果显著更清晰。</li>
+<li><strong>硬件光追</strong>：Mate 90系列进一步增强光追能力，更多游戏支持（如鸿蒙版鸣潮开启光追效果明显）。</li>
+<li><strong>智能HDR</strong>：游戏内自适应拓展动态范围增强画质，即使游戏本身不支持HDR。</li>
+</ul>
+<h3 id="_10">续航表现</h3>
+<ul>
+<li>电池容量：<strong>6800mAh</strong>（比前代又有提升）</li>
+<li>极客湾5G续航5.0模型实测：<strong>9小时56分钟</strong>，比Mate 80 Pro Max长出超过1.5小时。</li>
+<li>接近10小时的续航，中度日常使用足够撑一整天，与一众大电池安卓机差距不大。</li>
+<li>鸿蒙软硬芯云协同优化效果显著。</li>
+</ul>
+<h2 id="npu">NPU 能力</h2>
+<h3 id="_11">规模</h3>
+<ul>
+<li>主Die上的NPU面积已比9030 Pro整个NPU都大。</li>
+<li>NPU上下两片总面积比前代大 <strong>150%</strong>。</li>
+<li>主Die NPU面积 <strong>10.7mm²</strong>，总面积 <strong>21.5mm²</strong>，面积增加 <strong>25%</strong>。</li>
+</ul>
+<h3 id="_12">性能</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>9030 Pro</th>
+<th>麒麟9050 Pro</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NPU INT8吞吐量</td>
+<td>27.0 TOPS</td>
+<td><strong>67.7 TOPS</strong></td>
+</tr>
+<tr>
+<td>3B模型Prefill测试</td>
+<td>1039 tokens/s</td>
+<td><strong>3794 tokens/s</strong></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Int8吞吐量达 <strong>68 TOPS</strong>。</li>
+<li>跑3B模型时，与NPU算力相关的Prefill部分相比9030 Pro提升 <strong>3倍</strong>。</li>
+</ul>
+<h3 id="_13">应用场景</h3>
+<ul>
+<li>支持 <strong>30B端侧MOE大模型</strong>（30B A2B）。</li>
+<li>离线状态下与小艺对话，整理相册图片（如旅游照片分类）。</li>
+<li>修图时调用MOE模型进行图像分析，给出修图建议（去路人、加虚化等），本地调用6B多模态完成AI修图，效果不输云侧模型。</li>
+<li>未来可拓展更好用的本地Agent。</li>
+</ul>
+<h2 id="_14">总结</h2>
+<p>麒麟9050 Pro 通过逻辑折叠技术，在制程未迭代的情况下实现了芯片集成度的大幅提升（裸片总面积增大70%），同时降低了延迟和功耗。Mate 90 Pro Max 在实际测试中展现了出色的游戏能效和续航表现，NPU规模与算力更是大幅跃升。芯片设计突破极限，终端软硬协同，这一代华为旗舰带来了远超参数的体验。</p>
+<h2 id="_15">关键术语</h2>
+<ul>
+<li><strong>逻辑折叠</strong>：将芯片分为上下两片Die相向堆叠，通过铜-铜混合键合连接，缓存与运算单元面对面直连的技术。</li>
+<li><strong>铜-铜混合键合（Cu-Cu Hybrid Bonding）</strong>：将上下两块金属层直接粘合的技术。</li>
+<li><strong>TSV（硅穿孔）</strong>：穿透硅层提供上下层Die导电路径的技术。</li>
+<li><strong>PoP封装</strong>：Package on Package，将内存叠在SOC上面的封装方式。</li>
+<li><strong>韬定律</strong>：以时间替代几何缩微为核心，涵盖器件-电路-芯片-系统四层协同优化体系，逻辑折叠是其电路层级的高阶可选技术。</li>
+<li><strong>主Die / 副Die</strong>：逻辑折叠结构中上层（主）和下层（副）两片裸片。</li>
+<li><strong>MOE大模型</strong>：混合专家模型，此处指30B A2B端侧模型。</li>
+<li><strong>Prefill</strong>：大模型推理中处理输入提示词阶段的算力消耗部分。</li>
+</ul>
+<hr />
+<h2 id="_16">附录：原始提取素材</h2>
+<details>
+<summary>语音全文转写（带时间戳）</summary>
+<ul>
+<li><code>[00:00–00:07]</code> 我手边的这台就是华为新一代的直板旗舰手机Mate 90 Pro Max啦</li>
+<li><code>[00:07–00:15]</code> 它所搭载的是首颗基于逻辑折叠技术打造的芯片麒麟9050 Pro</li>
+<li><code>[00:15–00:20]</code> 其实我们之前就已经很详细地测过了麒麟9050 Pro的能效了</li>
+<li><code>[00:20–00:23]</code> 还没有看过那期视频的同学可以先去回顾一下</li>
+<li><code>[00:23–00:26]</code> 但是我觉得光是测个能效</li>
+<li><code>[00:26–00:30]</code> 是不是还没有办法满足大家的好奇心呢?</li>
+<li><code>[00:30–00:32]</code> 这逻辑折叠的芯片</li>
+<li><code>[00:32–00:36]</code> 它内部到底长啥样啊?</li>
+<li><code>[00:36–00:38]</code> 怎么给它折起来的呢?</li>
+<li><code>[00:38–00:39]</code> 怎么工作的呢?</li>
+<li><code>[00:39–00:44]</code> 我们今天这期视频就要借着Mate 90全家桶推出的机会</li>
+<li><code>[00:44–00:47]</code> 深入9050 Pro芯片的内部</li>
+<li><code>[00:47–00:53]</code> 给大家好好来看一下逻辑折叠到底是如何实现的</li>
+<li><code>[00:53–00:56]</code> 更是要深入测试一下Mate 90 Pro Max</li>
+<li><code>[00:56–00:59]</code> 性能如何、续航又如何</li>
+<li><code>[00:59–01:04]</code> 这么劲爆的节目是不是得先给我们点赞、收藏、评论</li>
+<li><code>[01:04–01:05]</code> 支持一下废话不多说</li>
+<li><code>[01:05–01:07]</code> 一起来看看吧</li>
+<li><code>[01:07–01:11]</code> 这次华为发布的是整个Mate 90家族</li>
+<li><code>[01:11–01:14]</code> 包括搭载了9030的Mate 90</li>
+<li><code>[01:14–01:17]</code> 搭载了麒麟9035的Mate 90 Pro</li>
+<li><code>[01:17–01:22]</code> 以及搭载了麒麟9050 Pro的Mate 90 Pro Max</li>
+<li><code>[01:22–01:24]</code> 虽然今天主要聊的是9050 Pro</li>
+<li><code>[01:24–01:28]</code> 但我还是简单的聊一下另外两位</li>
+<li><code>[01:28–01:33]</code> 同属于旗舰芯片家族的9030和9035</li>
+<li><code>[01:33–01:36]</code> 9030就是Mate 80 Pro上的9030</li>
+<li><code>[01:36–01:39]</code> 8核12线程相较于9030 Pro</li>
+<li><code>[01:39–01:42]</code> 是砍了一颗CPU大核再砍一颗GPU</li>
+<li><code>[01:42–01:45]</code> Mate 90比其他上一代的Mate 80</li>
+<li><code>[01:45–01:47]</code> 整机性能提升了27%</li>
+<li><code>[01:47–01:51]</code> 而这次新出的9035又是什么芯片呢?</li>
+<li><code>[01:51–01:54]</code> 它其实就相当于9030 Pro</li>
+<li><code>[01:54–01:57]</code> 至少CPU、GPU的规格都是完全相同的</li>
+<li><code>[01:57–01:59]</code> 仅仅是分支频率做了调整</li>
+<li><code>[01:59–02:03]</code> Mate 90 Pro和它的前代Mate 80 Pro比起来</li>
+<li><code>[02:03–02:05]</code> 也是提升了20%</li>
+<li><code>[02:05–02:07]</code> 当然它们用的CPU核心架构</li>
+<li><code>[02:07–02:09]</code> 还是和9050 Pro是相同的</li>
+<li><code>[02:09–02:11]</code> 实际应用里也能吃到</li>
+<li><code>[02:11–02:13]</code> 鸿蒙软硬协同带来的这种加成</li>
+<li><code>[02:13–02:15]</code> 这两位虽然都遵循了韬定律</li>
+<li><code>[02:15–02:18]</code> 但并没有用上逻辑折叠</li>
+<li><code>[02:18–02:21]</code> 如果我们想要探寻逻辑折叠的奥秘</li>
+<li><code>[02:21–02:22]</code> 我们还是得来看一下</li>
+<li><code>[02:22–02:26]</code> 最旗舰定位的麒麟9050 Pro</li>
+<li><code>[02:26–02:28]</code> 上期节目我们已经介绍了</li>
+<li><code>[02:28–02:31]</code> 这是一颗9核16线程的CPU</li>
+<li><code>[02:31–02:34]</code> 1加2加4加2的核心配置</li>
+<li><code>[02:34–02:37]</code> 而它的GPU也是迎来了大更新</li>
+<li><code>[02:37–02:40]</code> 不过最重要的当然还是逻辑折叠的应用</li>
+<li><code>[02:40–02:43]</code> 为了看清楚这颗芯片内部的奥秘</li>
+<li><code>[02:43–02:45]</code> 我们这次是真的找实验室</li>
+<li><code>[02:45–02:46]</code> 把芯片切开来</li>
+<li><code>[02:46–02:48]</code> 好好观察了一番</li>
+<li><code>[02:48–02:49]</code> 然后在3D空间里</li>
+<li><code>[02:49–02:54]</code> 原汁原味的帮大家重建出了9050 Pro的结构</li>
+<li><code>[02:54–02:59]</code> 这个就是麒麟9050 Pro的芯片本体了</li>
+<li><code>[02:59–03:01]</code> 其实乍一看过去</li>
+<li><code>[03:01–03:05]</code> 它长的好像和之前的9030 Pro也没太大区别</li>
+<li><code>[03:05–03:07]</code> 还是PoP封装</li>
+<li><code>[03:07–03:09]</code> 把内存叠在SOC上面</li>
+<li><code>[03:09–03:12]</code> 但是当我们扣掉内存</li>
+<li><code>[03:12–03:14]</code> 再把芯片切开来</li>
+<li><code>[03:14–03:18]</code> 对着底下这块SOC的截面放大</li>
+<li><code>[03:18–03:19]</code> 放大</li>
+<li><code>[03:19–03:21]</code> 再放大</li>
+<li><code>[03:21–03:21]</code> 诶</li>
+<li><code>[03:21–03:25]</code> 这下看起来是不是好像有点不一样了呢</li>
+<li><code>[03:25–03:27]</code> 正常来说芯片</li>
+<li><code>[03:27–03:29]</code> 应该就是从基板开始</li>
+<li><code>[03:29–03:32]</code> 从上往下一层层的金属层</li>
+<li><code>[03:32–03:35]</code> 最顶上埋了一片逻辑电路</li>
+<li><code>[03:35–03:40]</code> 而麒麟9050 Pro是由上下两大块组成的</li>
+<li><code>[03:40–03:42]</code> 上面一层层的金属层</li>
+<li><code>[03:42–03:44]</code> 顶上贴着逻辑电路</li>
+<li><code>[03:44–03:47]</code> 下面也有一层层的金属层</li>
+<li><code>[03:47–03:49]</code> 底下也贴着逻辑电路</li>
+<li><code>[03:49–03:52]</code> 上下两块相向排布</li>
+<li><code>[03:52–03:54]</code> 中间使用了一种叫做</li>
+<li><code>[03:54–03:56]</code> 铜铜混合键合的技术</li>
+<li><code>[03:56–03:59]</code> 把上下两块的金属层粘在一起</li>
+<li><code>[03:59–04:02]</code> 而整个上下两块的芯片汉堡</li>
+<li><code>[04:02–04:06]</code> 又被夹在了两层厚厚的硅基</li>
+<li><code>[04:06–04:08]</code> 并不直接接触封装基板</li>
+<li><code>[04:08–04:08]</code> 嗯</li>
+<li><code>[04:08–04:11]</code> 感觉初见端倪了是吧</li>
+<li><code>[04:11–04:11]</code> 没错</li>
+<li><code>[04:11–04:15]</code> 上面这一整片就是麒麟9050 Pro的主Die</li>
+<li><code>[04:15–04:18]</code> 这层就是主Die的逻辑电路</li>
+<li><code>[04:18–04:21]</code> 而下面这一片是它的副Die</li>
+<li><code>[04:21–04:24]</code> 这一层是副Die的逻辑电路</li>
+<li><code>[04:24–04:27]</code> 主Die的工艺制程要比副Die用的更先进一点</li>
+<li><code>[04:27–04:29]</code> 这两片Die的逻辑电路之间</li>
+<li><code>[04:29–04:34]</code> 就通过这上下两叠金属层加上铜铜键合来通信</li>
+<li><code>[04:34–04:36]</code> 但是有一个大问题</li>
+<li><code>[04:36–04:37]</code> 不知道你有没有发觉</li>
+<li><code>[04:37–04:38]</code> 正常的芯片</li>
+<li><code>[04:38–04:41]</code> 基板上面直接就是金属层连着芯片</li>
+<li><code>[04:41–04:43]</code> 很容易就能导电通信</li>
+<li><code>[04:43–04:47]</code> 而这麒麟9050 Pro为了做逻辑折叠的结构</li>
+<li><code>[04:47–04:50]</code> 它把上下两层芯片夹在了两层硅之间</li>
+<li><code>[04:50–04:51]</code> 这下</li>
+<li><code>[04:51–04:55]</code> 基板要怎么才能同时给上下两层芯片供电和通信呢</li>
+<li><code>[04:55–04:59]</code> 这就得有请一位好朋友TSV了</li>
+<li><code>[04:59–05:01]</code> 也就是硅穿孔技术</li>
+<li><code>[05:01–05:06]</code> 借助TSV导电通路先是穿过底下的硅层</li>
+<li><code>[05:06–05:10]</code> 然后再穿过下面的逻辑电路的区域</li>
+<li><code>[05:10–05:14]</code> 一路灌穿连接到靠近铜铜键合的金属层上</li>
+<li><code>[05:14–05:18]</code> 这样就可以给上下两层Die提供更直接的导电路径</li>
+<li><code>[05:18–05:23]</code> 实际上为了满足上下两层Die复杂的供电和通信需求</li>
+<li><code>[05:23–05:24]</code> 我们统计下来</li>
+<li><code>[05:24–05:28]</code> 海思总共在芯片和基板之间打了大约8万个TSV</li>
+<li><code>[05:28–05:31]</code> 而这些TSV也是要占空间的</li>
+<li><code>[05:31–05:34]</code> 下层Die被大量的TSV打穿</li>
+<li><code>[05:34–05:35]</code> 还得给布局留出位置</li>
+<li><code>[05:35–05:37]</code> 周围还设置了禁布区</li>
+<li><code>[05:37–05:38]</code> 放不了器件</li>
+<li><code>[05:38–05:41]</code> 这其实会占到它大概8%的可用面积</li>
+<li><code>[05:41–05:43]</code> 算是一种必要的牺牲</li>
+<li><code>[05:43–05:43]</code> 嗯</li>
+<li><code>[05:43–05:48]</code> 这整个结构看下来是不是还挺精妙绝伦的呢</li>
+<li><code>[05:48–05:50]</code> 但光看这个界面</li>
+<li><code>[05:50–05:53]</code> 你还看不出逻辑折叠真正最牛逼的地方</li>
+<li><code>[05:53–05:56]</code> 我们现在就翻开上下这两片带</li>
+<li><code>[05:56–05:57]</code> 来给大家看一下</li>
+<li><code>[05:57–06:02]</code> 这麒麟9050 Pro的两片逻辑电路是什么样子</li>
+<li><code>[06:02–06:05]</code> 这个就是它俩的真身了</li>
+<li><code>[06:05–06:05]</code> 诶</li>
+<li><code>[06:05–06:07]</code> 你有没有发现</li>
+<li><code>[06:07–06:08]</code> 这逻辑折叠</li>
+<li><code>[06:08–06:11]</code> 可并不只是上面放CPU</li>
+<li><code>[06:11–06:14]</code> 下面放GPU那么简单粗暴</li>
+<li><code>[06:14–06:16]</code> 你就看看它CPU部分</li>
+<li><code>[06:16–06:20]</code> 任意一个核心都被分割成了上下两块</li>
+<li><code>[06:20–06:22]</code> 比如我们来看超大核</li>
+<li><code>[06:22–06:24]</code> 它的大部分执行单元</li>
+<li><code>[06:24–06:27]</code> 包括整数、浮点、Load/Store单元</li>
+<li><code>[06:27–06:29]</code> 都被放在了主带上</li>
+<li><code>[06:29–06:34]</code> 而L1、L2缓存都被放在了附带上面</li>
+<li><code>[06:34–06:35]</code> 那逻辑折叠</li>
+<li><code>[06:35–06:35]</code> 诶</li>
+<li><code>[06:35–06:36]</code> 你就会发现</li>
+<li><code>[06:36–06:41]</code> 它的缓存就正好盖在了Load/Store那块的正下方</li>
+<li><code>[06:41–06:45]</code> 这Load/Store恰恰是需要频繁访问缓存的</li>
+<li><code>[06:45–06:47]</code> 如果按照以往平铺的设计</li>
+<li><code>[06:47–06:49]</code> 怕是要绕不少的距离</li>
+<li><code>[06:49–06:53]</code> 现在Load/Store和缓存两块是面对面的贴起来</li>
+<li><code>[06:53–06:55]</code> 通过密密麻麻的金属层铜铜键合</li>
+<li><code>[06:55–06:57]</code> 直连在一起</li>
+<li><code>[06:57–06:58]</code> 这不就超近道了吗</li>
+<li><code>[06:58–07:00]</code> 走线就这么缩短了</li>
+<li><code>[07:00–07:01]</code> 不仅降低了延迟</li>
+<li><code>[07:01–07:04]</code> 更是能够在同屏下实现更低的电压</li>
+<li><code>[07:04–07:06]</code> 功耗也就随之降低了</li>
+<li><code>[07:06–07:08]</code> 是不是还相当巧妙呢</li>
+<li><code>[07:08–07:12]</code> 我们纵观整个麒麟9050 Pro上的各种IP</li>
+<li><code>[07:12–07:14]</code> 几乎都是采用了类似的排布策略</li>
+<li><code>[07:14–07:19]</code> 把缓存、IO接口、PLL这种热密度比较低</li>
+<li><code>[07:19–07:23]</code> 对于工艺不太敏感的部分都移到了附带上</li>
+<li><code>[07:23–07:25]</code> 而密度和能效要求更高</li>
+<li><code>[07:25–07:29]</code> 发热也更大的运算部分都安排在了主带上</li>
+<li><code>[07:29–07:29]</code> 哇</li>
+<li><code>[07:29–07:30]</code> 这样设计的芯片</li>
+<li><code>[07:30–07:32]</code> 我是真的第一次见到</li>
+<li><code>[07:32–07:36]</code> 感觉这简直可以用巧夺天工来形容</li>
+<li><code>[07:36–07:36]</code> 当然了</li>
+<li><code>[07:36–07:39]</code> 逻辑折叠除了降功耗、降延迟之外</li>
+<li><code>[07:39–07:43]</code> 最大意义还是在于提高芯片的集成度</li>
+<li><code>[07:43–07:48]</code> 麒麟9050 Pro上下两片Die每片都只有120多平方毫米</li>
+<li><code>[07:48–07:51]</code> 叠起来还是占这么小点空间</li>
+<li><code>[07:51–07:54]</code> 比前代140多平方毫米的尺寸还小了不少</li>
+<li><code>[07:54–07:59]</code> 但这两片Die加起来可是有240多平方毫米</li>
+<li><code>[07:59–08:02]</code> 裸片总面积是增大了70%</li>
+<li><code>[08:02–08:05]</code> 虽然副Die的面积得被TSV占掉一小部分</li>
+<li><code>[08:05–08:07]</code> 但是在有限的占地里</li>
+<li><code>[08:07–08:11]</code> 能够安排的电路依然是多了太多</li>
+<li><code>[08:11–08:13]</code> 这可是在用不上先进工艺</li>
+<li><code>[08:13–08:16]</code> 制程没迭代的情况下实现了进步</li>
+<li><code>[08:16–08:20]</code> 正所谓山重水复疑无路，柳暗花明又一村</li>
+<li><code>[08:20–08:24]</code> 你别说还真给海思找到这么一条新的发展路线了</li>
+<li><code>[08:24–08:26]</code> 你说有这么好的半导体技术</li>
+<li><code>[08:26–08:30]</code> 是不是以后所有的华为产品都能受益了呢</li>
+<li><code>[08:30–08:31]</code> 其实我个人觉得</li>
+<li><code>[08:31–08:35]</code> 逻辑折叠在初期应该是主要用在旗舰产品上的</li>
+<li><code>[08:35–08:39]</code> 毕竟聊芯片撇不开的一个话题就是成本</li>
+<li><code>[08:39–08:43]</code> 现阶段显然是一种成本相当高的技术</li>
+<li><code>[08:43–08:45]</code> 还需要不停的迭代摸索</li>
+<li><code>[08:45–08:47]</code> 才能继续提高良率降低成本</li>
+<li><code>[08:47–08:52]</code> 所以华为才会把韬定律和逻辑折叠定义为包含关系</li>
+<li><code>[08:52–08:56]</code> 可能未来海思的芯片都会以韬定律为指导方针</li>
+<li><code>[08:56–09:00]</code> 但至少短期内不是所有的芯片都会做成逻辑折叠了</li>
+<li><code>[09:00–09:03]</code> 我们就好好期待一下这项神奇的技术</li>
+<li><code>[09:03–09:05]</code> 未来能够走的多远</li>
+<li><code>[09:05–09:07]</code> 逻辑折叠我们聊完之后</li>
+<li><code>[09:07–09:09]</code> 是不是感觉大开眼界</li>
+<li><code>[09:09–09:11]</code> 不后悔点开视频吧</li>
+<li><code>[09:11–09:12]</code> 都看到这了</li>
+<li><code>[09:12–09:14]</code> 就顺手给我们点个赞</li>
+<li><code>[09:14–09:15]</code> 对吧</li>
+<li><code>[09:15–09:16]</code> 再给我们加个收藏</li>
+<li><code>[09:16–09:17]</code> 对吧</li>
+<li><code>[09:17–09:18]</code> 关注一下</li>
+<li><code>[09:18–09:20]</code> 我们接下来再来好好看一下</li>
+<li><code>[09:20–09:24]</code> 麒麟9050 Pro在华为新推出的直板旗舰</li>
+<li><code>[09:24–09:28]</code> Mate90 Pro Max上它到底表现的怎么样</li>
+<li><code>[09:28–09:29]</code> 这颗芯片的能效</li>
+<li><code>[09:29–09:32]</code> 我们在上期视频里已经详细的测过了</li>
+<li><code>[09:32–09:34]</code> 这里再简单的回顾一下</li>
+<li><code>[09:34–09:38]</code> 它的CPU超大核跟大核都有一定能效上的进步</li>
+<li><code>[09:38–09:42]</code> 而多核能效凭借着多出来的两颗性能大核提升不小</li>
+<li><code>[09:42–09:44]</code> 已经达到了天玑9400的水平了</li>
+<li><code>[09:44–09:46]</code> GPU部分更是突飞猛进</li>
+<li><code>[09:46–09:47]</code> 大幅迭代</li>
+<li><code>[09:47–09:49]</code> 性能强了不少</li>
+<li><code>[09:49–09:50]</code> 上期视频可能没多说</li>
+<li><code>[09:50–09:54]</code> 但实际上麒麟9050 Pro不管是CPU多核</li>
+<li><code>[09:54–09:56]</code> 还是GPU的能效</li>
+<li><code>[09:56–09:59]</code> 其实都已经打赢了谷歌今年</li>
+<li><code>[09:59–10:01]</code> 基于台积电N3P的新旗舰</li>
+<li><code>[10:01–10:03]</code> Tensor G6</li>
+<li><code>[10:03–10:05]</code> 是不是还挺不可思议的呢</li>
+<li><code>[10:05–10:08]</code> 这次我们拿到了Mate90 Pro Max之后</li>
+<li><code>[10:08–10:13]</code> 又好好测试了这台华为旗舰直板机的游戏表现和续航</li>
+<li><code>[10:13–10:14]</code> 那我们就废话不多说</li>
+<li><code>[10:14–10:15]</code> 一起来好好看一下</li>
+<li><code>[10:15–10:18]</code> 首先测了热度比较高的原神</li>
+<li><code>[10:18–10:20]</code> 和其他的很多二游比起来</li>
+<li><code>[10:20–10:22]</code> 原神已经算是优化比较好的了</li>
+<li><code>[10:22–10:25]</code> 我们这次也在Mate90 Pro Max上开启了高性能模式</li>
+<li><code>[10:25–10:26]</code> 关闭了插针</li>
+<li><code>[10:26–10:28]</code> 跑了一下原神的7.0版本</li>
+<li><code>[10:28–10:30]</code> 虽然这个游戏新版本的压力</li>
+<li><code>[10:30–10:31]</code> 我们测下来</li>
+<li><code>[10:31–10:34]</code> 感觉好像比半年前测的还变大了</li>
+<li><code>[10:34–10:36]</code> 但是大家都能跑到60帧的情况下</li>
+<li><code>[10:36–10:38]</code> 原神更多还是在比拼能效</li>
+<li><code>[10:38–10:39]</code> 我们测下来</li>
+<li><code>[10:39–10:42]</code> 这次新版本890P的分辨率下</li>
+<li><code>[10:42–10:45]</code> Mate90 Pro Max只要4.2W的整机功耗</li>
+<li><code>[10:45–10:48]</code> 就能实现原神满真了</li>
+<li><code>[10:48–10:51]</code> 相比前代Mate 80 Pro Max跑更低一档分辨率</li>
+<li><code>[10:51–10:53]</code> 都有很明显的能效进步</li>
+<li><code>[10:53–10:55]</code> 4.2W这个表现</li>
+<li><code>[10:55–10:58]</code> 甚至已经优于一些A19的机型了</li>
+<li><code>[10:58–11:01]</code> 比起高通今年新出的8 Elite Gen 6</li>
+<li><code>[11:01–11:05]</code> 和苹果去年的A19 Pro也没有差出太多</li>
+<li><code>[11:05–11:06]</code> 嗯</li>
+<li><code>[11:06–11:09]</code> 我得说它这个游戏能效还是挺让我吃了一惊的</li>
+<li><code>[11:09–11:12]</code> 会不会是原神的压力太小了点呢</li>
+<li><code>[11:12–11:16]</code> 我们来挑战一下更高难度的鸣潮看看</li>
+<li><code>[11:16–11:18]</code> Mate90 Pro Max目前在鸣潮里</li>
+<li><code>[11:18–11:20]</code> 还只能开启648P的分辨率</li>
+<li><code>[11:20–11:23]</code> 和安卓和iOS平台可能不太对上</li>
+<li><code>[11:23–11:27]</code> 所以我们这里统一把所有的机器都设置在这个分辨率下</li>
+<li><code>[11:27–11:29]</code> 和前代的Mate80 Pro Max比起来</li>
+<li><code>[11:29–11:31]</code> 它的进步仍然是非常明显的</li>
+<li><code>[11:31–11:34]</code> 玄方城摩托跑图30分钟下来</li>
+<li><code>[11:34–11:36]</code> 平均50帧6.3W</li>
+<li><code>[11:36–11:38]</code> 帧率是大幅提升的同时</li>
+<li><code>[11:38–11:40]</code> 功耗也大幅下降了</li>
+<li><code>[11:40–11:42]</code> 并且9050 Pro在这里的性能表现</li>
+<li><code>[11:42–11:45]</code> 也是要比天玑9500的机型来得更好的</li>
+<li><code>[11:45–11:48]</code> 另一个压力极大的游戏一环</li>
+<li><code>[11:48–11:50]</code> Mate90 Pro Max同样是提升巨大</li>
+<li><code>[11:50–11:52]</code> 虽然功耗变高了</li>
+<li><code>[11:52–11:55]</code> 但帧率居然是高出了整整10帧来</li>
+<li><code>[11:55–11:58]</code> 53帧6.8W的能效表现</li>
+<li><code>[11:58–12:02]</code> 几乎是可以打平安卓阵营的天玑9500</li>
+<li><code>[12:02–12:03]</code> 和骁龙8 Elite的机型</li>
+<li><code>[12:03–12:07]</code> 当然安卓这边参测机型的分辨率会略高</li>
+<li><code>[12:07–12:09]</code> 但是红萌的软件优化还是一如既往的</li>
+<li><code>[12:09–12:10]</code> 没让人失望</li>
+<li><code>[12:10–12:11]</code> 当然了</li>
+<li><code>[12:11–12:12]</code> 这个出色的表现</li>
+<li><code>[12:12–12:15]</code> 前提还得是红萌原生游戏</li>
+<li><code>[12:15–12:17]</code> 如果是玩没登入红萌平台的游戏</li>
+<li><code>[12:17–12:19]</code> 比如明日方舟终末地</li>
+<li><code>[12:19–12:21]</code> 要依靠卓易通转移的话</li>
+<li><code>[12:21–12:23]</code> 这玩当然还是可以比较流畅玩的</li>
+<li><code>[12:23–12:27]</code> 但能效上就没有像原生游戏那么突出了</li>
+<li><code>[12:27–12:31]</code> 我还是挺期待有更多游戏和软件的开发者多多适配红萌的</li>
+<li><code>[12:31–12:34]</code> 毕竟现在连网易云都出了原生红萌版了</li>
+<li><code>[12:34–12:35]</code> 你说还有什么是不可能的呢</li>
+<li><code>[12:35–12:36]</code> 对吧</li>
+<li><code>[12:36–12:37]</code> 除了能效之外</li>
+<li><code>[12:37–12:41]</code> 华为这次也着重强调了游戏中的各种图形技术</li>
+<li><code>[12:41–12:42]</code> 比如新的AI超分算法</li>
+<li><code>[12:42–12:46]</code> 可以借助NPU和GPU协同实现超分</li>
+<li><code>[12:46–12:48]</code> 已经有好几款游戏支持了</li>
+<li><code>[12:48–12:50]</code> 这效果确实显著更清晰了</li>
+<li><code>[12:50–12:53]</code> 之前我们在做Mate80系列的视频的时候就讲过</li>
+<li><code>[12:53–12:56]</code> 它是支持暗区突围的硬件光追的</li>
+<li><code>[12:56–13:00]</code> 如今Mate90系列是进一步增强了光追能力</li>
+<li><code>[13:00–13:02]</code> 并且有更多的游戏可以支持光追了</li>
+<li><code>[13:02–13:08]</code> 比如这个就是红萌版的鸣潮在Mate90 Pro上开启光追的效果</li>
+<li><code>[13:08–13:11]</code> 光追反射这块还是挺明显的吧</li>
+<li><code>[13:11–13:15]</code> 包括现在的华为机型还支持了游戏内的智能HDR</li>
+<li><code>[13:15–13:17]</code> 哪怕游戏本来不一定有HDR</li>
+<li><code>[13:17–13:20]</code> 也可以自适应的拓展动态范围增强画质</li>
+<li><code>[13:20–13:21]</code> 在游戏以外</li>
+<li><code>[13:21–13:26]</code> 电池续航这块也是我们关注的一个重点</li>
+<li><code>[13:26–13:30]</code> 这次Mate90 Pro Max的电池加到了6800mAh</li>
+<li><code>[13:30–13:32]</code> 比前代又高了不少</li>
+<li><code>[13:32–13:36]</code> 在叠加上麒麟9050 Pro在能效上的进步</li>
+<li><code>[13:36–13:41]</code> 我们实测下来Mate90 Pro Max在我们极客湾的5G续航5.0模型里</li>
+<li><code>[13:41–13:44]</code> 是坚持了9小时56分钟</li>
+<li><code>[13:44–13:47]</code> 比起Mate80 Pro Max又长出了超过1.5小时</li>
+<li><code>[13:47–13:49]</code> 将近10个小时的续航</li>
+<li><code>[13:49–13:54]</code> 对于手机的中中度日常使用来说已经足够撑下来一整天了</li>
+<li><code>[13:54–13:55]</code> 它这个续航时间</li>
+<li><code>[13:55–13:59]</code> 甚至和一众大电池的安卓机比也没有差出太多</li>
+<li><code>[13:59–14:03]</code> 红萌软硬芯云的协同优化确实非常顶</li>
+<li><code>[14:03–14:07]</code> 其实9050 Pro这次还有一个提升幅度最大点</li>
+<li><code>[14:07–14:11]</code> 我们还没说到的就是它的NPU</li>
+<li><code>[14:11–14:15]</code> 如果你刚刚有仔细观察过我们放出来的芯片布局</li>
+<li><code>[14:15–14:16]</code> 你就会发现</li>
+<li><code>[14:16–14:19]</code> 它的NPU真的很大</li>
+<li><code>[14:19–14:24]</code> 光是主Die上的NPU面积都已经比9030 Pro整个NPU都大了</li>
+<li><code>[14:24–14:31]</code> NPU上下两片加起来的总面积比前代是大了整整150%</li>
+<li><code>[14:31–14:33]</code> 这个规模是非常之恐怖</li>
+<li><code>[14:33–14:35]</code> 我们上一期节目已经简单测了一下</li>
+<li><code>[14:35–14:40]</code> 它这颗NPU的Int8的吞吐量已经有68 TOPS了</li>
+<li><code>[14:40–14:43]</code> 这次我们又实测了它跑3B模型的效果</li>
+<li><code>[14:43–14:45]</code> 与NPU算力相关的Preview部分</li>
+<li><code>[14:45–14:49]</code> 相比9030 Pro它甚至提升了有3倍之多</li>
+<li><code>[14:49–14:51]</code> 这规模确实没白加</li>
+<li><code>[14:51–14:54]</code> 这么强的NPU到底能用来做些什么呢</li>
+<li><code>[14:54–14:56]</code> 华为其实也在思考这个问题</li>
+<li><code>[14:56–14:59]</code> 他们这次就给搭载了9050 Pro的机型</li>
+<li><code>[14:59–15:03]</code> 提供了30B的端侧MOE大模型的支持</li>
+<li><code>[15:03–15:06]</code> 比如我可以在离线的情况下跟小艺对话</li>
+<li><code>[15:06–15:08]</code> 让它帮我整理相册里的图片</li>
+<li><code>[15:08–15:10]</code> 像是旅游回来在飞机上没网的时候</li>
+<li><code>[15:10–15:14]</code> 我想把这次旅游拍的一些车的照片给整理出来</li>
+<li><code>[15:14–15:17]</code> 这个调用就是一个30B、A2B的模型</li>
+<li><code>[15:17–15:18]</code> 还是挺实用的</li>
+<li><code>[15:18–15:19]</code> 包括你在修图的时候</li>
+<li><code>[15:19–15:22]</code> 它还可以调用MOE模型来做图像的分析</li>
+<li><code>[15:22–15:23]</code> 给出修图的建议</li>
+<li><code>[15:23–15:26]</code> 比如去个路人加个虚化什么的</li>
+<li><code>[15:26–15:27]</code> 然后根据建议</li>
+<li><code>[15:27–15:31]</code> 本地调用6B的多模态来完成AI的修图</li>
+<li><code>[15:31–15:33]</code> 修出来的效果也不比云侧的模型差</li>
+<li><code>[15:33–15:35]</code> 还能随时随地都能用</li>
+<li><code>[15:35–15:37]</code> 未来这么强的NPU算力</li>
+<li><code>[15:37–15:40]</code> 还能做些什么更有意思的事呢</li>
+<li><code>[15:40–15:43]</code> 比如更好用的本地Agent</li>
+<li><code>[15:43–15:46]</code> 这个就留待各位想象了</li>
+<li><code>[15:46–15:50]</code> 今天我们是把麒麟9050 Pro拆了个底朝天</li>
+<li><code>[15:50–15:54]</code> 带大家好好了解了一下它的内部设计</li>
+<li><code>[15:54–15:57]</code> 逻辑折叠到底是一个什么样的折法</li>
+<li><code>[15:57–16:00]</code> 除了感叹半导体创新的精妙之外</li>
+<li><code>[16:00–16:03]</code> 我们通过测试Mate 90 Pro Max的游戏和续航</li>
+<li><code>[16:03–16:05]</code> 更是看到了麒麟9050 Pro</li>
+<li><code>[16:05–16:09]</code> 和红萌7系统的软件优化相结合之后</li>
+<li><code>[16:09–16:11]</code> 在实际应用里出色的能效表现</li>
+<li><code>[16:11–16:14]</code> 芯片设计上能突破极限</li>
+<li><code>[16:14–16:16]</code> 去探索出一条新的道路来</li>
+<li><code>[16:16–16:19]</code> 然后在终端上又能做到软硬协同</li>
+<li><code>[16:19–16:23]</code> 给用户带来远超参数的体验</li>
+<li><code>[16:23–16:25]</code> 这一代的华为旗舰还真的是一如既往的</li>
+<li><code>[16:25–16:27]</code> 让人佩服</li>
+<li><code>[16:27–16:29]</code> 不知道大家看完这个逻辑折叠</li>
+<li><code>[16:29–16:32]</code> 在看到Mate 90 Pro Max实际的表现之后</li>
+<li><code>[16:32–16:33]</code> 有些什么感想</li>
+<li><code>[16:33–16:35]</code> 欢迎在我们视频底下留言</li>
+<li><code>[16:35–16:36]</code> 告诉我们</li>
+<li><code>[16:36–16:38]</code> 那么以上就是本期节目的全部内容了</li>
+<li><code>[16:38–16:41]</code> 为了给大家做逻辑折叠的拆解分析</li>
+<li><code>[16:41–16:43]</code> 我们也是费了九牛二虎之力</li>
+<li><code>[16:43–16:46]</code> 如果你觉得确实干货满满的话</li>
+<li><code>[16:46–16:48]</code> 一定要给我们点赞收藏转发</li>
+<li><code>[16:48–16:50]</code> 不要吝啬你的关注</li>
+<li><code>[16:50–16:50]</code> 对吧</li>
+<li><code>[16:50–16:52]</code> 我们下期节目再见了</li>
+<li><code>[16:52–16:54]</code> 拜拜</li>
+</ul>
+</details>
+<details>
+<summary>关键帧 + OCR</summary>
+<p><strong><code>[00:00]</code></strong> Pro Max　/　标准</p>
+<p><img loading="lazy" alt="00:00" src="assets/BV1heam6TExz_v2md/frames/kf_0001.jpg" /></p>
+<p><strong><code>[00:10]</code></strong> Mate 90 Pro Max　/　逻折　/　辑叠　/　Kirin　/　9050PRO</p>
+<p><img loading="lazy" alt="00:10" src="assets/BV1heam6TExz_v2md/frames/kf_0002.jpg" /></p>
+<p><strong><code>[00:20]</code></strong> oiolo　/　Kirin　/　9050Pro　/　性能解析　/　麒麟9050Pro能效实测！华为MateXT2性能　/　有多强？　/　34万2周前</p>
+<p><img loading="lazy" alt="00:20" src="assets/BV1heam6TExz_v2md/frames/kf_0003.jpg" /></p>
+<p><strong><code>[00:30]</code></strong> o1o-</p>
+<p><img loading="lazy" alt="00:30" src="assets/BV1heam6TExz_v2md/frames/kf_0004.jpg" /></p>
+<p><strong><code>[00:40]</code></strong> XMAGE　/　Kirin　/　9050PI</p>
+<p><img loading="lazy" alt="00:40" src="assets/BV1heam6TExz_v2md/frames/kf_0005.jpg" /></p>
+<p><strong><code>[00:50]</code></strong> 逻辑折叠　/　Kirin　/　性能续航　/　9050 Pro</p>
+<p><img loading="lazy" alt="00:50" src="assets/BV1heam6TExz_v2md/frames/kf_0006.jpg" /></p>
+<p><strong><code>[01:00]</code></strong> oiolo</p>
+<p><img loading="lazy" alt="01:00" src="assets/BV1heam6TExz_v2md/frames/kf_0007.jpg" /></p>
+<p><strong><code>[01:10]</code></strong> Mate90系列　/　XMAGE　/　CMAGI　/　标准　/　麒麟9030　/　麒麟9035</p>
+<p><img loading="lazy" alt="01:10" src="assets/BV1heam6TExz_v2md/frames/kf_0008.jpg" /></p>
+<p><strong><code>[01:20]</code></strong> Mate90系列　/　标准　/　Pro Max 16G　/　麒麟9030　/　麒麟9035　/　麒麟9050Pro　/　12G版本搭载麒麟9050</p>
+<p><img loading="lazy" alt="01:20" src="assets/BV1heam6TExz_v2md/frames/kf_0009.jpg" /></p>
+<p><strong><code>[01:30]</code></strong> 超大核　/　大核-性能　/　Mate90ProMax16G　/　31GHz　/　大核-能效　/　2.7GHz　/　2.2GHz　/　小核　/　麒麟9050Pro　/　马良955　/　1056MHz　/　超大核　/　Mate90Pro　/　大核　/　2.85GHz　/　麒麟9035　/　2.35GHz　/　小核　/　马良935　/　933MHz　/　Mate80Pro　/　同款　/　超大核　/　Mate90　/　大核　/　2.70GHz　/　麒麟9030　/　227GHz　/　小核　/　马良935　/　933MHz</p>
+<p><img loading="lazy" alt="01:30" src="assets/BV1heam6TExz_v2md/frames/kf_0010.jpg" /></p>
+<p><strong><code>[01:40]</code></strong> 超大核　/　大核-性能　/　Mate90ProMax16G　/　31GHz　/　大核-能效　/　27GHz　/　2.2GHz　/　小核　/　麒麟9050Pro　/　马良955　/　1056MHz　/　超大核　/　Mate90Pro　/　大核　/　2.85GHz　/　麒麟9035　/　2.35GHz　/　小核　/　马良935　/　933MHZ　/　Mate80　/　麒麟902027%　/　8核12线程　/　超大核　/　Mate90　/　大核　/　2.70GH　/　麒麟9030　/　2.27GHz　/　小核　/　马良935　/　933MHz</p>
+<p><img loading="lazy" alt="01:40" src="assets/BV1heam6TExz_v2md/frames/kf_0011.jpg" /></p>
+<p><strong><code>[01:50]</code></strong> 超大核　/　大核-性能　/　Mate90ProMax16G　/　31GHz　/　大核-能效　/　27GHz　/　2.2GHz　/　小核　/　麒麟9050Pro　/　马良955　/　1056MHz　/　相当于　/　麒麟9030Pro　/　超大核　/　Mate90Pro　/　大核　/　麒麟9035　/　2.85GHz　/　2.35GHz　/　小核　/　马良935　/　933MHz　/　超大核　/　Mate90　/　大核　/　270GHz　/　麒麟9030　/　2.27GHz　/　小核　/　马良935　/　933MHz</p>
+<p><img loading="lazy" alt="01:50" src="assets/BV1heam6TExz_v2md/frames/kf_0012.jpg" /></p>
+<p><strong><code>[02:00]</code></strong> 超大核　/　大核-性能　/　Mate90ProMax16G　/　31GHz　/　大核-能效　/　2.7GHz　/　2.2GHz　/　小核　/　麒麟9050Pro　/　马良955　/　1056MHz　/　Mate80Pro　/　麒麟9030　/　20%　/　超大核　/　Mate90Pro　/　大核　/　2.85GHz　/　麒麟9035　/　2.35GHz　/　小核　/　马良935　/　933MHz　/　超大核　/　Mate90　/　大核　/　2.70GHz　/　麒麟9030　/　2.27GHz　/　小核　/　马良935　/　933MHz</p>
+<p><img loading="lazy" alt="02:00" src="assets/BV1heam6TExz_v2md/frames/kf_0013.jpg" /></p>
+<p><strong><code>[02:10]</code></strong> 超大核　/　Mate90ProMax16G　/　大核-性能　/　3.1GHz　/　大核-能效　/　2.7GHz　/　2.2GHz　/　小核　/　麒麟9050Pro　/　马良955　/　1056MHz　/　超大核　/　Mate90Pro　/　大核　/　2.85GHz　/　麒麟9035　/　235GHz　/　小核　/　马良935　/　933MHz　/　韬定律　/　超大核　/　Mate90　/　大核　/　2.70GHz　/　麒麟9030　/　2.27GHz　/　小核　/　马良935　/　933MHz</p>
+<p><img loading="lazy" alt="02:10" src="assets/BV1heam6TExz_v2md/frames/kf_0014.jpg" /></p>
+<p><strong><code>[02:20]</code></strong> 超大核　/　3.1GHz　/　大核-性能　/　大核-能效　/　2.7GHz　/　2.2GHz　/　小核　/　2MBL2　/　175GHz　/　Mate90ProMax16G　/　8MBL3　/　8MBL3　/　2MBL2　/　麒麟9050Pro　/　马良955　/　1056MHz　/　12MB系统缓存　/　内存最高4x24bitLPDDR610667MT/s</p>
+<p><img loading="lazy" alt="02:20" src="assets/BV1heam6TExz_v2md/frames/kf_0015.jpg" /></p>
+<p><strong><code>[02:30]</code></strong> 超大核　/　3.1GHz　/　大核-性能　/　大核-能效　/　2.7GHz　/　2.2GHz　/　小核　/　2MBL2　/　Mate90ProMax16G　/　8MBL3　/　8MBL3　/　2MBL2　/　麒麟9050Pro　/　马良955　/　1056MHz　/　12MB系统缓存　/　内存最高4x24bitLPDDR610667MT/s</p>
+<p><img loading="lazy" alt="02:30" src="assets/BV1heam6TExz_v2md/frames/kf_0016.jpg" /></p>
+<p><strong><code>[02:40]</code></strong> 1.5mm</p>
+<p><img loading="lazy" alt="02:40" src="assets/BV1heam6TExz_v2md/frames/kf_0017.jpg" /></p>
+<p><strong><code>[02:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="02:50" src="assets/BV1heam6TExz_v2md/frames/kf_0018.jpg" /></p>
+<p><strong><code>[03:00]</code></strong> 9030 Pro　/　irin</p>
+<p><img loading="lazy" alt="03:00" src="assets/BV1heam6TExz_v2md/frames/kf_0019.jpg" /></p>
+<p><strong><code>[03:10]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="03:10" src="assets/BV1heam6TExz_v2md/frames/kf_0020.jpg" /></p>
+<p><strong><code>[03:20]</code></strong> 传统芯片　/　逻辑折叠</p>
+<p><img loading="lazy" alt="03:20" src="assets/BV1heam6TExz_v2md/frames/kf_0021.jpg" /></p>
+<p><strong><code>[03:30]</code></strong> 传统芯片　/　逻辑折叠　/　逻辑电路　/　金属层　/　基板</p>
+<p><img loading="lazy" alt="03:30" src="assets/BV1heam6TExz_v2md/frames/kf_0022.jpg" /></p>
+<p><strong><code>[03:40]</code></strong> 逻辑电路　/　金属层</p>
+<p><img loading="lazy" alt="03:40" src="assets/BV1heam6TExz_v2md/frames/kf_0023.jpg" /></p>
+<p><strong><code>[03:50]</code></strong> 铜-铜混合键合面　/　铜-铜混合键合　/　Cu-CuHybrid Bonding　/　1555555558</p>
+<p><img loading="lazy" alt="03:50" src="assets/BV1heam6TExz_v2md/frames/kf_0024.jpg" /></p>
+<p><strong><code>[04:00]</code></strong> 硅衬底　/　硅衬底</p>
+<p><img loading="lazy" alt="04:00" src="assets/BV1heam6TExz_v2md/frames/kf_0025.jpg" /></p>
+<p><strong><code>[04:10]</code></strong> 主Die</p>
+<p><img loading="lazy" alt="04:10" src="assets/BV1heam6TExz_v2md/frames/kf_0026.jpg" /></p>
+<p><strong><code>[04:20]</code></strong> 主Die逻辑电路　/　主Die　/　副Die　/　副Die逻辑电路</p>
+<p><img loading="lazy" alt="04:20" src="assets/BV1heam6TExz_v2md/frames/kf_0027.jpg" /></p>
+<p><strong><code>[04:30]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="04:30" src="assets/BV1heam6TExz_v2md/frames/kf_0028.jpg" /></p>
+<p><strong><code>[04:40]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="04:40" src="assets/BV1heam6TExz_v2md/frames/kf_0029.jpg" /></p>
+<p><strong><code>[04:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="04:50" src="assets/BV1heam6TExz_v2md/frames/kf_0030.jpg" /></p>
+<p><strong><code>[05:00]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="05:00" src="assets/BV1heam6TExz_v2md/frames/kf_0031.jpg" /></p>
+<p><strong><code>[05:10]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="05:10" src="assets/BV1heam6TExz_v2md/frames/kf_0032.jpg" /></p>
+<p><strong><code>[05:20]</code></strong> 客海　/　硅穿孔（TSV）　/　（经加租墨示）</p>
+<p><img loading="lazy" alt="05:20" src="assets/BV1heam6TExz_v2md/frames/kf_0033.jpg" /></p>
+<p><strong><code>[05:30]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="05:30" src="assets/BV1heam6TExz_v2md/frames/kf_0034.jpg" /></p>
+<p><strong><code>[05:40]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="05:40" src="assets/BV1heam6TExz_v2md/frames/kf_0035.jpg" /></p>
+<p><strong><code>[05:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="05:50" src="assets/BV1heam6TExz_v2md/frames/kf_0036.jpg" /></p>
+<p><strong><code>[06:00]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　Cacha　/　POEX3PCEX3 OP PCEX2　/　LPOOR　/　超大楼　/　马良995　/　中核　/　6CU9105MH　/　270H　/　小核　/　PDSOHE　/　ISP-CPU　/　SLC控制器　/　12MB　/　中核　/　LPOOR　/　Memory　/　Modem　/　40PHY　/　RF-F</p>
+<p><img loading="lazy" alt="06:00" src="assets/BV1heam6TExz_v2md/frames/kf_0037.jpg" /></p>
+<p><strong><code>[06:10]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　超大核　/　@31GHz　/　中核　/　马良995　/　@27GH2　/　小核　/　@L75GHz　/　SLC控制器　/　12MB　/　中核　/　@22GHz　/　MuJM</p>
+<p><img loading="lazy" alt="06:10" src="assets/BV1heam6TExz_v2md/frames/kf_0038.jpg" /></p>
+<p><strong><code>[06:20]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　下半　/　上半　/　超大核　/　@3.1GHz　/　256KB　/　中核　/　@2.7GHz　/　256KB　/　小核</p>
+<p><img loading="lazy" alt="06:20" src="assets/BV1heam6TExz_v2md/frames/kf_0039.jpg" /></p>
+<p><strong><code>[06:30]</code></strong> 麒麟9050Pro　/　主Die　/　副Die　/　下丰　/　中核　/　超大核　/　@27GHz　/　@3.IGHz　/　小核　/　@1.75GHz</p>
+<p><img loading="lazy" alt="06:30" src="assets/BV1heam6TExz_v2md/frames/kf_0040.jpg" /></p>
+<p><strong><code>[06:40]</code></strong> 麒麟9050Pro　/　主Die　/　下米　/　超大核　/　@31GHz　/　中核　/　小核　/　@1.75GHz</p>
+<p><img loading="lazy" alt="06:40" src="assets/BV1heam6TExz_v2md/frames/kf_0041.jpg" /></p>
+<p><strong><code>[06:50]</code></strong> 麒麟9050Pro　/　卡米　/　主Die　/　超大核　/　@3.1GH2　/　中核　/　金属层　/　@2.7GHz　/　小核　/　@1.75GHz</p>
+<p><img loading="lazy" alt="06:50" src="assets/BV1heam6TExz_v2md/frames/kf_0042.jpg" /></p>
+<p><strong><code>[07:00]</code></strong> 麒麟9050Pro　/　同频　/　更低电压　/　更低功耗　/　超大核　/　降低延迟　/　3.1GHZ　/　中核　/　@2.7GHz　/　走线缩短　/　小核　/　@175GHz</p>
+<p><img loading="lazy" alt="07:00" src="assets/BV1heam6TExz_v2md/frames/kf_0043.jpg" /></p>
+<p><strong><code>[07:10]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　缓存、10　/　Cache　/　Cache　/　Cache　/　UPOOR　/　超大核　/　P3GH2　/　LPOOR　/　马良995　/　L/S　/　中核　/　cCU9IO5M　/　Cache　/　Cache　/　81750Hr　/　小核　/　5208　/　ISP-CPU　/　SLC控制器　/　12MB　/　中核　/　LPDOR　/　12.204　/　Memory　/　Controler　/　Modem　/　RF-F</p>
+<p><img loading="lazy" alt="07:10" src="assets/BV1heam6TExz_v2md/frames/kf_0044.jpg" /></p>
+<p><strong><code>[07:20]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　缓存、10　/　PLLUSI　/　发热低，但占面积　/　Cache　/　Cache　/　Cache　/　LPOOR　/　超大核　/　LPOOR　/　马良995　/　L/S　/　中核　/　6CU91056M　/　发热大　/　小核　/　52x8　/　ISP-CPU　/　能效要求高　/　12MB　/　中核　/　LPDOR　/　Memory　/　Controler　/　Modem　/　RF-F</p>
+<p><img loading="lazy" alt="07:20" src="assets/BV1heam6TExz_v2md/frames/kf_0045.jpg" /></p>
+<p><strong><code>[07:30]</code></strong> 麒麟9050Pro　/　副Die　/　主Die　/　缓存、10　/　计算单元　/　PLLUSI　/　发热低，但占面积　/　发热大，能效要求高　/　Cache　/　Cache　/　Cache　/　UPOOR　/　超大核　/　P3GHE　/　LPOOR　/　马良995　/　L/S　/　中核　/　Cache　/　Cache　/　91750Hr　/　小核　/　52X0　/　ISP-CPU　/　SLC控制器　/　12MB　/　中核　/　LPOOR　/　2.20Ht　/　Memory　/　Controller　/　Modem　/　RF-F</p>
+<p><img loading="lazy" alt="07:30" src="assets/BV1heam6TExz_v2md/frames/kf_0046.jpg" /></p>
+<p><strong><code>[07:40]</code></strong> 麒麟9050Pro　/　副Die　/　主Die</p>
+<p><img loading="lazy" alt="07:40" src="assets/BV1heam6TExz_v2md/frames/kf_0047.jpg" /></p>
+<p><strong><code>[07:50]</code></strong> 麒麟9030Pro　/　麒麟9050Pro　/　副Die　/　主Die　/　20.6mmi20.6mm²</p>
+<p><img loading="lazy" alt="07:50" src="assets/BV1heam6TExz_v2md/frames/kf_0048.jpg" /></p>
+<p><strong><code>[08:00]</code></strong> 麒麟9030Pro　/　麒麟9050Pro　/　副Die　/　主Die　/　面积　/　241.3mm²　/　+70.3%</p>
+<p><img loading="lazy" alt="08:00" src="assets/BV1heam6TExz_v2md/frames/kf_0049.jpg" /></p>
+<p><strong><code>[08:10]</code></strong> 麒麟9030Pro　/　麒麟9050Pro　/　副Die　/　主Die　/　面积　/　+70.3%　/　241.3mm²　/　制程　/　工艺</p>
+<p><img loading="lazy" alt="08:10" src="assets/BV1heam6TExz_v2md/frames/kf_0050.jpg" /></p>
+<p><strong><code>[08:20]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="08:20" src="assets/BV1heam6TExz_v2md/frames/kf_0051.jpg" /></p>
+<p><strong><code>[08:30]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="08:30" src="assets/BV1heam6TExz_v2md/frames/kf_0052.jpg" /></p>
+<p><strong><code>[08:40]</code></strong> oiolo</p>
+<p><img loading="lazy" alt="08:40" src="assets/BV1heam6TExz_v2md/frames/kf_0053.jpg" /></p>
+<p><strong><code>[08:50]</code></strong> 韬定律　/　逻辑折叠　/　以时间（）替代几何缩微为核心　/　韬定律电路层级的一项　/　器件-电路-芯片-系统　/　高阶可选技术　/　四层协同优化体系　/　垂直堆曼的两层有源硅房　/　逻辑折叠　/　oiolo</p>
+<p><img loading="lazy" alt="08:50" src="assets/BV1heam6TExz_v2md/frames/kf_0054.jpg" /></p>
+<p><strong><code>[09:00]</code></strong> 主Die逻辑电路　/　主Die　/　副Die　/　副Die逻辑电路</p>
+<p><img loading="lazy" alt="09:00" src="assets/BV1heam6TExz_v2md/frames/kf_0055.jpg" /></p>
+<p><strong><code>[09:10]</code></strong> 关注　/　iolo</p>
+<p><img loading="lazy" alt="09:10" src="assets/BV1heam6TExz_v2md/frames/kf_0056.jpg" /></p>
+<p><strong><code>[09:20]</code></strong> 0010</p>
+<p><img loading="lazy" alt="09:20" src="assets/BV1heam6TExz_v2md/frames/kf_0057.jpg" /></p>
+<p><strong><code>[09:30]</code></strong> CPU单核能效曲线-SPEC2026　/　麒麟9050Pro　/　麒麟9030Pro　/　麒麟9020　/　天玑9400+　/　骁龙8Elite　/　骁龙8Gen3　/　晓龙8Gen2　/　晓龙8+　/　LPDDR5X　/　LPDDR5X　/　LPDDR5X　/　LPDDR5X/台积电N3E　/　LPDDR5X/台积电N3E　/　LPDDR5X/台积电N4P　/　LPDDR5X/台积电N4　/　LPDDR5X/台积电N4　/　INT整数（分）　/　FP浮点（分）　/　9050Pro-L　/　9050Pro-L　/　9030Pro-L　/　030Pro-L　/　&gt;Kirin　/　9050Pro　/　主板功耗（W）　/　性能解析　/　麟9050Pro能效实测！华为MateXT2性能　/　有多强？　/　拆机使用SG1233功耗分析仪+每电通承量：减实时旗基动得到主板功</p>
+<p><img loading="lazy" alt="09:30" src="assets/BV1heam6TExz_v2md/frames/kf_0058.jpg" /></p>
+<p><strong><code>[09:40]</code></strong> 能效曲线-GPU负载　/　3DMarkSteelNomadLight（分)　/　苹果-Metal，安卓-Vulkan　/　EDDCRO　/　2000　/　LRINBK　/　&gt;Kirin　/　9050Pro　/　性能解析　/　主板功耗　/　麒麟9050Pro能效实测！华为MateXT2性能　/　折机使用SG1233功耗分析仪+微电池测票，减实时基功耗得到主板功邦　/　有多强？</p>
+<p><img loading="lazy" alt="09:40" src="assets/BV1heam6TExz_v2md/frames/kf_0059.jpg" /></p>
+<p><strong><code>[09:50]</code></strong> 能效曲线　/　TensorG6　/　麒麟9050Pro　/　谷歌Pixel11ProXL　/　华为Mate90ProMax　/　LPDDR5X　/　LPDDR5X　/　TSMCN3P　/　Geekbench7多核（分）　/　3DMarkSteelNomadLight（分）　/　苹果-Metal，安卓-Vulkan　/　10000　/　1500　/　频9050Pro　/　8000　/　9050Pro　/　TensorG6　/　TensorG6　/　1000　/　6000　/　4000　/　2000　/　主板功耗（W）　/　主板功耗（W）　/　折机使用SG1233功耗分折仪+数电池出票　/　海实时指基功耗得烈主板功托</p>
+<p><img loading="lazy" alt="09:50" src="assets/BV1heam6TExz_v2md/frames/kf_0060.jpg" /></p>
+<p><strong><code>[10:00]</code></strong> 能效曲线　/　TensorG6　/　麒麟9050Pro　/　谷歌Pixel11ProXL　/　华为Mate90ProMax　/　LPDDR5X　/　LPDDR5X　/　TSMCN3P　/　Geekbench7多核（分）　/　3DMarkSteelNomadLight（分）　/　苹果-Metal，安卓-Vulkan　/　10000　/　1500　/　频9050Pro　/　8000　/　9050Pro　/　TensorG6　/　TensorG6　/　1000　/　6000　/　4000　/　2000　/　主板功耗（W）　/　主板功耗（W）　/　折机使用SG1233功耗分折仪+低电油测量：减实时期基功耗得到主板功科</p>
+<p><img loading="lazy" alt="10:00" src="assets/BV1heam6TExz_v2md/frames/kf_0061.jpg" /></p>
+<p><strong><code>[10:10]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="10:10" src="assets/BV1heam6TExz_v2md/frames/kf_0062.jpg" /></p>
+<p><strong><code>[10:20]</code></strong> 客酒</p>
+<p><img loading="lazy" alt="10:20" src="assets/BV1heam6TExz_v2md/frames/kf_0063.jpg" /></p>
+<p><strong><code>[10:30]</code></strong> 机原万叶　/　月巴卡</p>
+<p><img loading="lazy" alt="10:30" src="assets/BV1heam6TExz_v2md/frames/kf_0064.jpg" /></p>
+<p><strong><code>[10:40]</code></strong> 原神　/　须弥城跑图帧率　/　最高画质渲染精度-极高使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low帧/整机平均功耗　/　麒麟9050Pro　/　59.2　/　42.1io　/　4.2w　/　麒麟9030Pro　/　华为Mate90ProMax1920-890　/　华为Mate80ProMax1730-804　/　59.942.05.5　/　A19Pro　/　59.1P　/　3.9w　/　骁龙8EliteExtremeGen6　/　iPhone17Pro Max1920-884　/　机型A1920-884　/　59.9　/　59.14.2w　/　晓龙8EliteGen5　/　59.949.54.6w　/　天玑9500　/　机型C1920-873　/　59.9　/　59.14.8w　/　30（分钟）</p>
+<p><img loading="lazy" alt="10:40" src="assets/BV1heam6TExz_v2md/frames/kf_0065.jpg" /></p>
+<p><strong><code>[10:50]</code></strong> 保客漆　/　原神　/　须弥城跑图帧率　/　最高画质渲染精度-极高使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low帧/整机平均功耗　/　品大　/　41.8　/　麒麟9050Pro　/　59.2　/　42.1is　/　4.2w　/　麒麟9030Pro　/　华为Mate90ProMax1920-890　/　华为Mate80ProMax1730-804　/　59.9　/　42.0p　/　5.5w　/　最大　/　41.2　/　A19Pro　/　59.1Ps　/　3.9w　/　骁龙8EliteExtremeGen6　/　iPhone17ProMax1920-884　/　机型A1920~884　/　59.9　/　59.11　/　4.2w　/　最大　/　最大　/　42.8　/　骁龙8EliteGen5　/　59.9　/　49.54.6w　/　天玑9500　/　机型C1920-873　/　59.9　/　59.14.8w　/　30（分钟）</p>
+<p><img loading="lazy" alt="10:50" src="assets/BV1heam6TExz_v2md/frames/kf_0066.jpg" /></p>
+<p><strong><code>[11:00]</code></strong> 刺堂　/　须弥城跑图帧率　/　最高画质渲染精度-极高使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low帧/整机平均功耗　/　最大　/　41.8　/　最大　/　麒麟9050Pro　/　59.2　/　42.1is　/　4.2w　/　麒麟9030Pro　/　华为Mate90ProMax1920-890　/　华为Mate80ProMax1730-804　/　59.9　/　42.0p　/　5.5w　/　最大　/　最大　/　41.2　/　39.3　/　A19Pro　/　59.1P　/　3.9w　/　骁龙8EliteExtremeGen6　/　iPhone17ProMax1920-884　/　机型A1920-884　/　59.9　/　59.1ips　/　4.2w　/　最大　/　最大　/　42.4　/　42.8　/　晓龙8EliteGen5　/　59.9　/　49.54.6w　/　天玑9500　/　机型C1920-873　/　59.9　/　59.14.8w　/　30（分钟）</p>
+<p><img loading="lazy" alt="11:00" src="assets/BV1heam6TExz_v2md/frames/kf_0067.jpg" /></p>
+<p><strong><code>[11:10]</code></strong> 《OHR式　/　：11025463</p>
+<p><img loading="lazy" alt="11:10" src="assets/BV1heam6TExz_v2md/frames/kf_0068.jpg" /></p>
+<p><strong><code>[11:20]</code></strong> 鸣潮　/　玄方城跑图帧率　/　最高画质设置近似分辨率使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low顿/整机平均功耗　/　麒麟9050Pro　/　50.0　/　麒麟9030Pro　/　华为Mate90ProMax　/　1400-648　/　17.8p6.3w　/　华为Mate80ProMax　/　43.1　/　1400×648　/　16.7t7.0w　/　A19Pro　/　50.3　/　5.6w　/　天玑9500　/　iPhone17ProMao　/　1339-616　/　机型1412-644　/　45.9　/　13.75.9w　/　骁龙8Elite　/　机型口1428-644　/　56.9　/　24.76.0w　/　30（分钟）</p>
+<p><img loading="lazy" alt="11:20" src="assets/BV1heam6TExz_v2md/frames/kf_0069.jpg" /></p>
+<p><strong><code>[11:30]</code></strong> 鸣潮　/　玄方城跑图帧率　/　最高画质设置近似分辨率使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low顿/整机平均功耗　/　麒麟9050Pro　/　50.0　/　17.8tp　/　6.3w　/　麒麟9030Pro　/　华为Mate90ProMax1400-648　/　华为Mate80ProMax1400-648　/　43.1　/　16.7tp7.0w　/　A19Pro　/　50.3　/　5.6w　/　天玑9500　/　iPhone17ProMax1339-616　/　机型C1412-644　/　45.9　/　13.75.9w　/　晓龙8Elite　/　机型D1428-644　/　56.9　/　24.76.0w　/　30（分钟）</p>
+<p><img loading="lazy" alt="11:30" src="assets/BV1heam6TExz_v2md/frames/kf_0070.jpg" /></p>
+<p><strong><code>[11:40]</code></strong> 鸣潮　/　玄方城跑图帧率　/　最高画质设置近似分辨率使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low帧/整机平均功耗　/　最大　/　最大　/　44.6　/　麒麟9050Pro　/　50.0　/　17.8tps　/　6.3w　/　麒麟9030Pro　/　华为Mate90ProMax1400-648　/　华为Mate80ProMax1400-648　/　43.1　/　16.7t7.0w　/　最大　/　43.7　/　A19Pro　/　50.3　/　5.6w　/　天玑9500　/　iPhone17ProMax1339-616　/　机型C1412-644　/　45.9　/　13.75.9w　/　最大　/　44.0　/　晓龙8Elite　/　机型D1428-644　/　56.9　/　24.7p6.0w　/　30（分钟）</p>
+<p><img loading="lazy" alt="11:40" src="assets/BV1heam6TExz_v2md/frames/kf_0071.jpg" /></p>
+<p><strong><code>[11:50]</code></strong> 异环　/　雨天开车跑图帧率　/　原画预设-交通极致使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均顿/1%Low帧/整机平均功耗　/　麒麟9050Pro　/　53.0　/　19.41　/　麒麟9030Pro　/　华为Mate90ProMax1552-720　/　6.8w　/　华为Mate80ProMax1552-720　/　42.0　/　19.26.4w　/　A19Pro　/　53.7　/　5.4w　/　晓龙8EliteGen5　/　iPhone17ProMax1721792　/　机型B1720~792　/　59.530.06.9w　/　天玑9500　/　52.6s　/　晓龙8Elite　/　机型C1736-792　/　17.96.7w　/　机型D1760-792　/　57.3　/　16.68.0w　/　30（分钟）</p>
+<p><img loading="lazy" alt="11:50" src="assets/BV1heam6TExz_v2md/frames/kf_0072.jpg" /></p>
+<p><strong><code>[12:00]</code></strong> 异环　/　雨天开车跑图帧率　/　原画预设-交通极致使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low顿/整机平均功耗　/　最大　/　最大　/　46.7　/　42.3　/　麒麟9050Pro　/　53.0　/　19.41　/　6.8w　/　麒麟9030Pro　/　华为Mate90ProMax　/　1552-720　/　华为Mate 80ProMa　/　1552-720　/　42.0　/　19.2　/　6.4w　/　最大　/　43.1　/　最大　/　47.4　/　A19Pro　/　53.7　/　5.4w　/　骁龙8EliteGen5　/　iPhone17ProMa　/　1721×792　/　机型　/　1720×792　/　59.5　/　30.0p　/　6.9w　/　最大　/　最大　/　47.2　/　天玑9500　/　52.6　/　6.7w　/　晓龙8Elite　/　机型1736-792　/　17.91p　/　机型D1760-792　/　57.3　/　16.68.0w　/　30（分钟）</p>
+<p><img loading="lazy" alt="12:00" src="assets/BV1heam6TExz_v2md/frames/kf_0073.jpg" /></p>
+<p><strong><code>[12:10]</code></strong> 全游戏　/　排行榜　/　口桃　/　下始　/　打开　/　烟江湖　/　我MT：起　/　三国：冰河时代　/　无尽冬日　/　开心消消乐　/　一念通运　/　灵妖　/　天命行者</p>
+<p><img loading="lazy" alt="12:10" src="assets/BV1heam6TExz_v2md/frames/kf_0074.jpg" /></p>
+<p><strong><code>[12:20]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="12:20" src="assets/BV1heam6TExz_v2md/frames/kf_0075.jpg" /></p>
+<p><strong><code>[12:30]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="12:30" src="assets/BV1heam6TExz_v2md/frames/kf_0076.jpg" /></p>
+<p><strong><code>[12:40]</code></strong> 默认　/　开启智能超级分辨率</p>
+<p><img loading="lazy" alt="12:40" src="assets/BV1heam6TExz_v2md/frames/kf_0077.jpg" /></p>
+<p><strong><code>[12:50]</code></strong> 到89间34:12</p>
+<p><img loading="lazy" alt="12:50" src="assets/BV1heam6TExz_v2md/frames/kf_0078.jpg" /></p>
+<p><strong><code>[13:00]</code></strong> 默认　/　开启光线追踪（增强）</p>
+<p><img loading="lazy" alt="13:00" src="assets/BV1heam6TExz_v2md/frames/kf_0079.jpg" /></p>
+<p><strong><code>[13:10]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="13:10" src="assets/BV1heam6TExz_v2md/frames/kf_0080.jpg" /></p>
+<p><strong><code>[13:20]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="13:20" src="assets/BV1heam6TExz_v2md/frames/kf_0081.jpg" /></p>
+<p><strong><code>[13:30]</code></strong> 手机设为均衡模式、400nits亮度、开启定位与振动、使用5G弱信号网络、　/　连接蓝牙音箱外放。　/　以1小时为一轮循环测试至电量耗尽，每轮乱序运行：　/　极客湾·手机续航测试5.0　/　即时通讯10分钟、购物浏览10分钟（后台微信语音/视频）、社媒浏览14分钟　/　（后台播放音乐）观看视频9分钟、玩游戏9分钟、导航5分钟、快开快关应　/　用3分钟（3轮各1分钟，插入至各环节之间）。手机每分钟至少接收一条微　/　信消息。　/　9000mAh　/　REDMIK90 Max　/　专营机　/　额定31.85Wh　/　典型8550mAh　/　红魔11Pro　/　额定29.66Wh　/　典型8000mAh　/　小米17Max售机　/　额定29.84Wh　/　典型8000mAh　/　iQOOZ11Turbo售的　/　额定27.83Wh　/　典型7600mAh　/　iQOOZ10Turbo+　/　额定29.72Wh　/　典型8000mAh　/　一加Ace6T　/　零售机　/　额定30.88Wh　/　典型8300mAh　/　一加15T专售机　/　额定27.05Wh　/　典型7500mAh　/　一加Ace6至尊版　/　额定31.60Wn　/　典型8600mAh　/　iQ0ONeo11售标　/　额定27.59Wh　/　典型7500mAh　/　荣耀Magic8Pro　/　零售粉　/　额定26.54Wh　/　典型7200mAh　/　POFindX9Pra　/　27.34Wh　/　10i00</p>
+<p><img loading="lazy" alt="13:30" src="assets/BV1heam6TExz_v2md/frames/kf_0082.jpg" /></p>
+<p><strong><code>[13:40]</code></strong> 手机设为均衡模式、400nits亮度、开启定位与振动、使用5G弱信号网络、　/　连接蓝牙音箱外放。　/　以1小时为一轮循环测试至电量耗尽，每轮乱序运行：　/　极客湾·手机续航测试5.0　/　即时通讯10分钟、购物浏览10分钟（后台微信语音/视频）、社媒浏览14分钟　/　（后台播放音乐）观看视频9分钟、玩游戏9分钟、导航5分钟、快开快关应　/　用3分钟（3轮各1分钟，插入至各环节之间）。手机每分钟至少接收一条微　/　信消息。　/　华为Mate90ProMax　/　典型6800mAh　/　华为Mate80ProMax　/　零售机　/　额定22.31Wh　/　典型6000mAh　/　iQ0O15UltraC售格　/　典型7400mAh　/　额定27.08Wh　/　iQOO15T售标　/　额定29.35Wh　/　典型8000mAh　/　REDMIK9OProMax　/　额定28.13Wh　/　典型7560mAh　/　一加Ace6售　/　额定28.66Wh　/　典型7800mAh　/　努比亚Z80Ultra　/　零售机　/　额定26.67Wh　/　典型7200mAh　/　华为Pura90Pro　/　额定22.35Wh　/　典型6000mAh　/　REDMIK80至尊版　/　零售机　/　额定27.78Wh　/　典型7410mAh　/　荣耀GTPro　/　零售机　/　额定27.51Wh　/　典型7200mAh　/　华为Nova15Pro售物　/　额定24.21Wh　/　典型6500mAh</p>
+<p><img loading="lazy" alt="13:40" src="assets/BV1heam6TExz_v2md/frames/kf_0083.jpg" /></p>
+<p><strong><code>[13:50]</code></strong> 手机设为均衡模式、400nits亮度、开启定位与振动、使用5G弱信号网络、　/　连接蓝牙音箱外放。　/　以1小时为一轮循环测试至电量耗尽，每轮乱序运行：　/　极客湾·手机续航测试5.0　/　即时通讯10分钟、购物浏览10分钟（后台微信语音/视频）、社媒浏览14分钟　/　（后台播放音乐），观看视频9分钟、玩游戏9分钟、导航5分钟、快开快关应　/　用3分钟（3轮各1分钟，插入至各环节之间）。手机每分钟至少接收一条微　/　信消息。　/　F方Nova16　/　型7000mAh　/　华为Mate90ProMax　/　典型6800mAh　/　华为Nova16Pro　/　零售机　/　额定25.98Wh　/　典型7000mAh　/　iQOO15UItra岁售格　/　额定27.08Wh　/　典型7400mAh　/　iQOO15TC售标　/　额定29.35Wh　/　型8000mAh　/　REDMIK90ProMax　/　额定28.13Wh　/　典型7560mAh　/　一加Ace6　/　零售机　/　额定28.66Wh　/　典型7800mAh　/　努比亚Z80Ulitra　/　零售机　/　额定26.67Wh　/　典型7200mAh　/　华为Pura90Pro　/　零售机　/　额定22.35Wh　/　典型6000mAh　/　REDMIK8O至尊版　/　零售机　/　额定27.78Wh　/　典型7410mAh　/　荣耀GTPro　/　零售机　/　额定27.51Wh　/　典型7200mAh　/　定24.21Wh</p>
+<p><img loading="lazy" alt="13:50" src="assets/BV1heam6TExz_v2md/frames/kf_0084.jpg" /></p>
+<p><strong><code>[14:00]</code></strong> o1010</p>
+<p><img loading="lazy" alt="14:00" src="assets/BV1heam6TExz_v2md/frames/kf_0085.jpg" /></p>
+<p><strong><code>[14:10]</code></strong> 麒麟9050Pro　/　副Die　/　主Die</p>
+<p><img loading="lazy" alt="14:10" src="assets/BV1heam6TExz_v2md/frames/kf_0086.jpg" /></p>
+<p><strong><code>[14:20]</code></strong> 麒麟9030Pro　/　麒麟9050Pro　/　主Die　/　副Die　/　面积+25%　/　8.6mm2　/　总面积　/　21.5mm²　/　10.7mm²　/　10.7mm²</p>
+<p><img loading="lazy" alt="14:20" src="assets/BV1heam6TExz_v2md/frames/kf_0087.jpg" /></p>
+<p><strong><code>[14:30]</code></strong> NPUINT8吞吐量测试　/　越高越好　/　Kirin　/　27.0TOPS　/　9030PRO　/　Kirin　/　67.7TOPS　/　9050PRO</p>
+<p><img loading="lazy" alt="14:30" src="assets/BV1heam6TExz_v2md/frames/kf_0088.jpg" /></p>
+<p><strong><code>[14:40]</code></strong> NPU3B模型PrefilI测试　/　越高越好　/　Kirin　/　1039tokens/s　/　9030PRO　/　Kirin　/　3794tokens/s　/　9050PRO</p>
+<p><img loading="lazy" alt="14:40" src="assets/BV1heam6TExz_v2md/frames/kf_0089.jpg" /></p>
+<p><strong><code>[14:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="14:50" src="assets/BV1heam6TExz_v2md/frames/kf_0090.jpg" /></p>
+<p><strong><code>[15:00]</code></strong> 9月30日周三八月二+　/　当下可能背要　/　送动健康　/　小艺建议　/　阿络未连，请检查网设置　/　我在新，请说</p>
+<p><img loading="lazy" alt="15:00" src="assets/BV1heam6TExz_v2md/frames/kf_0091.jpg" /></p>
+<p><strong><code>[15:10]</code></strong> 创建“夏日座驾“相册　/　联消全选　/　2026年7月8日　/　2026年7月7日　/　2026年7月4日</p>
+<p><img loading="lazy" alt="15:10" src="assets/BV1heam6TExz_v2md/frames/kf_0092.jpg" /></p>
+<p><strong><code>[15:20]</code></strong> 发消息或按住说话</p>
+<p><img loading="lazy" alt="15:20" src="assets/BV1heam6TExz_v2md/frames/kf_0093.jpg" /></p>
+<p><strong><code>[15:30]</code></strong> 发消息或按住说诺</p>
+<p><img loading="lazy" alt="15:30" src="assets/BV1heam6TExz_v2md/frames/kf_0094.jpg" /></p>
+<p><strong><code>[15:40]</code></strong> iolo</p>
+<p><img loading="lazy" alt="15:40" src="assets/BV1heam6TExz_v2md/frames/kf_0095.jpg" /></p>
+<p><strong><code>[15:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="15:50" src="assets/BV1heam6TExz_v2md/frames/kf_0096.jpg" /></p>
+<p><strong><code>[16:00]</code></strong> 异环　/　雨天开车跑图帧率　/　原画预设-交通极致使用PerfDog进行测试　/　25C室温300尼特亮度WiFi　/　(fps)　/　平均帧/1%Low顿/整机平均功耗　/　平均帧/1%Low帧/整机平均功耗　/　麒麟9050Pro　/　53.0T　/　19.41　/　麒麟9030Pro　/　华为Mate90ProMax1552-720　/　6.8w　/　华为Mate80ProMax1552-720　/　42.0　/　19.2tp6.4w　/　A19Pro　/　53.7　/　5.4w　/　骁龙8EliteGen5　/　iPhone17ProMax1721792　/　机型B1720-792　/　59.530.06.9w　/　天玑9500　/　52.6　/　晓龙8Elite　/　机型C1736-792　/　17.96.7w　/　机型D1760-792　/　57.3　/　16.68.0　/　30（分钟）</p>
+<p><img loading="lazy" alt="16:00" src="assets/BV1heam6TExz_v2md/frames/kf_0097.jpg" /></p>
+<p><strong><code>[16:10]</code></strong> 麒麟9030Pro　/　麒麟9050Pro　/　副Die　/　主Die　/　面积　/　241.3mm2　/　+70.3%</p>
+<p><img loading="lazy" alt="16:10" src="assets/BV1heam6TExz_v2md/frames/kf_0098.jpg" /></p>
+<p><strong><code>[16:20]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="16:20" src="assets/BV1heam6TExz_v2md/frames/kf_0099.jpg" /></p>
+<p><strong><code>[16:30]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="16:30" src="assets/BV1heam6TExz_v2md/frames/kf_0100.jpg" /></p>
+<p><strong><code>[16:40]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="16:40" src="assets/BV1heam6TExz_v2md/frames/kf_0101.jpg" /></p>
+<p><strong><code>[16:50]</code></strong> （无文字）</p>
+<p><img loading="lazy" alt="16:50" src="assets/BV1heam6TExz_v2md/frames/kf_0102.jpg" /></p>
+</details><footer>md2html · 2026-10-05</footer></main></body></html>
