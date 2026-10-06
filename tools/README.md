@@ -23,8 +23,14 @@ python3 tools/hot_radar.py --all                 # 不筛，全部列出
 python3 tools/hot_radar.py --topic "黄金|美联储|芯片"
 python3 tools/hot_radar.py --cross               # 抖音热词 → 自动去B站搜可转写候选
 python3 tools/hot_radar.py --search "华为 芯片"   # 直接按词搜B站
+python3 tools/hot_radar.py --ups                 # 看关注 UP 主的最新投稿（内置名单）
+python3 tools/hot_radar.py --ups "极客湾Geekerwan,小Lin说" --days 7 --all
 python3 tools/hot_radar.py --cross -o radar.md   # 附带输出 Markdown 报告
 ```
+
+**`--ups` 比刷热榜实用**：垂类内容（财经/深度科技）播放量 1–20 万量级，
+靠订阅和搜索分发，**基本进不了全站榜**；盯住头部 UP 的更新才是有效路径。
+内置名单见代码 `DEFAULT_UPS`。
 
 | 参数 | 默认 | 说明 |
 |---|---|---|
@@ -34,12 +40,16 @@ python3 tools/hot_radar.py --cross -o radar.md   # 附带输出 Markdown 报告
 | `--cross` | 关 | 热词跨平台换成 B 站候选 |
 | `--cross-top` | 5 | 最多为几个热词做跨平台搜索（控流） |
 | `--search` | — | 跳过热榜，直接按词搜 B 站 |
+| `--ups [名单]` | 内置名单 | 看关注 UP 主最新投稿；逗号分隔可自定义 |
+| `--days` | — | `--ups` 只看最近 N 天 |
 | `-n, --limit` | 12 | 各榜展示条数 |
 | `-o, --out` | — | 输出 Markdown 报告 |
 
 命中的 BV 号直接接流水线：`bili_dl.py <BV号>` → `video2md.py ref/<BV号>.mp4 --auto-crop`。
 
-接口脾气（已在代码中处理）：B 站分区排行榜返回 -352、`order=pubdate` 易被限流，
+接口脾气（已在代码中处理）：B 站 **space/ 系接口（含 wbi 签名版）整体 412 边缘拦截**，
+故 `--ups` 改走搜索接口（`order=pubdate` + 作者精确过滤）并带退避重试；
+分区排行榜返回 -352、`order=pubdate` 易被限流，
 故只用全站榜 + 热门 + `order=click` 搜索，并在请求间加延时；任一接口失败会降级跳过而非中断。
 
 ## bili_dl.py — B 站视频下载（API 通道）

@@ -12,6 +12,8 @@ hot_radar.py — 选题雷达：抖音热榜（发现热点）× B 站（可下�
   python3 tools/hot_radar.py --topic "黄金|美联储|芯片"
   python3 tools/hot_radar.py --cross              # 抖音热词 → 自动去B站搜可转写视频
   python3 tools/hot_radar.py --search "华为 芯片"  # 直接按词搜B站候选
+  python3 tools/hot_radar.py --ups                # 看关注 UP 主的最新投稿（内置名单）
+  python3 tools/hot_radar.py --ups "极客湾Geekerwan,小Lin说" --days 7 --all
   python3 tools/hot_radar.py --cross -o radar.md  # 同时输出 Markdown 报告
 
 命中的 BV 号可直接喂给流水线：
@@ -30,6 +32,9 @@ DEFAULT_TOPIC = (r"AI|人工智能|智能|芯片|算力|模型|大模型|机器�
                  r"关税|楼市|房价|债|通胀|特斯拉|华为|苹果|自动驾驶|新能源|锂电|存储|光模块")
 
 LABELS = {1: "新", 2: "荐", 3: "热", 8: "爆"}
+
+# 关注的 UP 主（本库转写过的垂类头部）。--ups 缺省用这组，也可逗号分隔自定义。
+DEFAULT_UPS = ["开卷有财", "野生量化员", "B站金融大学", "科技狐", "极客湾Geekerwan", "小Lin说"]
 
 
 # ---------------- 通用 ----------------
@@ -141,8 +146,47 @@ def bili_search(sess, keyword, limit=5):
     return out
 
 
+def bili_up_latest(sess, up_name, limit=5, days=None):
+    """某 UP 主的最新投稿。
+
+    注意：B 站 space/ 系接口（含 wbi 签名版）对本机 IP 整体返回 412 边缘拦截，不可用。
+    这里改走唯一稳定的搜索接口：按 UP 名搜 + order=pubdate（时间倒序）+ 作者精确过滤。
+    代价是只能拿到搜索可见的投稿，但对「看关注的人更新了什么」足够。
+    """
+    d = None
+    for attempt in range(3):                      # 搜索接口密集调用易被限流，退避重试
+        if attempt:
+            time.sleep(6 * attempt)
+        try:
+            d = sess.get("https://api.bilibili.com/x/web-interface/search/type",
+                         params={"search_type": "video", "keyword": up_name,
+                                 "order": "pubdate", "page": 1}, timeout=30).json()
+        except Exception:
+            d = None
+            continue
+        if d.get("code") == 0:
+            break
+    if not d:
+        return None, "限流/无响应（已重试3次）"
+    if d.get("code") != 0:
+        return None, f"code={d.get('code')}"
+    cut = time.time() - days * 86400 if days else 0
+    out = []
+    for it in (d.get("data") or {}).get("result") or []:
+        if it.get("author") != up_name:          # 只要本人投稿，滤掉"提到他"的视频
+            continue
+        if it.get("pubdate", 0) < cut:
+            continue
+        out.append({"bv": it.get("bvid"), "title": clean(it.get("title")),
+                    "up": up_name, "play": it.get("play", 0),
+                    "dur": it.get("duration", "?"), "pub": it.get("pubdate", 0)})
+        if len(out) >= limit:
+            break
+    return out, None
+
+
 # ---------------- 渲染 ----------------
-def render(dy, bili, cross, topic_src, args):
+def render(dy, bili, cross, topic_src, args, feeds=None):
     L = []
     w = L.append
     w(f"# 选题雷达 · {datetime.datetime.now():%Y-%m-%d %H:%M}\n")
@@ -180,6 +224,17 @@ def render(dy, bili, cross, topic_src, args):
                 w(f"- `{v['bv']}` {v['title']}  ")
                 w(f"  {v['up']} · {fmt_ts(v['pub'])} · {v['dur']} · 播放 {v['play']:,}")
 
+    if feeds:
+        w(f"\n## UP 主最新投稿（{sum(len(v) for _, v in feeds)} 条 / {len(feeds)} 位）\n")
+        for name, vids in feeds:
+            w(f"\n### {name}")
+            if not vids:
+                w("（无新投稿或未命中过滤）")
+                continue
+            for v in vids:
+                w(f"- `{v['bv']}` {v['title']}  ")
+                w(f"  {fmt_ts(v['pub'])} · {v['dur']} · 播放 {v['play']:,}")
+
     w("\n---\n")
     w("转写任一候选：\n")
     w("```bash\npython3 tools/bili_dl.py <BV号>\n"
@@ -195,6 +250,9 @@ def main():
     ap.add_argument("--bili-only", action="store_true", help="只看 B 站爆款")
     ap.add_argument("--cross", action="store_true", help="抖音命中热词 → 去 B 站搜可转写视频")
     ap.add_argument("--search", default=None, help="直接按词搜 B 站候选（不拉热榜）")
+    ap.add_argument("--ups", nargs="?", const="", default=None,
+                    help="看关注 UP 主的最新投稿；缺省用内置名单，或逗号分隔自定义")
+    ap.add_argument("--days", type=int, default=None, help="--ups 只看最近 N 天")
     ap.add_argument("-n", "--limit", type=int, default=12, help="各榜最多展示条数")
     ap.add_argument("--cross-top", type=int, default=5, help="最多为几个热词做跨平台搜索")
     ap.add_argument("-o", "--out", default=None, help="同时输出 Markdown 报告路径")
@@ -202,6 +260,34 @@ def main():
 
     pat = None if args.all else re.compile(args.topic or DEFAULT_TOPIC, re.I)
     topic_src = "（无，全部列出）" if args.all else (args.topic or "仓库默认选题（AI/科技/财经）")
+
+    # UP 主订阅模式
+    if args.ups is not None:
+        ups = [u.strip() for u in args.ups.split(",") if u.strip()] or DEFAULT_UPS
+        rng = f"最近 {args.days} 天" if args.days else "最新"
+        print(f"[UP订阅] {len(ups)} 位 · {rng}\n")
+        sess = _bili_session()
+        feeds = []
+        for name in ups:
+            vids, err = bili_up_latest(sess, name, limit=args.limit, days=args.days)
+            if err:
+                print(f"  ⚠ {name}: {err}")
+                feeds.append((name, []))
+            else:
+                hit = [v for v in vids if not pat or pat.search(v["title"])]
+                feeds.append((name, hit))
+                print(f"▸ {name}  （{len(hit)} 条）")
+                for v in hit:
+                    print(f"    {v['bv']} | {fmt_ts(v['pub'])} | {v['dur']:>6} | "
+                          f"播放 {v['play']:>9,} | {v['title'][:40]}")
+                if not hit:
+                    print("    （无）")
+            time.sleep(4)
+        if args.out:
+            open(args.out, "w", encoding="utf-8").write(
+                render(None, None, None, topic_src, args, feeds=feeds))
+            print(f"\n报告 -> {args.out}")
+        return
 
     # 直接搜索模式
     if args.search:
