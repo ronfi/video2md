@@ -189,22 +189,52 @@ def main():
     print("[2/4] 取播放地址 (DASH)")
     play = api(s, "https://api.bilibili.com/x/player/playurl",
                bvid=bvid, cid=cid, qn=args.qn, fnval=16)
-    if "dash" not in play or not play["dash"]:
-        sys.exit("未返回 DASH 流（可能需要登录/大会员）")
-    v, a = pick_streams(play["dash"])
-    print(f"  视频: {v['width']}x{v['height']} {v['codecs'][:12]} | 音频 bw: {a['bandwidth']}")
-
-    print("[3/4] 下载流")
-    tmp_v, tmp_a = out + ".v.m4s", out + ".a.m4s"
     def _urls(st):
-        return [st["baseUrl"]] + list(st.get("backupUrl") or st.get("backup_url") or [])
-    download(s, _urls(v), tmp_v, "视频流", fresh=args.fresh)
-    download(s, _urls(a), tmp_a, "音频流", fresh=args.fresh)
+        return [st.get("baseUrl") or st.get("url")] + \
+               list(st.get("backupUrl") or st.get("backup_url") or [])
 
-    print("[4/4] ffmpeg 合并")
-    subprocess.run([ffmpeg_exe(), "-y", "-i", tmp_v, "-i", tmp_a, "-c", "copy", out],
-                   check=True, stderr=subprocess.DEVNULL)
-    os.remove(tmp_v); os.remove(tmp_a)
+    if play.get("dash"):
+        # DASH：音视频分离，分别下载后合并
+        v, a = pick_streams(play["dash"])
+        print(f"  视频: {v['width']}x{v['height']} {v['codecs'][:12]} | 音频 bw: {a['bandwidth']}")
+        print("[3/4] 下载流")
+        tmp_v, tmp_a = out + ".v.m4s", out + ".a.m4s"
+        download(s, _urls(v), tmp_v, "视频流", fresh=args.fresh)
+        download(s, _urls(a), tmp_a, "音频流", fresh=args.fresh)
+        print("[4/4] ffmpeg 合并")
+        subprocess.run([ffmpeg_exe(), "-y", "-i", tmp_v, "-i", tmp_a, "-c", "copy", out],
+                       check=True, stderr=subprocess.DEVNULL)
+        os.remove(tmp_v); os.remove(tmp_a)
+
+    elif play.get("durl"):
+        # durl：单文件(FLV/MP4)，部分视频只给这种格式；多段时需拼接
+        segs = sorted(play["durl"], key=lambda x: x.get("order", 1))
+        print(f"  单文件格式 durl，共 {len(segs)} 段，清晰度 {play.get('quality')}")
+        print("[3/4] 下载流")
+        parts = []
+        for i, seg in enumerate(segs, 1):
+            p = f"{out}.p{i}.part"
+            download(s, _urls(seg), p, f"第{i}段" if len(segs) > 1 else "视频",
+                     fresh=args.fresh)
+            parts.append(p)
+        print("[4/4] ffmpeg 转封装")
+        if len(parts) == 1:
+            subprocess.run([ffmpeg_exe(), "-y", "-i", parts[0], "-c", "copy", out],
+                           check=True, stderr=subprocess.DEVNULL)
+        else:
+            lst = out + ".concat.txt"
+            with open(lst, "w", encoding="utf-8") as f:
+                for p in parts:
+                    f.write(f"file '{os.path.abspath(p)}'\n")
+            subprocess.run([ffmpeg_exe(), "-y", "-f", "concat", "-safe", "0",
+                            "-i", lst, "-c", "copy", out],
+                           check=True, stderr=subprocess.DEVNULL)
+            os.remove(lst)
+        for p in parts:
+            os.remove(p)
+
+    else:
+        sys.exit("playurl 既无 dash 也无 durl（可能需要登录/大会员）")
     print(f"\n✅ 完成: {out} ({os.path.getsize(out)/1e6:.1f} MB)")
     print("   提示: 第三方版权内容请勿入库/传播；可配合 tools/video2md.py 转文档。")
 
