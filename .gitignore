@@ -23,3 +23,8 @@
 *.log
 .DS_Store
 __pycache__/
+
+# 登录凭据（绝不入库！公开仓库）
+cookies/
+*cookies*.txt
+*.cookies
